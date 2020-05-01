@@ -181,7 +181,13 @@ const DefaultLayout = (props) => {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
+          <Grid
+            container
+            spacing={3}
+            direction="column"
+            justify="center"
+            alignItems="center"
+          >
             {props.children}
           </Grid>
           <Box pt={4}>

@@ -4,6 +4,7 @@ import { Route, Redirect } from "react-router-dom";
 
 import DefaultLayout from "../_layouts/default/DefaultLayout";
 import AuthLayout from "../_layouts/auth/AuthLayout";
+import { LayoutStepper } from "../Components/LayoutStepper";
 
 export default function RouteWrapper({
   component: Component,
@@ -38,6 +39,7 @@ export default function RouteWrapper({
       {...rest}
       render={(props) => (
         <Layout>
+          <LayoutStepper></LayoutStepper>
           <Component {...props} />
         </Layout>
       )}
