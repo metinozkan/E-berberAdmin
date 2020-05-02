@@ -6,9 +6,12 @@ import StepButton from "@material-ui/core/StepButton";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
+import { useHistory } from "react-router-dom";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
+    marginBottom: "5em",
   },
   button: {
     marginRight: theme.spacing(1),
@@ -26,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ["Select campaign settings", "Create an ad group", "Create an ad"];
+  return ["GeneralInformation", "Orders", "Create an ad"];
 }
 
 function getStepContent(step) {
@@ -49,6 +52,7 @@ export const LayoutStepper = () => {
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
 
+  const history = useHistory();
   const totalSteps = () => {
     return getSteps().length;
   };
@@ -99,11 +103,20 @@ export const LayoutStepper = () => {
     setActiveStep(newActiveStep);
   };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
   const handleStep = (step) => () => {
+    switch (step) {
+      case 0:
+        history.push("/general-information");
+        break;
+      case 1:
+        history.push("/orders");
+
+        break;
+      case 2:
+        break;
+      default:
+        console.log("home a gider");
+    }
     setActiveStep(step);
   };
 
@@ -163,66 +176,13 @@ export const LayoutStepper = () => {
           );
         })}
       </Stepper>
-      <div>
-        {allStepsCompleted() ? (
-          <div>
-            <Typography className={classes.instructions}>
-              All steps completed - you&apos;re finished
-            </Typography>
-            <Button onClick={handleReset}>Reset</Button>
-          </div>
-        ) : (
-          <div>
-            <Typography className={classes.instructions}>
-              {getStepContent(activeStep)}
-            </Typography>
-            <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.button}
-              >
-                Back
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNext}
-                className={classes.button}
-              >
-                Next
-              </Button>
-              {isStepOptional(activeStep) && !completed.has(activeStep) && (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleSkip}
-                  className={classes.button}
-                >
-                  Skip
-                </Button>
-              )}
-
-              {activeStep !== steps.length &&
-                (completed.has(activeStep) ? (
-                  <Typography variant="caption" className={classes.completed}>
-                    Step {activeStep + 1} already completed
-                  </Typography>
-                ) : (
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleComplete}
-                  >
-                    {completedSteps() === totalSteps() - 1
-                      ? "Finish"
-                      : "Complete Step"}
-                  </Button>
-                ))}
-            </div>
-          </div>
-        )}
-      </div>
+      {/* <div>
+        <div>
+          <Typography className={classes.instructions}>
+            {getStepContent(activeStep)}
+          </Typography>
+        </div>
+      </div> */}
     </div>
   );
 };

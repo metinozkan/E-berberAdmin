@@ -10,15 +10,19 @@ const Home = () => {
 const Customers = () => {
   return <h1>Customers</h1>;
 };
+const Orders = () => {
+  return <h1>Orders</h1>;
+};
 export default function Routes() {
   return (
     <Switch>
       <Route path="/" exact component={Home} />
       <Route path="/customers" exact component={Customers} />
+      <Route path="/orders" exact component={Orders} />
 
       <Route path="/general-information" exact component={GeneralInformation} />
       {/* redirect user to SignIn page if route does not exist and user is not authenticated */}
-      <Route component={"Login"} />
+      {/* <Route component={"Login"} /> */}
     </Switch>
   );
 }
