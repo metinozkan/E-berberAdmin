@@ -123,6 +123,31 @@ const WorkingHoursRow = ({ title }) => {
   );
 };
 
+export const WorkingHoursComp = () => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: "2em",
+      }}
+    >
+      <WorkingHoursRow title="pzts"></WorkingHoursRow>
+      <WorkingHoursRow title="Salı"></WorkingHoursRow>
+
+      <WorkingHoursRow title="Çarş"></WorkingHoursRow>
+
+      <WorkingHoursRow title="Perş"></WorkingHoursRow>
+
+      <WorkingHoursRow title="Cuma"></WorkingHoursRow>
+      <WorkingHoursRow title="Cmts"></WorkingHoursRow>
+      <WorkingHoursRow title="Pzr"></WorkingHoursRow>
+    </div>
+  );
+};
+
 export const WorkingHours = () => {
   const classes = useStyles();
 
@@ -148,26 +173,7 @@ export const WorkingHours = () => {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <div style={{ width: "100%", height: "100%" }}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                marginBottom: "2em",
-              }}
-            >
-              <WorkingHoursRow title="pzts"></WorkingHoursRow>
-              <WorkingHoursRow title="Salı"></WorkingHoursRow>
-
-              <WorkingHoursRow title="Çarş"></WorkingHoursRow>
-
-              <WorkingHoursRow title="Perş"></WorkingHoursRow>
-
-              <WorkingHoursRow title="Cuma"></WorkingHoursRow>
-              <WorkingHoursRow title="Cmts"></WorkingHoursRow>
-              <WorkingHoursRow title="Pzr"></WorkingHoursRow>
-            </div>
+            <WorkingHoursComp></WorkingHoursComp>
             <Button
               variant="contained"
               color="primary"

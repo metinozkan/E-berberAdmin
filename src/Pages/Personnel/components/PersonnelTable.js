@@ -8,6 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
+import { PersonnelEditModal } from "./PersonnelEditModal";
 
 const useStyles = makeStyles({
   table: {
@@ -32,30 +33,21 @@ const rows = [
     "+90 0535 053 55 454",
     "Yönetici",
     "erkek yetişkin",
-    <Button variant="outlined" color="primary">
-      {" "}
-      tikla banaa
-    </Button>
+    <PersonnelEditModal></PersonnelEditModal>
   ),
   createData(
     "Hasan Dogan",
     "+90 0535 053 55 454",
     "Yönetici",
     "KADIN",
-    <Button variant="outlined" color="primary">
-      {" "}
-      tikla banaa
-    </Button>
+    <PersonnelEditModal />
   ),
   createData(
     "Metin ÖZKAN",
     "+90 0535 053 55 454",
     "Yönetici",
     "Farketmez",
-    <Button variant="outlined" color="primary">
-      {" "}
-      tikla banaa
-    </Button>
+    <PersonnelEditModal />
   ),
 ];
 

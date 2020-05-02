@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Button, Typography, Paper } from "@material-ui/core";
 import { PersonnelTable } from "./components/PersonnelTable";
+import { PersonnelEditModal } from "./components/PersonnelEditModal";
+
 const TopPersonnel = styled.div`
   width: 100%;
   paddign: 1em;
