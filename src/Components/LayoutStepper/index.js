@@ -109,7 +109,7 @@ export const LayoutStepper = () => {
         history.push("/general-information");
         break;
       case 1:
-        history.push("/orders");
+        history.push("/personnel");
 
         break;
       case 2:

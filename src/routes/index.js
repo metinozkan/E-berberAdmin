@@ -2,7 +2,7 @@ import React from "react";
 import { Switch } from "react-router-dom";
 import Route from "./Route";
 import GeneralInformation from "../Pages/GeneralInformation";
-
+import Personnel from "../Pages/Personnel";
 const Home = () => {
   return <h1>home</h1>;
 };
@@ -17,7 +17,7 @@ export default function Routes() {
   return (
     <Switch>
       <Route path="/" exact component={Home} />
-      <Route path="/customers" exact component={Customers} />
+      <Route path="/personnel" exact component={Personnel} />
       <Route path="/orders" exact component={Orders} />
 
       <Route path="/general-information" exact component={GeneralInformation} />
