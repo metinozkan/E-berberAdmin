@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid, Button, Typography } from "@material-ui/core";
-
+import { Grid, Button, Typography, Paper } from "@material-ui/core";
+import { PersonnelTable } from "./components/PersonnelTable";
 const TopPersonnel = styled.div`
   width: 100%;
   paddign: 1em;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 2em 0px;
 `;
 const Personnel = () => {
   return (
@@ -20,10 +21,24 @@ const Personnel = () => {
     >
       <TopPersonnel>
         <Typography variant="h4" gutterBottom>
-          Çalışanlar{" "}
+          Çalışanlar
         </Typography>
-        <Button primary> ekleme</Button>
+        <Button primary variant="contained" color="primary">
+          ekleme
+        </Button>
       </TopPersonnel>
+      <div
+        style={{
+          background: "white",
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <PersonnelTable></PersonnelTable>
+      </div>
     </Grid>
   );
 };
