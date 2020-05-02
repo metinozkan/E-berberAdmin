@@ -33,7 +33,7 @@ const rows = [
     "+90 0535 053 55 454",
     "Yönetici",
     "erkek yetişkin",
-    <PersonnelEditModal></PersonnelEditModal>
+    <PersonnelEditModal />
   ),
   createData(
     "Hasan Dogan",

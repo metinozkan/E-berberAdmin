@@ -183,8 +183,52 @@ const ModalContent = () => {
   );
 };
 
+const SelectPageComp = ({ setSelectedPage }) => {
+  return (
+    <Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+      style={{ width: "100%", height: "100%" }}
+      spacing={3}
+    >
+      <Grid item xs={8}>
+        <Button
+          variant="outlined"
+          color="primary"
+          style={{ width: "100%" }}
+          onClick={() => {
+            setSelectedPage(1);
+          }}
+        >
+          Düzenle
+        </Button>
+      </Grid>
+      <Grid item xs={8}>
+        <Button
+          variant="outlined"
+          color="primary"
+          style={{ width: "100%" }}
+          onClick={() => {
+            setSelectedPage(2);
+          }}
+        >
+          Verdiği hizmetler
+        </Button>
+      </Grid>
+      <Grid item xs={8}>
+        <Button variant="outlined" color="primary" style={{ width: "100%" }}>
+          Düzenle
+        </Button>
+      </Grid>
+    </Grid>
+  );
+};
+
 export const PersonnelEditModal = () => {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(false);
+  const [selectedPage, setSelectedPage] = useState(0);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -205,38 +249,116 @@ export const PersonnelEditModal = () => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: "100%",
-          }}
-        >
-          <DialogTitle id="alert-dialog-title">Çalışan Düzenle</DialogTitle>
-          <Close
-            size={25}
-            style={{ marginRight: "16px", cursor: "pointer" }}
-            onClick={() => {
-              handleClose();
-            }}
-          ></Close>
-        </div>
+        {selectedPage == 0 ? (
+          <>
+            {" "}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "100%",
+                padding: "1em 0px",
+              }}
+            >
+              <DialogTitle id="alert-dialog-title">Ayar Seçin</DialogTitle>
 
-        <DialogContent>
-          <ModalContent></ModalContent>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleClose}
-            color="primary"
-            style={{ width: "100%" }}
-            variant="outlined"
-          >
-            Kaydet
-          </Button>
-        </DialogActions>
+              <Close
+                size={25}
+                style={{ marginRight: "16px", cursor: "pointer" }}
+                onClick={() => {
+                  handleClose();
+                }}
+              ></Close>
+            </div>
+            <DialogContent
+              style={{
+                width: "100%",
+                height: "100%",
+                minHeight: "350px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <SelectPageComp
+                setSelectedPage={setSelectedPage}
+              ></SelectPageComp>
+            </DialogContent>
+          </>
+        ) : selectedPage == 1 ? (
+          <>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              <DialogTitle id="alert-dialog-title">Çalışan Düzenle</DialogTitle>
+              <Close
+                size={25}
+                style={{ marginRight: "16px", cursor: "pointer" }}
+                onClick={() => {
+                  handleClose();
+                }}
+              ></Close>
+            </div>
+
+            <DialogContent>
+              <ModalContent></ModalContent>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={handleClose}
+                color="primary"
+                style={{ width: "100%" }}
+                variant="outlined"
+              >
+                Kaydet
+              </Button>
+            </DialogActions>
+          </>
+        ) : (
+          <>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              <DialogTitle id="alert-dialog-title">Çalışan Düzenle</DialogTitle>
+              <Close
+                size={25}
+                style={{ marginRight: "16px", cursor: "pointer" }}
+                onClick={() => {
+                  handleClose();
+                }}
+              ></Close>
+            </div>
+
+            <DialogContent>
+              <h1>Hizmettlerr bebegqim</h1>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={handleClose}
+                color="primary"
+                style={{ width: "100%" }}
+                variant="outlined"
+              >
+                Kaydet
+              </Button>
+            </DialogActions>
+          </>
+        )}
       </Dialog>
     </div>
   );
