@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Button, Typography, Paper } from "@material-ui/core";
 import { PersonnelTable } from "./components/PersonnelTable";
-import { PersonnelEditModal } from "./components/PersonnelEditModal";
+import { PersonnelAddModal } from "./components/PersonnelAddModal";
 
 const TopPersonnel = styled.div`
   width: 100%;
@@ -25,9 +25,7 @@ const Personnel = () => {
         <Typography variant="h4" gutterBottom>
           Çalışanlar
         </Typography>
-        <Button primary variant="contained" color="primary">
-          ekleme
-        </Button>
+        <PersonnelAddModal></PersonnelAddModal>
       </TopPersonnel>
       <div
         style={{
