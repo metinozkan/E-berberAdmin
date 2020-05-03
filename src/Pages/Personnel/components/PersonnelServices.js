@@ -100,7 +100,7 @@ export const PersonnelServices = () => {
         />
         <AddServiceModal></AddServiceModal>
       </div>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} elevation={0}>
         <Table
           classserviceName={classes.table}
           size="medium"

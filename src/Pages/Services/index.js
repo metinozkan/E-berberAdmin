@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Grid, Button, Typography, Paper } from "@material-ui/core";
-
+import { ServicesTable } from "./components/ServicesTable";
+import { AddServiceMatchPersonelModal } from "./components/AddServiceMatchPersonnelModal";
 const TopServices = styled.div`
   width: 100%;
   paddign: 1em;
@@ -23,7 +24,7 @@ const Services = () => {
         <Typography variant="h4" gutterBottom>
           Services
         </Typography>
-        <Button>asdasd</Button>
+        <AddServiceMatchPersonelModal />
       </TopServices>
       <div
         style={{
@@ -34,7 +35,9 @@ const Services = () => {
           justifyContent: "center",
           alignItems: "center",
         }}
-      ></div>
+      >
+        <ServicesTable />
+      </div>
     </Grid>
   );
 };
