@@ -11,6 +11,7 @@ import LayersIcon from "@material-ui/icons/Layers";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import PeopleAlt from "@material-ui/icons/PeopleAlt";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
+import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 
 import { Link } from "react-router-dom";
 export const mainListItems = (
@@ -40,13 +41,15 @@ export const mainListItems = (
         <ListItemText primary="Hizmetler" />
       </ListItem>
     </Link>
+    <Link to="/durations">
+      <ListItem button>
+        <ListItemIcon>
+          <QueryBuilderIcon />
+        </ListItemIcon>
+        <ListItemText primary="Servis Süreleri" />
+      </ListItem>
+    </Link>
 
-    <ListItem button>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Reports" />
-    </ListItem>
     <ListItem button>
       <ListItemIcon>
         <LayersIcon />
