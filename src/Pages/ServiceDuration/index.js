@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Grid, Button, Typography, Paper } from "@material-ui/core";
+import { ServiceDurationTable } from "./components/ServiceDurationTable";
+
 const TopServiceDuration = styled.div`
   width: 100%;
   paddign: 1em;
@@ -33,7 +35,9 @@ const ServiceDuration = () => {
           justifyContent: "center",
           alignItems: "center",
         }}
-      ></div>
+      >
+        <ServiceDurationTable />
+      </div>
     </Grid>
   );
 };
