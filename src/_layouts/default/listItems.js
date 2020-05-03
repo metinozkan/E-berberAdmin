@@ -10,6 +10,7 @@ import BarChartIcon from "@material-ui/icons/BarChart";
 import LayersIcon from "@material-ui/icons/Layers";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import PeopleAlt from "@material-ui/icons/PeopleAlt";
+import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 
 import { Link } from "react-router-dom";
 export const mainListItems = (
@@ -22,7 +23,7 @@ export const mainListItems = (
         <ListItemText primary="Genel Bilgiler" />
       </ListItem>
     </Link>
-    <Link to="/personnel">
+    <Link to="/personnel" style={{}}>
       <ListItem button>
         <ListItemIcon>
           <PeopleAlt />
@@ -31,12 +32,15 @@ export const mainListItems = (
       </ListItem>
     </Link>
 
-    <ListItem button>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Customers" />
-    </ListItem>
+    <Link to="/services">
+      <ListItem button>
+        <ListItemIcon>
+          <FormatListBulletedIcon />
+        </ListItemIcon>
+        <ListItemText primary="Hizmetler" />
+      </ListItem>
+    </Link>
+
     <ListItem button>
       <ListItemIcon>
         <BarChartIcon />

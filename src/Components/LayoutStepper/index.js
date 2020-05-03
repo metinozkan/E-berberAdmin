@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ["GeneralInformation", "Orders", "Create an ad"];
+  return ["GeneralInformation", "Personnel", "Services"];
 }
 
 function getStepContent(step) {
@@ -113,6 +113,7 @@ export const LayoutStepper = () => {
 
         break;
       case 2:
+        history.push("/services");
         break;
       default:
         console.log("home a gider");
@@ -155,11 +156,11 @@ export const LayoutStepper = () => {
         {steps.map((label, index) => {
           const stepProps = {};
           const buttonProps = {};
-          if (isStepOptional(index)) {
-            buttonProps.optional = (
-              <Typography variant="caption">Optional</Typography>
-            );
-          }
+          // if (isStepOptional(index)) {
+          //   buttonProps.optional = (
+          //     <Typography variant="caption">Optional</Typography>
+          //   );
+          // }
           if (isStepSkipped(index)) {
             stepProps.completed = false;
           }
