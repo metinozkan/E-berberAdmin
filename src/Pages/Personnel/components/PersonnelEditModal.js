@@ -19,6 +19,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 import { Close } from "@material-ui/icons";
 import { WorkingHoursComp } from "../../GeneralInformation/components/WorkingHours";
+import { PersonnelServices } from "./PersonnelServices";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -269,6 +270,7 @@ export const PersonnelEditModal = () => {
                 style={{ marginRight: "16px", cursor: "pointer" }}
                 onClick={() => {
                   handleClose();
+                  setSelectedPage(0);
                 }}
               ></Close>
             </div>
@@ -304,6 +306,7 @@ export const PersonnelEditModal = () => {
                 size={25}
                 style={{ marginRight: "16px", cursor: "pointer" }}
                 onClick={() => {
+                  setSelectedPage(0);
                   handleClose();
                 }}
               ></Close>
@@ -334,18 +337,21 @@ export const PersonnelEditModal = () => {
                 width: "100%",
               }}
             >
-              <DialogTitle id="alert-dialog-title">Çalışan Düzenle</DialogTitle>
+              <DialogTitle id="alert-dialog-title">
+                Çalışanın Verdiği Hizmetler
+              </DialogTitle>
               <Close
                 size={25}
                 style={{ marginRight: "16px", cursor: "pointer" }}
                 onClick={() => {
+                  setSelectedPage(0);
                   handleClose();
                 }}
               ></Close>
             </div>
 
             <DialogContent>
-              <h1>Hizmettlerr bebegqim</h1>
+              <PersonnelServices></PersonnelServices>
             </DialogContent>
             <DialogActions>
               <Button
