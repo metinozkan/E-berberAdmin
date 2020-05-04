@@ -7,7 +7,7 @@ const TopServiceDuration = styled.div`
   width: 100%;
   paddign: 1em;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   margin: 2em 0px;
 `;
@@ -24,7 +24,6 @@ const ServiceDuration = () => {
         <Typography variant="h4" gutterBottom>
           Hizmet Süreleri
         </Typography>
-        <Button>asdafasd</Button>
       </TopServiceDuration>
       <div
         style={{
