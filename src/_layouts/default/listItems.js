@@ -12,6 +12,7 @@ import AssignmentIcon from "@material-ui/icons/Assignment";
 import PeopleAlt from "@material-ui/icons/PeopleAlt";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 
 import { Link } from "react-router-dom";
 export const mainListItems = (
@@ -46,16 +47,17 @@ export const mainListItems = (
         <ListItemIcon>
           <QueryBuilderIcon />
         </ListItemIcon>
-        <ListItemText primary="Servis Süreleri" />
+        <ListItemText primary="Hizmet Süreleri" />
       </ListItem>
     </Link>
-
-    <ListItem button>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItem>
+    <Link to="/prices">
+      <ListItem button>
+        <ListItemIcon>
+          <AttachMoneyIcon />
+        </ListItemIcon>
+        <ListItemText primary="Hizmet Fiyatları" />
+      </ListItem>
+    </Link>
   </div>
 );
 

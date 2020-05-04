@@ -5,6 +5,8 @@ import GeneralInformation from "../Pages/GeneralInformation";
 import Personnel from "../Pages/Personnel";
 import Services from "../Pages/Services";
 import ServiceDuration from "../Pages/ServiceDuration";
+import ServicePrices from "../Pages/ServicePrices";
+
 const Home = () => {
   return <h1>home</h1>;
 };
@@ -22,6 +24,7 @@ export default function Routes() {
       <Route path="/personnel" exact component={Personnel} />
       <Route path="/services" exact component={Services} />
       <Route path="/durations" exact component={ServiceDuration} />
+      <Route path="/prices" exact component={ServicePrices} />
 
       <Route path="/general-information" exact component={GeneralInformation} />
       {/* redirect user to SignIn page if route does not exist and user is not authenticated */}
