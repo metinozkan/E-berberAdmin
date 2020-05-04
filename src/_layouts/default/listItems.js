@@ -1,13 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import PeopleIcon from "@material-ui/icons/People";
-import BarChartIcon from "@material-ui/icons/BarChart";
-import LayersIcon from "@material-ui/icons/Layers";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import PeopleAlt from "@material-ui/icons/PeopleAlt";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
@@ -15,55 +12,68 @@ import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 
 import { Link } from "react-router-dom";
+
+const LinkContainer = ({ icon, path, title }) => {
+  const { pathname } = useLocation();
+  const [active, setActive] = useState();
+  useEffect(() => {
+    setActive(pathname.includes(path) > 0);
+  });
+  return (
+    <Link
+      to={path}
+      style={{
+        color: "black",
+      }}
+    >
+      <ListItem
+        button
+        style={
+          {
+            //  background: `${active && "#f5f5f5"}`,
+          }
+        }
+      >
+        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemText primary={title} />
+      </ListItem>
+    </Link>
+  );
+};
 export const mainListItems = (
   <div>
-    <Link to="/general-information">
-      <ListItem button>
-        <ListItemIcon>
-          <DashboardIcon />
-        </ListItemIcon>
-        <ListItemText primary="Genel Bilgiler" />
-      </ListItem>
-    </Link>
-    <Link to="/personnel" style={{}}>
-      <ListItem button>
-        <ListItemIcon>
-          <PeopleAlt />
-        </ListItemIcon>
-        <ListItemText primary="Çalışanlar" />
-      </ListItem>
-    </Link>
+    <LinkContainer
+      icon={<DashboardIcon color="primary" />}
+      path="/general-information"
+      title="Genel Bilgiler"
+    />
+    <LinkContainer
+      icon={<PeopleAlt color="primary" />}
+      path="/personnel"
+      title="Çalışanlar"
+    />
+    <LinkContainer
+      icon={<FormatListBulletedIcon color="primary" />}
+      path="/services"
+      title="Hizmetler"
+    />
 
-    <Link to="/services">
-      <ListItem button>
-        <ListItemIcon>
-          <FormatListBulletedIcon />
-        </ListItemIcon>
-        <ListItemText primary="Hizmetler" />
-      </ListItem>
-    </Link>
-    <Link to="/durations">
-      <ListItem button>
-        <ListItemIcon>
-          <QueryBuilderIcon />
-        </ListItemIcon>
-        <ListItemText primary="Hizmet Süreleri" />
-      </ListItem>
-    </Link>
-    <Link to="/prices">
-      <ListItem button>
-        <ListItemIcon>
-          <AttachMoneyIcon />
-        </ListItemIcon>
-        <ListItemText primary="Hizmet Fiyatları" />
-      </ListItem>
-    </Link>
+    <LinkContainer
+      icon={<QueryBuilderIcon color="primary" />}
+      path="/durations"
+      title="Hizmet Süreleri"
+    />
+    <LinkContainer
+      icon={<AttachMoneyIcon color="primary" />}
+      path="/prices"
+      title="Hizmet Fiyatları"
+    />
   </div>
 );
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Saved reports</ListSubheader>
+    <ListSubheader inset>Randevuler Muhabbeti</ListSubheader>
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />

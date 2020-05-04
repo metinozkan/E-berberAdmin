@@ -117,7 +117,7 @@ const useStyles = makeStyles((theme) => ({
 
 const DefaultLayout = (props) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -153,7 +153,7 @@ const DefaultLayout = (props) => {
             noWrap
             className={classes.title}
           >
-            Dashboard
+            E-berber
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
