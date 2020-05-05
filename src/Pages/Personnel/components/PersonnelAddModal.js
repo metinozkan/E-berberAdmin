@@ -18,7 +18,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Close } from "@material-ui/icons";
-import { WorkingHoursComp } from "../../GeneralInformation/components/WorkingHours";
+import { WorkingHoursComp } from "../../GeneralInformation/components/WorkingHours/WorkingHours";
 import { PersonnelServices } from "./PersonnelServices";
 const useStyles = makeStyles((theme) => ({
   root: {

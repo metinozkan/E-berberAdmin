@@ -136,11 +136,8 @@ export const WorkingHoursComp = () => {
     >
       <WorkingHoursRow title="pzts"></WorkingHoursRow>
       <WorkingHoursRow title="Salı"></WorkingHoursRow>
-
       <WorkingHoursRow title="Çarş"></WorkingHoursRow>
-
       <WorkingHoursRow title="Perş"></WorkingHoursRow>
-
       <WorkingHoursRow title="Cuma"></WorkingHoursRow>
       <WorkingHoursRow title="Cmts"></WorkingHoursRow>
       <WorkingHoursRow title="Pzr"></WorkingHoursRow>
