@@ -14,12 +14,9 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
-  tableCol: {
-    border: "1px solid darkGray",
-  },
+  tableCol: {},
   tableRowBorder: {
-    borderRight: "1px solid darkGray",
-    borderLeft: "1px solid darkGray",
+    borderRight: "1px solid #e2e2e2",
   },
 });
 
@@ -55,7 +52,7 @@ export const PersonnelTable = () => {
   const classes = useStyles();
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} elevation={0}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -76,10 +73,7 @@ export const PersonnelTable = () => {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              style={{ background: "rgb(250, 250, 250)" }}
-            >
+            <TableRow key={row.name}>
               <TableCell
                 component="th"
                 scope="row"
@@ -87,16 +81,16 @@ export const PersonnelTable = () => {
               >
                 {row.name}
               </TableCell>
-              <TableCell align="left" className={classes.tableRowBorder}>
+              <TableCell align="center" className={classes.tableRowBorder}>
                 {row.phoneNumber}
               </TableCell>
-              <TableCell align="left" className={classes.tableRowBorder}>
+              <TableCell align="center" className={classes.tableRowBorder}>
                 {row.workerType}
               </TableCell>
-              <TableCell align="left" className={classes.tableRowBorder}>
+              <TableCell align="center" className={classes.tableRowBorder}>
                 {row.genderType}
               </TableCell>
-              <TableCell align="center" className={classes.tableRowBorder}>
+              <TableCell align="center" className={""}>
                 {row.button}
               </TableCell>
             </TableRow>
