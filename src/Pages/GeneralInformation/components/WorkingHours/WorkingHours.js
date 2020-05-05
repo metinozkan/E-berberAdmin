@@ -132,7 +132,36 @@ export const WorkingHoursComp = () => {
     openHour: "08:00",
     closeHour: "20:00",
   });
-  console.log(monday);
+  const [tuesday, setTuesday] = useState({
+    isOpen: true,
+    openHour: "08:00",
+    closeHour: "20:00",
+  });
+  const [wednesday, setWednesday] = useState({
+    isOpen: true,
+    openHour: "08:00",
+    closeHour: "20:00",
+  });
+  const [thursday, setThursday] = useState({
+    isOpen: true,
+    openHour: "08:00",
+    closeHour: "20:00",
+  });
+  const [friday, setFriday] = useState({
+    isOpen: true,
+    openHour: "08:00",
+    closeHour: "20:00",
+  });
+  const [saturday, setSaturday] = useState({
+    isOpen: true,
+    openHour: "08:00",
+    closeHour: "20:00",
+  });
+  const [sunday, setSunday] = useState({
+    isOpen: true,
+    openHour: "08:00",
+    closeHour: "20:00",
+  });
   const handleChange = ({}) => {};
   return (
     <div
@@ -149,12 +178,36 @@ export const WorkingHoursComp = () => {
         value={monday}
         setValue={setMonday}
       ></WorkingHoursRow>
-      <WorkingHoursRow title="Salı"></WorkingHoursRow>
-      <WorkingHoursRow title="Çarş"></WorkingHoursRow>
-      <WorkingHoursRow title="Perş"></WorkingHoursRow>
-      <WorkingHoursRow title="Cuma"></WorkingHoursRow>
-      <WorkingHoursRow title="Cmts"></WorkingHoursRow>
-      <WorkingHoursRow title="Pzr"></WorkingHoursRow>
+      <WorkingHoursRow
+        title="Salı"
+        value={tuesday}
+        setValue={setTuesday}
+      ></WorkingHoursRow>
+      <WorkingHoursRow
+        title="Çarş"
+        value={wednesday}
+        setValue={setWednesday}
+      ></WorkingHoursRow>
+      <WorkingHoursRow
+        title="Perş"
+        value={thursday}
+        setValue={setThursday}
+      ></WorkingHoursRow>
+      <WorkingHoursRow
+        title="Cuma"
+        value={friday}
+        setValue={setFriday}
+      ></WorkingHoursRow>
+      <WorkingHoursRow
+        title="Cmts"
+        value={saturday}
+        setValue={setSaturday}
+      ></WorkingHoursRow>
+      <WorkingHoursRow
+        title="Pzr"
+        value={sunday}
+        setValue={setSunday}
+      ></WorkingHoursRow>
     </div>
   );
 };
