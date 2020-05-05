@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
@@ -39,13 +39,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ConteinerInvoiceRow = ({ title }) => {
+const ConteinerInvoiceRow = ({ title, value, setValue }) => {
   return (
     <InvoiceRow>
       <span style={{ width: "50%" }}>{title}</span>
       <TextField
         id="outlined-full-width"
         // label="İşletme adı"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         style={{ width: "50%" }}
         placeholder="Giriniz"
         // helperText="Full width!"
@@ -62,6 +64,10 @@ const ConteinerInvoiceRow = ({ title }) => {
 export const InvoiceContainer = () => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [taxName, setTaxName] = useState("");
+  const [taxNo, setTaxNo] = useState("");
+  const [taxOffice, setTaxOffice] = useState("");
+  const [taxAddress, setTaxAddress] = useState("");
 
   return (
     <ExpansionPanel
@@ -81,10 +87,26 @@ export const InvoiceContainer = () => {
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <div style={{ width: "100%" }}>
-          <ConteinerInvoiceRow title={"Vergi Adı"} />
-          <ConteinerInvoiceRow title={"Vergi No"} />
-          <ConteinerInvoiceRow title={"Vergi Dairesi"} />
-          <ConteinerInvoiceRow title={"Vergi Adresi"} />
+          <ConteinerInvoiceRow
+            title={"Vergi Adı"}
+            value={taxName}
+            setValue={setTaxName}
+          />
+          <ConteinerInvoiceRow
+            title={"Vergi No"}
+            value={taxNo}
+            setValue={setTaxNo}
+          />
+          <ConteinerInvoiceRow
+            title={"Vergi Dairesi"}
+            value={taxOffice}
+            setValue={setTaxOffice}
+          />
+          <ConteinerInvoiceRow
+            title={"Vergi Adresi"}
+            value={taxAddress}
+            setValue={setTaxAddress}
+          />
         </div>
       </ExpansionPanelDetails>
     </ExpansionPanel>
