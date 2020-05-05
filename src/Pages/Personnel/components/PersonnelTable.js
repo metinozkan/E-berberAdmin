@@ -8,7 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
-import { PersonnelEditModal } from "./PersonnelEditModal";
+import { PersonnelSettingsModal } from "./PersonnelSettingsModal/PersonnelSettingsModal";
 
 const useStyles = makeStyles({
   table: {
@@ -24,29 +24,29 @@ function createData(name, phoneNumber, workerType, genderType, button) {
   return { name, phoneNumber, workerType, genderType, button };
 }
 
-const rows = [
-  createData(
-    "Yüksel Yurtay",
-    "+90 0535 053 55 454",
-    "Yönetici",
-    "erkek yetişkin",
-    <PersonnelEditModal />
-  ),
-  createData(
-    "Hasan Dogan",
-    "+90 0535 053 55 454",
-    "Yönetici",
-    "KADIN",
-    <PersonnelEditModal />
-  ),
-  createData(
-    "Metin ÖZKAN",
-    "+90 0535 053 55 454",
-    "Yönetici",
-    "Farketmez",
-    <PersonnelEditModal />
-  ),
+const Personnels = [
+  {
+    name: "Yüksel Yurtay",
+    tel: "+90 0535 053 55 454",
+    type: "Yönetici",
+    customerGender: "Kadın",
+  },
+  {
+    name: "Metin ÖZKAN",
+    tel: "+90 0535 053 55 454",
+    type: "Yönetici",
+    customerGender: "Farketmez",
+  },
 ];
+const rows = Personnels.map((personnel) =>
+  createData(
+    personnel.name,
+    personnel.tel,
+    personnel.type,
+    personnel.customerGender,
+    <PersonnelSettingsModal selectedPersonnel={personnel} />
+  )
+);
 
 export const PersonnelTable = () => {
   const classes = useStyles();

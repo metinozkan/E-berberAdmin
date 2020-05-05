@@ -14,12 +14,12 @@ import {
   ExpansionPanelSummary,
   ExpansionPanelDetails,
 } from "@material-ui/core";
+import { MdKeyboardArrowLeft } from "react-icons/md";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
 import { makeStyles } from "@material-ui/core/styles";
 import { Close } from "@material-ui/icons";
-import { WorkingHoursComp } from "../../GeneralInformation/components/WorkingHours/WorkingHours";
-import { PersonnelServices } from "./PersonnelServices";
+import { WorkingHoursComp } from "../../../GeneralInformation/components/WorkingHours/WorkingHours";
+import { PersonnelServices } from "../PersonnelServices";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ModalContent = () => {
+const PersonnelEdit = ({ selectedPersonnel }) => {
   const [personnelType, setPersonnelType] = useState("Yönetici");
   const [color, setColor] = useState();
   const [openWorkingHours, setOpenWorkingHours] = useState(false);
@@ -51,6 +51,7 @@ const ModalContent = () => {
           <TextField
             id="outlined-full-width"
             label="Çalışan adı"
+            value={selectedPersonnel.name}
             style={{}}
             //  placeholder="Placeholder"
             // helperText="Full width!"
@@ -192,7 +193,7 @@ const SelectPageComp = ({ setSelectedPage }) => {
       justify="center"
       alignItems="center"
       style={{ width: "100%", height: "100%" }}
-      spacing={3}
+      spacing={1}
     >
       <Grid item xs={8}>
         <Button
@@ -227,7 +228,7 @@ const SelectPageComp = ({ setSelectedPage }) => {
   );
 };
 
-export const PersonnelEditModal = () => {
+export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
   const [open, setOpen] = useState(false);
   const [selectedPage, setSelectedPage] = useState(0);
 
@@ -241,8 +242,15 @@ export const PersonnelEditModal = () => {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Düzenle
+      <Button
+        variant="outlined"
+        color="primary"
+        onClick={() => {
+          handleClickOpen();
+          setSelectedPage(0);
+        }}
+      >
+        Ayarlar
       </Button>
       <Dialog
         open={open}
@@ -250,121 +258,67 @@ export const PersonnelEditModal = () => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        {selectedPage == 0 ? (
-          <>
-            {" "}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                width: "100%",
-                padding: "1em 0px",
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "100%",
+            padding: "1em",
+          }}
+        >
+          {!selectedPage == 0 && (
+            <MdKeyboardArrowLeft
+              size={30}
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                setSelectedPage(selectedPage - 1);
               }}
-            >
-              <DialogTitle id="alert-dialog-title">Ayar Seçin</DialogTitle>
+            />
+          )}
 
-              <Close
-                size={25}
-                style={{ marginRight: "16px", cursor: "pointer" }}
-                onClick={() => {
-                  handleClose();
-                  setSelectedPage(0);
-                }}
-              ></Close>
-            </div>
-            <DialogContent
-              style={{
-                width: "100%",
-                height: "100%",
-                minHeight: "350px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <SelectPageComp
-                setSelectedPage={setSelectedPage}
-              ></SelectPageComp>
-            </DialogContent>
-          </>
-        ) : selectedPage == 1 ? (
-          <>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                width: "100%",
-              }}
-            >
-              <DialogTitle id="alert-dialog-title">Çalışan Düzenle</DialogTitle>
-              <Close
-                size={25}
-                style={{ marginRight: "16px", cursor: "pointer" }}
-                onClick={() => {
-                  setSelectedPage(0);
-                  handleClose();
-                }}
-              ></Close>
-            </div>
+          <DialogTitle id="alert-dialog-title" style={{ fontSize: "35px" }}>
+            {selectedPage == 0
+              ? "Ayar Seçin"
+              : selectedPage == 1
+              ? "Çalışan Düzenle"
+              : "Verdiği Hizmetler"}
+          </DialogTitle>
+          <Close
+            size={30}
+            style={{ marginRight: "16px", cursor: "pointer" }}
+            onClick={() => {
+              handleClose();
+              // setTimeout(() => {
+              // }, 100);
+            }}
+          ></Close>
+        </div>
 
-            <DialogContent>
-              <ModalContent></ModalContent>
-            </DialogContent>
-            <DialogActions>
-              <Button
-                onClick={handleClose}
-                color="primary"
-                style={{ width: "100%" }}
-                variant="outlined"
-              >
-                Kaydet
-              </Button>
-            </DialogActions>
-          </>
-        ) : (
-          <>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                width: "100%",
-              }}
+        <DialogContent>
+          {selectedPage == 0 ? (
+            <SelectPageComp setSelectedPage={setSelectedPage}></SelectPageComp>
+          ) : selectedPage == 1 ? (
+            <PersonnelEdit
+              selectedPersonnel={selectedPersonnel}
+            ></PersonnelEdit>
+          ) : (
+            <PersonnelServices></PersonnelServices>
+          )}
+        </DialogContent>
+        <DialogActions>
+          {!selectedPage == 0 && (
+            <Button
+              onClick={handleClose}
+              color="primary"
+              style={{ width: "100%" }}
+              variant="outlined"
             >
-              <DialogTitle id="alert-dialog-title">
-                Çalışanın Verdiği Hizmetler
-              </DialogTitle>
-              <Close
-                size={25}
-                style={{ marginRight: "16px", cursor: "pointer" }}
-                onClick={() => {
-                  setSelectedPage(0);
-                  handleClose();
-                }}
-              ></Close>
-            </div>
-
-            <DialogContent>
-              <PersonnelServices></PersonnelServices>
-            </DialogContent>
-            <DialogActions>
-              <Button
-                onClick={handleClose}
-                color="primary"
-                style={{ width: "100%" }}
-                variant="outlined"
-              >
-                Kaydet
-              </Button>
-            </DialogActions>
-          </>
-        )}
+              Kaydet
+            </Button>
+          )}
+        </DialogActions>
       </Dialog>
     </div>
   );
