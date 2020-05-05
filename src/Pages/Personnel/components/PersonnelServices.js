@@ -23,39 +23,23 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(serviceName, time, price, deleteButton) {
-  return { serviceName, time, price, deleteButton };
+function createData(serviceName, duration, price, deleteButton) {
+  return { serviceName, duration, price, deleteButton };
 }
 
-const rows = [
-  createData(
-    "Saç kesim",
-    30,
-    "20₺",
-    <IconButton aria-label="delete" style={{ color: "red", padding: "0px" }}>
-      <DeleteIcon />
-    </IconButton>
-  ),
-  createData(
-    "Saç Yıkama",
-    10,
-    "20₺",
-    <IconButton aria-label="delete" style={{ color: "red", padding: "0px" }}>
-      <DeleteIcon />
-    </IconButton>
-  ),
-  createData(
-    "Sakal Kesim",
-    10,
-    "25₺",
-    <IconButton aria-label="delete" style={{ color: "red", padding: "0px" }}>
-      <DeleteIcon />
-    </IconButton>
-  ),
-];
-
-export const PersonnelServices = () => {
+export const PersonnelServices = ({ selectedPersonnel }) => {
   const classes = useStyles();
+
+  const rows = selectedPersonnel.services.map((service) =>
+    createData(
+      service.serviceName,
+      service.serviceDuration,
+      service.servicePrice + "₺",
+      <IconButton aria-label="delete" style={{ color: "red", padding: "0px" }}>
+        <DeleteIcon />
+      </IconButton>
+    )
+  );
 
   return (
     <div
@@ -84,7 +68,7 @@ export const PersonnelServices = () => {
           style={{ width: "50%" }}
           id="free-solo-2-demo"
           disableClearable
-          options={["saç yıkama", "saç kesim", "sakal", "ense"]}
+          options={selectedPersonnel.services}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -120,7 +104,7 @@ export const PersonnelServices = () => {
                 <TableCell component="th" scope="row">
                   {row.serviceName}
                 </TableCell>
-                <TableCell align="right">{row.time}</TableCell>
+                <TableCell align="right">{row.duration}</TableCell>
                 <TableCell align="right">{row.price}</TableCell>
                 <TableCell align="right">{row.deleteButton}</TableCell>
               </TableRow>

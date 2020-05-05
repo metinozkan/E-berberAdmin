@@ -85,6 +85,7 @@ const PersonnelEdit = ({ selectedPersonnel }) => {
             <TextField
               id="outlined-full-width"
               label="Telefon numarası"
+              value={selectedPersonnel.phoneNumber}
               style={{}}
               placeholder="Placeholder"
               // helperText="Full width!"
@@ -101,6 +102,7 @@ const PersonnelEdit = ({ selectedPersonnel }) => {
           <TextField
             id="outlined-full-width"
             //label="Açık"
+            value={selectedPersonnel.workerType}
             style={{ flex: 2, marginRight: ".5em" }}
             placeholder="Çalışan türü"
             margin="dense"
@@ -304,7 +306,9 @@ export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
               selectedPersonnel={selectedPersonnel}
             ></PersonnelEdit>
           ) : (
-            <PersonnelServices></PersonnelServices>
+            <PersonnelServices
+              selectedPersonnel={selectedPersonnel}
+            ></PersonnelServices>
           )}
         </DialogContent>
         <DialogActions>

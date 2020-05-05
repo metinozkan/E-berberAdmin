@@ -27,23 +27,70 @@ function createData(name, phoneNumber, workerType, genderType, button) {
 const Personnels = [
   {
     name: "Yüksel Yurtay",
-    tel: "+90 0535 053 55 454",
-    type: "Yönetici",
-    customerGender: "Kadın",
+    phoneNumber: "+90 0535 053 55 454",
+    workerType: "Yönetici",
+    genderType: "Kadın",
+    services: [
+      {
+        serviceName: "saç ",
+        serviceDuration: "20",
+        servicePrice: "20tl",
+      },
+
+      {
+        serviceName: "sakal",
+        serviceDuration: "20",
+        servicePrice: "20tl",
+      },
+      {
+        serviceName: "yıkama",
+        serviceDuration: "35",
+        servicePrice: "28tl",
+      },
+    ],
   },
   {
     name: "Metin ÖZKAN",
-    tel: "+90 0535 053 55 454",
-    type: "Yönetici",
-    customerGender: "Farketmez",
+    phoneNumber: "+90 0535 053 55 454",
+    workerType: "Yönetici",
+    genderType: "Farketmez",
+    services: [
+      {
+        serviceName: "çocuk traş",
+        serviceDuration: "20",
+        servicePrice: "20tl",
+      },
+
+      {
+        serviceName: "maske",
+        serviceDuration: "20",
+        servicePrice: "20tl",
+      },
+      {
+        serviceName: "el ayak :)",
+        serviceDuration: "35",
+        servicePrice: "28tl",
+      },
+    ],
+  },
+];
+
+const PersonnelMatchService = [
+  {
+    name: "Yüksel Yurtay",
+    services: ["saç", "sakal", "ense", "damat traş"],
+  },
+  {
+    name: "Metin ÖZKAN",
+    services: ["çocuk traş", "maske", "el ayak :)"],
   },
 ];
 const rows = Personnels.map((personnel) =>
   createData(
     personnel.name,
-    personnel.tel,
-    personnel.type,
-    personnel.customerGender,
+    personnel.phoneNumber,
+    personnel.workerType,
+    personnel.genderType,
     <PersonnelSettingsModal selectedPersonnel={personnel} />
   )
 );
