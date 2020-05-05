@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Hours = ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "20:00"];
 
-const WorkingHoursRow = ({ title }) => {
+const WorkingHoursRow = ({ title, value, setValue }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [openHour, setOpenHour] = useState("08:00");
   const [closeHour, setCloseHour] = useState("20:00");
@@ -62,6 +62,7 @@ const WorkingHoursRow = ({ title }) => {
       <TextField
         id="outlined-full-width"
         //label="Açık"
+
         style={{ flex: 2, marginRight: ".5em" }}
         margin="dense"
         InputLabelProps={{
@@ -69,9 +70,9 @@ const WorkingHoursRow = ({ title }) => {
         }}
         variant="outlined"
         select
-        value={isOpen}
+        value={value && value.isOpen}
         onChange={(e) => {
-          setIsOpen(e.target.value);
+          setValue({ ...value, isOpen: e.target.value });
         }}
       >
         <MenuItem value={true}>Açık</MenuItem>
@@ -80,17 +81,18 @@ const WorkingHoursRow = ({ title }) => {
       <TextField
         id="outlined-full-width"
         //label="Açık"
+        disabled={value && !value.isOpen}
+        select
+        value={value && value.openHour}
+        onChange={(e) => {
+          setValue({ ...value, openHour: e.target.value });
+        }}
         style={{ flex: 1, marginRight: ".5em" }}
         margin="dense"
         InputLabelProps={{
           shrink: true,
         }}
         variant="outlined"
-        select
-        value={openHour}
-        onChange={(e) => {
-          setOpenHour(e.target.value);
-        }}
       >
         {Hours.map((hour, index) => (
           <MenuItem key={index} value={hour}>
@@ -101,17 +103,18 @@ const WorkingHoursRow = ({ title }) => {
       <TextField
         id="outlined-full-width"
         //label="Açık"
+        disabled={value && !value.isOpen}
+        select
+        value={value && value.closeHour}
+        onChange={(e) => {
+          setValue({ ...value, closeHour: e.target.value });
+        }}
         style={{ flex: 1, marginRight: ".5em" }}
         margin="dense"
         InputLabelProps={{
           shrink: true,
         }}
         variant="outlined"
-        select
-        value={closeHour}
-        onChange={(e) => {
-          setCloseHour(e.target.value);
-        }}
       >
         {Hours.map((hour, index) => (
           <MenuItem key={index} value={hour}>
@@ -124,6 +127,13 @@ const WorkingHoursRow = ({ title }) => {
 };
 
 export const WorkingHoursComp = () => {
+  const [monday, setMonday] = useState({
+    isOpen: true,
+    openHour: "08:00",
+    closeHour: "20:00",
+  });
+  console.log(monday);
+  const handleChange = ({}) => {};
   return (
     <div
       style={{
@@ -134,7 +144,11 @@ export const WorkingHoursComp = () => {
         marginBottom: "2em",
       }}
     >
-      <WorkingHoursRow title="pzts"></WorkingHoursRow>
+      <WorkingHoursRow
+        title="pzts"
+        value={monday}
+        setValue={setMonday}
+      ></WorkingHoursRow>
       <WorkingHoursRow title="Salı"></WorkingHoursRow>
       <WorkingHoursRow title="Çarş"></WorkingHoursRow>
       <WorkingHoursRow title="Perş"></WorkingHoursRow>
