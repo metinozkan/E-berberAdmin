@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import {
   TextField,
@@ -8,10 +8,9 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { ColumnCenterContainer } from "../../../Components/StyledComponents";
 import { makeStyles } from "@material-ui/core/styles";
+import { InvoiceContainer } from "./InvoiceContainer";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -39,43 +38,16 @@ export const ContainerGeneral = styled.div`
   background: white;
   border-radius: 5px;
 `;
-export const InvoiceRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width:100%,
-  background: white;
-  border-radius: 5px;
-`;
-const ConteinerInvoiceRow = ({ title }) => {
-  return (
-    <InvoiceRow>
-      <span style={{ width: "50%" }}>{title}</span>
-      <TextField
-        id="outlined-full-width"
-        // label="İşletme adı"
-        style={{ width: "50%" }}
-        placeholder="Giriniz"
-        // helperText="Full width!"
-        fullWidth
-        margin="dense"
-        InputLabelProps={{
-          shrink: true,
-        }}
-        variant="outlined"
-      ></TextField>
-    </InvoiceRow>
-  );
-};
 
 export const GeneralSettings = () => {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [barberName, setBarberName] = useState("");
+  const [address, setAddress] = useState("");
+  const [email, setEmail] = useState("");
+  const [telephoneNumber, setTelephoneNumber] = useState();
+  const [district, setDistrict] = useState("");
 
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
+  // console.log("distric", district);
   return (
     <ContainerGeneral style={{}}>
       <ExpansionPanel
@@ -106,6 +78,10 @@ export const GeneralSettings = () => {
             <TextField
               id="outlined-full-width"
               label="İşletme adı"
+              value={barberName}
+              onChange={(e) => {
+                setBarberName(e.target.value);
+              }}
               style={{}}
               //  placeholder="Placeholder"
               // helperText="Full width!"
@@ -119,6 +95,10 @@ export const GeneralSettings = () => {
             <TextField
               id="outlined-full-width"
               label="Adres"
+              value={address}
+              onChange={(e) => {
+                setAddress(e.target.value);
+              }}
               style={{}}
               placeholder="Placeholder"
               // helperText="Full width!"
@@ -129,6 +109,10 @@ export const GeneralSettings = () => {
             <TextField
               id="outlined-full-width"
               label="E posta adresi"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
               style={{}}
               placeholder="Placeholder"
               // helperText="Full width!"
@@ -144,6 +128,10 @@ export const GeneralSettings = () => {
             <TextField
               id="outlined-full-width"
               label="Telefon Numarası"
+              value={telephoneNumber}
+              onChange={(e) => {
+                setTelephoneNumber(e.target.value);
+              }}
               style={{}}
               placeholder="Placeholder"
               // helperText="Full width!"
@@ -166,6 +154,9 @@ export const GeneralSettings = () => {
               ]}
               getOptionLabel={(option) => option.title}
               style={{ width: "100%" }}
+              onChange={(e, values) => {
+                setDistrict(values.title);
+              }}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -178,32 +169,8 @@ export const GeneralSettings = () => {
                 />
               )}
             ></Autocomplete>
-            <ExpansionPanel
-              expanded={expanded === "panel2"}
-              onChange={handleChange("panel2")}
-              style={{ width: "100%", margin: "2em 0px" }}
-            >
-              <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
-              >
-                <Typography className={classes.heading}>
-                  Fatura Bilgileri
-                </Typography>
-                <Typography className={classes.secondaryHeading}>
-                  Fatura bilgilerini girin
-                </Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <div style={{ width: "100%" }}>
-                  <ConteinerInvoiceRow title={"Vergi Adı"} />
-                  <ConteinerInvoiceRow title={"Vergi No"} />
-                  <ConteinerInvoiceRow title={"Vergi Dairesi"} />
-                  <ConteinerInvoiceRow title={"Vergi Adresi"} />
-                </div>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
+            <InvoiceContainer></InvoiceContainer>
+
             <Button
               variant="contained"
               color="primary"

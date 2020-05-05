@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid } from "@material-ui/core";
 
-import { GeneralSettings } from "./components/GeneralSettings";
+import { GeneralSettings } from "./components/GeneralSettings/GeneralSettings";
 import { WorkingHours } from "./components/WorkingHours";
 
 const GeneralInformation = () => {

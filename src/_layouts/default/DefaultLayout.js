@@ -101,8 +101,9 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
   },
   container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
+    // paddingTop: theme.spacing(4),
+    // paddingBottom: theme.spacing(4),
+    padding: theme.spacing(4),
   },
   paper: {
     padding: theme.spacing(2),
@@ -181,7 +182,7 @@ const DefaultLayout = (props) => {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
+        <Container maxWidth="xl" className={classes.container}>
           <div style={{ height: "100%", width: "100%" }}>{props.children}</div>
           <Box pt={4}>
             <Copyright />

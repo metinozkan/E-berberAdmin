@@ -187,7 +187,7 @@ export const LayoutStepper = () => {
             stepProps.completed = false;
           }
           return (
-            <Step key={label} {...stepProps}>
+            <Step key={label} {...stepProps} style={{ cursor: "pointer" }}>
               <StepButton
                 onClick={handleStep(index)}
                 completed={isStepComplete(index)}
