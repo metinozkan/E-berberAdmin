@@ -19,7 +19,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems, secondaryListItems } from "./listItems";
-
+import { LayoutStepper } from "../../Components/LayoutStepper";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -125,6 +125,7 @@ const DefaultLayout = (props) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
@@ -183,7 +184,10 @@ const DefaultLayout = (props) => {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="xl" className={classes.container}>
-          <div style={{ height: "100%", width: "100%" }}>{props.children}</div>
+          <div style={{ height: "100%", width: "100%" }}>
+            <LayoutStepper></LayoutStepper>
+            {props.children}
+          </div>
           <Box pt={4}>
             <Copyright />
           </Box>
