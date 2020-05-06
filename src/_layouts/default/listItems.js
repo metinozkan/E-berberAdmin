@@ -74,6 +74,11 @@ export const mainListItems = (
 export const secondaryListItems = (
   <div>
     <ListSubheader inset>Randevuler Muhabbeti</ListSubheader>
+    <LinkContainer
+      icon={<AssignmentIcon color="primary" />}
+      path="/calendar"
+      title="Takvim"
+    />
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />

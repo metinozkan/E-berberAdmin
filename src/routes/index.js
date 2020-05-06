@@ -11,6 +11,7 @@ import ServicePrices from "../Pages/ServicePrices";
 import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import Membership from "../Pages/Membership";
+import Calendar from "../Pages/Calendar";
 const Home = () => {
   return <Redirect to="/general-information" />;
 };
@@ -32,6 +33,7 @@ export default function Routes() {
       <Route path="/general-information" exact component={GeneralInformation} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={SignUp} />
+      <Route path="/calendar" exact component={Calendar} />
 
       {/* redirect user to SignIn page if route does not exist and user is not authenticated */}
       <Route component={Login} />

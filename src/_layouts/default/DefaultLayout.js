@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation, useRouteMatch } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -119,6 +120,8 @@ const useStyles = makeStyles((theme) => ({
 const DefaultLayout = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const { path } = useRouteMatch();
+  console.log(path);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -185,7 +188,7 @@ const DefaultLayout = (props) => {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="xl" className={classes.container}>
           <div style={{ height: "100%", width: "100%" }}>
-            <LayoutStepper></LayoutStepper>
+            {!path == "/calendar" && <LayoutStepper></LayoutStepper>}
             {props.children}
           </div>
           <Box pt={4}>
