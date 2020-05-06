@@ -31,24 +31,24 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import { Close } from "@material-ui/icons";
 import { PricesEditModal } from "./ServicePricesEditModal/PricesEditModal";
-function createData(name, duration, button) {
-  return { name, duration, button };
+
+const Services = [
+  { name: "Saç yıkama", duration: "15" },
+  { name: "Saç kesim", duration: "35" },
+  { name: "Sakal kesim", duration: "15" },
+];
+
+function createData(name, price, button) {
+  return { name, price, button };
 }
 
-const rows = [
+const rows = Services.map((service) =>
   createData(
-    "Saç",
-    "15 TL",
-    <IconButton color="secondary" aria-label="add an alarm">
-      <EditIcon />
-    </IconButton>
-  ),
-
-  createData("Saç yıkama", "15 TL"),
-  createData("Ense", "15 TL"),
-  createData("Damat tıraş", "15 TL"),
-  createData("sakal", "15 TL", <PricesEditModal />),
-];
+    service.name,
+    service.duration,
+    <PricesEditModal selectedService={service} />
+  )
+);
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -381,7 +381,7 @@ export const ServicePricesTable = () => {
                           width: "50%",
                         }}
                       >
-                        {row.duration}
+                        {row.price}
                       </TableCell>
                       <TableCell
                         component="th"

@@ -78,7 +78,7 @@ const rows = [
   ),
 ];
 
-export const PricesEditTable = () => {
+export const PricesEditTable = ({ selectedService }) => {
   const classes = useStyles();
 
   return (

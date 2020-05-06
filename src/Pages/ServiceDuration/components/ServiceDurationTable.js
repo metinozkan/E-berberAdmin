@@ -186,7 +186,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
+  const { numSelected, _setSelected } = props;
 
   const ToolBarTop = styled.div`
     display: flex;
@@ -197,12 +197,8 @@ const EnhancedTableToolbar = (props) => {
   `;
 
   return (
-    <Toolbar
-      className={clsx(classes.root, {
-        [classes.highlight]: numSelected > 0,
-      })}
-    >
-      {numSelected > 0 ? (
+    <Toolbar className={clsx(classes.root, {})}>
+      {/* {numSelected > 0 ? (
         <Typography
           className={classes.title}
           color="inherit"
@@ -211,36 +207,41 @@ const EnhancedTableToolbar = (props) => {
         >
           {numSelected} selected
         </Typography>
-      ) : (
-        <ToolBarTop>
-          <Autocomplete
-            freeSolo
-            style={{ width: "50%" }}
-            id="free-solo-2-demo"
-            disableClearable
-            options={["saç yıkama", "saç kesim", "sakal", "ense"]}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                placeholder="Ara"
-                margin="dense"
-                variant="outlined"
-                InputProps={{ ...params.InputProps, type: "search" }}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            )}
-          />
-          <Button variant="outlined" color="primary">
-            Seçilen süreleri düzenle
-          </Button>
-        </ToolBarTop>
-      )}
+      ) : ( */}
+      <ToolBarTop>
+        <Autocomplete
+          freeSolo
+          style={{ width: "50%" }}
+          id="free-solo-2-demo"
+          disableClearable
+          options={["saç yıkama", "saç kesim", "sakal", "ense"]}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              placeholder="Ara"
+              margin="dense"
+              variant="outlined"
+              InputProps={{ ...params.InputProps, type: "search" }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          )}
+        />
+        <Button variant="outlined" color="primary">
+          Seçilen süreleri düzenle
+        </Button>
+      </ToolBarTop>
+      {/* )} */}
 
       {numSelected > 0 && (
         <Tooltip title="Delete">
-          <IconButton aria-label="delete">
+          <IconButton
+            aria-label="delete"
+            onClick={() => {
+              _setSelected([]);
+            }}
+          >
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -323,7 +324,10 @@ export const ServiceDurationTable = () => {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper} elevation={0}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          _setSelected={setSelected}
+        />
         <TableContainer>
           <Table
             className={classes.table}

@@ -14,7 +14,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export const PricesEditModal = () => {
+export const PricesEditModal = ({ selectedService }) => {
   const [open, setOpen] = React.useState(true);
 
   const handleClickOpen = () => {
@@ -47,7 +47,7 @@ export const PricesEditModal = () => {
           Süreleri Düzenle
         </DialogTitle>
         <DialogContent>
-          <PricesEditTable />
+          <PricesEditTable selectedService={selectedService} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
