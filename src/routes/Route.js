@@ -4,14 +4,13 @@ import { Route, Redirect } from "react-router-dom";
 
 import DefaultLayout from "../_layouts/default/DefaultLayout";
 import AuthLayout from "../_layouts/auth/AuthLayout";
-import { LayoutStepper } from "../Components/LayoutStepper";
 
 export default function RouteWrapper({
   component: Component,
   isPrivate,
   ...rest
 }) {
-  const signed = false;
+  const signed = true;
 
   /**
    * Redirect user to SignIn page if he tries to access a private route
@@ -30,9 +29,7 @@ export default function RouteWrapper({
   // }
 
   const Layout = signed ? DefaultLayout : AuthLayout;
-  // if (!signed) {
-  //   return <Redirect to="/login" />;
-  // }
+
   /**
    * If not included on both previous cases, redirect user to the desired route.
    */
@@ -41,7 +38,7 @@ export default function RouteWrapper({
       {...rest}
       render={(props) => (
         <Layout>
-          <Component {...props} />
+          <Component {...props} signed={signed} />
         </Layout>
       )}
     />

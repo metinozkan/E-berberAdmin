@@ -1,12 +1,16 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
+
 import styled from "styled-components";
 import { Grid } from "@material-ui/core";
 
 import { GeneralSettings } from "./components/GeneralSettings/GeneralSettings";
 import { WorkingHours } from "./components/WorkingHours/WorkingHours";
 
-const GeneralInformation = () => {
-  return (
+const GeneralInformation = ({ signed }) => {
+  return !signed ? (
+    <Redirect to="/login" />
+  ) : (
     <Grid
       container
       spacing={3}

@@ -1,4 +1,6 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
+
 import styled from "styled-components";
 import { Grid, Button, Typography, Paper } from "@material-ui/core";
 import { ServicePricesTable } from "./components/ServicePricesTable";
@@ -10,8 +12,10 @@ const TopServicePrices = styled.div`
   align-items: center;
   margin: 2em 0px;
 `;
-const ServicePrices = () => {
-  return (
+const ServicePrices = ({ signed }) => {
+  return !signed ? (
+    <Redirect to="/login" />
+  ) : (
     <Grid
       container
       spacing={3}

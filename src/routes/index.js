@@ -1,4 +1,6 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
+
 import { Switch } from "react-router-dom";
 import Route from "./Route";
 import GeneralInformation from "../Pages/GeneralInformation";
@@ -7,9 +9,10 @@ import Services from "../Pages/Services";
 import ServiceDuration from "../Pages/ServiceDuration";
 import ServicePrices from "../Pages/ServicePrices";
 import Login from "../Pages/Login";
-
+import SignUp from "../Pages/SignUp";
+import Membership from "../Pages/Membership";
 const Home = () => {
-  return <h1>home</h1>;
+  return <Redirect to="/general-information" />;
 };
 
 const Customers = () => {
@@ -28,6 +31,7 @@ export default function Routes() {
       <Route path="/prices" exact component={ServicePrices} />
       <Route path="/general-information" exact component={GeneralInformation} />
       <Route path="/login" component={Login} />
+      <Route path="/signup" component={SignUp} />
 
       {/* redirect user to SignIn page if route does not exist and user is not authenticated */}
       <Route component={Login} />

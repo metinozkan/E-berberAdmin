@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { Grid, Button, Typography, Paper } from "@material-ui/core";
 import { ServicesTable } from "./components/ServicesTable";
@@ -11,8 +12,10 @@ const TopServices = styled.div`
   align-items: center;
   margin: 2em 0px;
 `;
-const Services = () => {
-  return (
+const Services = ({ signed }) => {
+  return !signed ? (
+    <Redirect to="/login" />
+  ) : (
     <Grid
       container
       spacing={3}

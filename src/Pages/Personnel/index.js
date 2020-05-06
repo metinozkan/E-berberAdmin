@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Grid, Button, Typography, Paper } from "@material-ui/core";
 import { PersonnelTable } from "./components/PersonnelTable";
 import { PersonnelAddModal } from "./components/PersonnelAddModal";
+import { Route, Redirect } from "react-router-dom";
 
 const TopPersonnel = styled.div`
   width: 100%;
@@ -12,8 +13,10 @@ const TopPersonnel = styled.div`
   align-items: center;
   margin: 2em 0px;
 `;
-const Personnel = () => {
-  return (
+const Personnel = ({ signed }) => {
+  return !signed ? (
+    <Redirect to="/login" />
+  ) : (
     <Grid
       container
       spacing={3}
