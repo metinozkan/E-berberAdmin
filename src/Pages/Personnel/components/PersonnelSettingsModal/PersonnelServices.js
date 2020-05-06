@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   TableBody,
@@ -15,7 +15,7 @@ import {
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Paper from "@material-ui/core/Paper";
-import { AddServiceModal } from "./AddServiceModal";
+import { AddServiceModal } from "../AddServiceModal";
 
 const useStyles = makeStyles({
   table: {
@@ -29,7 +29,7 @@ function createData(serviceName, duration, price, deleteButton) {
 
 export const PersonnelServices = ({ selectedPersonnel }) => {
   const classes = useStyles();
-
+  const [services, setServices] = useState(selectedPersonnel.services);
   const rows = selectedPersonnel.services.map((service) =>
     createData(
       service.serviceName,
@@ -68,7 +68,7 @@ export const PersonnelServices = ({ selectedPersonnel }) => {
           style={{ width: "50%" }}
           id="free-solo-2-demo"
           disableClearable
-          options={selectedPersonnel.services}
+          options={services}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -82,7 +82,7 @@ export const PersonnelServices = ({ selectedPersonnel }) => {
             />
           )}
         />
-        <AddServiceModal></AddServiceModal>
+        <AddServiceModal setServices={setServices}></AddServiceModal>
       </div>
       <TableContainer component={Paper} elevation={0}>
         <Table

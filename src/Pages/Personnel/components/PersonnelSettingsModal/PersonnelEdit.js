@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import {
   Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
   Typography,
   Grid,
   TextField,
@@ -14,12 +9,11 @@ import {
   ExpansionPanelSummary,
   ExpansionPanelDetails,
 } from "@material-ui/core";
+import { MdKeyboardArrowLeft } from "react-icons/md";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
 import { makeStyles } from "@material-ui/core/styles";
 import { Close } from "@material-ui/icons";
-import { WorkingHoursComp } from "../../GeneralInformation/components/WorkingHours/WorkingHours";
-import { PersonnelServices } from "./PersonnelSettingsModal/PersonnelServices";
+import { WorkingHoursComp } from "../../../GeneralInformation/components/WorkingHours/WorkingHours";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -38,12 +32,18 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
-
-const ModalContent = () => {
+export const PersonnelEdit = ({ selectedPersonnel }) => {
+  const classes = useStyles();
   const [personnelType, setPersonnelType] = useState("Yönetici");
   const [color, setColor] = useState();
   const [openWorkingHours, setOpenWorkingHours] = useState(false);
-  const classes = useStyles();
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [tel, setTel] = useState();
+  const [workerType, setWorkerType] = useState();
+
+  //calısma saatlerini nasıl yapacaksın artık Allah bilir
+
   return (
     <Grid container direction="column" justify="flex-start">
       <Grid item xs={12}>
@@ -51,6 +51,7 @@ const ModalContent = () => {
           <TextField
             id="outlined-full-width"
             label="Çalışan adı"
+            value={selectedPersonnel.name}
             style={{}}
             //  placeholder="Placeholder"
             // helperText="Full width!"
@@ -84,6 +85,7 @@ const ModalContent = () => {
             <TextField
               id="outlined-full-width"
               label="Telefon numarası"
+              value={selectedPersonnel.phoneNumber}
               style={{}}
               placeholder="Placeholder"
               // helperText="Full width!"
@@ -100,6 +102,7 @@ const ModalContent = () => {
           <TextField
             id="outlined-full-width"
             //label="Açık"
+            value={selectedPersonnel.workerType}
             style={{ flex: 2, marginRight: ".5em" }}
             placeholder="Çalışan türü"
             margin="dense"
@@ -181,68 +184,5 @@ const ModalContent = () => {
         </form>
       </Grid>
     </Grid>
-  );
-};
-
-export const PersonnelAddModal = () => {
-  const [open, setOpen] = useState(false);
-  const [selectedPage, setSelectedPage] = useState(0);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  return (
-    <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Ekle
-      </Button>
-      <Dialog
-        open={open}
-        //  onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "100%",
-            }}
-          >
-            <DialogTitle id="alert-dialog-title">Çalışan Ekle</DialogTitle>
-            <Close
-              size={25}
-              style={{ marginRight: "16px", cursor: "pointer" }}
-              onClick={() => {
-                setSelectedPage(0);
-                handleClose();
-              }}
-            ></Close>
-          </div>
-
-          <DialogContent>
-            <ModalContent></ModalContent>
-          </DialogContent>
-          <DialogActions>
-            <Button
-              onClick={handleClose}
-              color="primary"
-              style={{ width: "100%" }}
-              variant="outlined"
-            >
-              Kaydet
-            </Button>
-          </DialogActions>
-        </>
-      </Dialog>
-    </div>
   );
 };
