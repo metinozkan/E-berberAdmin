@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Table,
@@ -22,10 +22,75 @@ function createData(service, durationInput) {
   return { service, durationInput };
 }
 
-const rows = [
-  createData(
-    "Saç Kesim",
+// const rows = [
+//   createData(
+//     "Saç Kesim",
+//     <TextField
+//       placeholder="süre"
+//       variant="outlined"
+//       margin="dense"
+//       // InputLabelProps={{
+//       //   shrink: true,
+//       // }},
+//       InputProps={{
+//         endAdornment: (
+//           <InputAdornment position="end">
+//             dk <AccessAlarmIcon />
+//           </InputAdornment>
+//         ),
+//       }}
+//       //   InputProps={{
+//       //     endAdornment: (
+//       //       <InputAdornment position="end">
+//       //         <AccessAlarmIcon />
+//       //       </InputAdornment>
+//       //     ),
+//       //   }}
+//     ></TextField>
+//   ),
+//   createData(
+//     "Sakal Kesim",
+//     <TextField
+//       placeholder="süre"
+//       variant="outlined"
+//       margin="dense"
+//       InputProps={{
+//         endAdornment: (
+//           <InputAdornment position="end">
+//             dk <AccessAlarmIcon />
+//           </InputAdornment>
+//         ),
+//       }}
+//     ></TextField>
+//   ),
+
+//   createData(
+//     "Ağda",
+//     <TextField
+//       placeholder="süre"
+//       variant="outlined"
+//       margin="dense"
+//       InputProps={{
+//         endAdornment: (
+//           <InputAdornment position="end">
+//             dk <AccessAlarmIcon />
+//           </InputAdornment>
+//         ),
+//       }}
+//     ></TextField>
+//   ),
+// ];
+
+export const DurationEditTable = ({ selectedService }) => {
+  const classes = useStyles();
+  const [duration, setDuration] = useState(selectedService.duration);
+  const row = createData(
+    selectedService.name,
     <TextField
+      value={duration}
+      onChange={(e) => {
+        setDuration(e.target.value);
+      }}
       placeholder="süre"
       variant="outlined"
       margin="dense"
@@ -39,50 +104,8 @@ const rows = [
           </InputAdornment>
         ),
       }}
-      //   InputProps={{
-      //     endAdornment: (
-      //       <InputAdornment position="end">
-      //         <AccessAlarmIcon />
-      //       </InputAdornment>
-      //     ),
-      //   }}
     ></TextField>
-  ),
-  createData(
-    "Sakal Kesim",
-    <TextField
-      placeholder="süre"
-      variant="outlined"
-      margin="dense"
-      InputProps={{
-        endAdornment: (
-          <InputAdornment position="end">
-            dk <AccessAlarmIcon />
-          </InputAdornment>
-        ),
-      }}
-    ></TextField>
-  ),
-
-  createData(
-    "Ağda",
-    <TextField
-      placeholder="süre"
-      variant="outlined"
-      margin="dense"
-      InputProps={{
-        endAdornment: (
-          <InputAdornment position="end">
-            dk <AccessAlarmIcon />
-          </InputAdornment>
-        ),
-      }}
-    ></TextField>
-  ),
-];
-
-export const DurationEditTable = () => {
-  const classes = useStyles();
+  );
 
   return (
     <TableContainer
@@ -98,20 +121,18 @@ export const DurationEditTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.service}>
-              <TableCell
-                component="th"
-                scope="row"
-                style={{ width: "40%", borderRight: "1px solid #e2e2e2" }}
-              >
-                {row.service}
-              </TableCell>
-              <TableCell align="right" style={{ width: "50%" }}>
-                {row.durationInput}
-              </TableCell>
-            </TableRow>
-          ))}
+          <TableRow>
+            <TableCell
+              component="th"
+              scope="row"
+              style={{ width: "40%", borderRight: "1px solid #e2e2e2" }}
+            >
+              {row.service}
+            </TableCell>
+            <TableCell align="right" style={{ width: "50%" }}>
+              {row.durationInput}
+            </TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </TableContainer>

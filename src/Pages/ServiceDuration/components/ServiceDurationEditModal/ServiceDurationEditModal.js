@@ -15,7 +15,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export const ServiceDurationEditModal = () => {
+export const ServiceDurationEditModal = ({ selectedService }) => {
   const [open, setOpen] = React.useState(true);
 
   const handleClickOpen = () => {
@@ -33,6 +33,7 @@ export const ServiceDurationEditModal = () => {
         color="primary"
         endIcon={<EditIcon />}
         onClick={handleClickOpen}
+        style={{ margin: ".5em" }}
       >
         Edit
       </Button>
@@ -48,7 +49,7 @@ export const ServiceDurationEditModal = () => {
           Süreleri Düzenle
         </DialogTitle>
         <DialogContent>
-          <DurationEditTable />
+          <DurationEditTable selectedService={selectedService} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

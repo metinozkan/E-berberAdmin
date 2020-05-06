@@ -36,24 +36,24 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import { Close } from "@material-ui/icons";
 import { ServiceDurationEditModal } from "./ServiceDurationEditModal/ServiceDurationEditModal";
+
+const Services = [
+  { name: "Saç yıkama", duration: "5" },
+  { name: "Saç kesim", duration: "25" },
+  { name: "Sakal kesim", duration: "15" },
+];
+
 function createData(name, duration, button) {
   return { name, duration, button };
 }
 
-const rows = [
+const rows = Services.map((service) =>
   createData(
-    "Saç",
-    "5 dakika",
-    <IconButton color="secondary" aria-label="add an alarm">
-      <EditIcon />
-    </IconButton>
-  ),
-
-  createData("Saç yıkama", "5 dakika"),
-  createData("Ense", "5 dakika"),
-  createData("Damat tıraş", "5 dakika"),
-  createData("sakal", "5 dakika", <ServiceDurationEditModal />),
-];
+    service.name,
+    service.duration,
+    <ServiceDurationEditModal selectedService={service} />
+  )
+);
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -362,6 +362,7 @@ export const ServiceDurationTable = () => {
                           inputProps={{ "aria-labelledby": labelId }}
                           onChange={(event) => handleClick(event, row.name)}
                         />
+                        {/* <div style={{ margin: "0.5em" }}></div> */}
                       </TableCell>
                       <TableCell
                         component="th"
