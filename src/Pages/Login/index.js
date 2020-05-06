@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -46,10 +47,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+const Login = ({ signed }) => {
   const classes = useStyles();
 
-  return (
+  return signed ? (
+    <Redirect to="/home"></Redirect>
+  ) : (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>

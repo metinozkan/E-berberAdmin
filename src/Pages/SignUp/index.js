@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,7 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-function Copyright() {
+function Copyright({}) {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
@@ -46,10 +47,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignUp = () => {
+const SignUp = ({ signed }) => {
   const classes = useStyles();
 
-  return (
+  return signed ? (
+    <Redirect to="/home" />
+  ) : (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
