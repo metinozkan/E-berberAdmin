@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
+import { CreateEventCalendar } from "./CreateEventCalendar";
 import {
   Calendar,
   momentLocalizer,
@@ -33,6 +34,8 @@ const CalendarPage = () => {
             style={{ height: 500 }}
             culture="tr"
           />
+
+          {/* <CreateEventCalendar /> */}
         </div>
       </Grid>
     </Grid>
