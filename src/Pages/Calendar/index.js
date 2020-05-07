@@ -1,6 +1,8 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import { CreateEventCalendar } from "./CreateEventCalendar";
+import { BasicCalendar } from "./BasicCalendar";
+
 import {
   Calendar,
   momentLocalizer,
@@ -26,16 +28,18 @@ const CalendarPage = () => {
     <Grid container direction="column" justify="center" align="center">
       <Grid item xs={12}>
         <div>
-          <Calendar
+          {/* <Calendar
             localizer={localizer}
             events={myEventsList}
             startAccessor="start"
             endAccessor="end"
             style={{ height: 500 }}
             culture="tr"
-          />
+          /> */}
 
           {/* <CreateEventCalendar /> */}
+
+          <BasicCalendar />
         </div>
       </Grid>
     </Grid>
