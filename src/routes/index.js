@@ -12,6 +12,9 @@ import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import Membership from "../Pages/Membership";
 import Calendar from "../Pages/Calendar";
+import { BasicCalendar } from "../Pages/Calendar/BasicCalendar";
+import { ResourceCalendar } from "../Pages/Calendar/ResourceCalendar";
+
 const Home = () => {
   return <Redirect to="/general-information" />;
 };
@@ -34,6 +37,8 @@ export default function Routes() {
       <Route path="/login" component={Login} />
       <Route path="/signup" component={SignUp} />
       <Route path="/calendar" exact component={Calendar} />
+      <Route path="/basic-calendar" exact component={BasicCalendar} />
+      <Route path="/resource-calendar" exact component={ResourceCalendar} />
 
       {/* redirect user to SignIn page if route does not exist and user is not authenticated */}
       <Route component={Login} />

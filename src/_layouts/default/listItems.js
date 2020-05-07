@@ -79,6 +79,16 @@ export const secondaryListItems = (
       path="/calendar"
       title="Takvim"
     />
+    <LinkContainer
+      icon={<AssignmentIcon color="primary" />}
+      path="/basic-calendar"
+      title="BasicTakvim"
+    />
+    <LinkContainer
+      icon={<AssignmentIcon color="primary" />}
+      path="/resource-calendar"
+      title="ResourceTakvim"
+    />
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
