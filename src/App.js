@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import history from "./services/history";
 import Routes from "./routes";
 import GlobalStyles from "./styles/global";
+import "./styles/main.scss";
 
 import {
   createMuiTheme,
