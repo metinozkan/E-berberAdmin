@@ -2,7 +2,7 @@ import React from "react";
 import { Grid } from "@material-ui/core";
 import { CreateEventCalendar } from "./CreateEventCalendar";
 import { BasicCalendar } from "./BasicCalendar";
-
+import { ResourceCalendar } from "./ResourceCalendar";
 import {
   Calendar,
   momentLocalizer,
@@ -39,7 +39,9 @@ const CalendarPage = () => {
 
           {/* <CreateEventCalendar /> */}
 
-          <BasicCalendar />
+          {/* <BasicCalendar /> */}
+
+          <ResourceCalendar />
         </div>
       </Grid>
     </Grid>
