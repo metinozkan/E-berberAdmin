@@ -87,7 +87,7 @@ const headCells = [
     id: "name",
     numeric: false,
     disablePadding: true,
-    label: "Süre",
+    label: "Fiyat",
   },
   {
     id: "name",

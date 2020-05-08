@@ -188,7 +188,7 @@ const DefaultLayout = (props) => {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="xl" className={classes.container}>
           <div style={{ height: "100%", width: "100%" }}>
-            {!path == "/calendar" && <LayoutStepper></LayoutStepper>}
+            {!path.includes("calendar") && <LayoutStepper></LayoutStepper>}
             {props.children}
           </div>
           <Box pt={4}>

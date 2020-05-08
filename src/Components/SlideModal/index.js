@@ -27,7 +27,6 @@ export const SlideModal = ({ openModal, setOpenModal, selectedEvent }) => {
     }
   }, [openModal]);
 
-  console.log("seas", selectedEvent);
   return (
     <div>
       {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>

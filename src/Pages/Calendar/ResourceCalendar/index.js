@@ -15,14 +15,14 @@ const localizer = momentLocalizer(moment);
 const events = [
   {
     id: 0,
-    title: "Board meeting",
+    title: "saç ",
     start: new Date(2018, 0, 29, 9, 0, 0),
     end: new Date(2018, 0, 29, 13, 0, 0),
     resourceId: 1,
   },
   {
     id: 1,
-    title: "MS training",
+    title: "Doğan",
     allDay: true,
     start: new Date(2018, 0, 29, 14, 0, 0),
     end: new Date(2018, 0, 29, 16, 30, 0),
@@ -30,25 +30,40 @@ const events = [
   },
   {
     id: 2,
-    title: "Team lead meeting",
+    title: "Metin ",
     start: new Date(2018, 0, 29, 8, 30, 0),
     end: new Date(2018, 0, 29, 12, 30, 0),
     resourceId: 3,
   },
   {
     id: 11,
-    title: "Birthday Party",
+    title: "özkan",
     start: new Date(2018, 0, 30, 7, 0, 0),
     end: new Date(2018, 0, 30, 10, 30, 0),
     resourceId: 4,
   },
 ];
 
+const eventStyleGetter = (event, start, end, isSelected) => {
+  var backgroundColor = "#" + event.hexColor;
+  var style = {
+    backgroundColor:
+      event.resourceId == 1 ? "red" : event.resourceId == 2 ? "blue" : "pink",
+    borderRadius: "0px",
+    opacity: 0.8,
+    color: "black",
+    border: "0px",
+    display: "block",
+  };
+  return {
+    style: style,
+  };
+};
 const resourceMap = [
-  { resourceId: 1, resourceTitle: "Board room" },
-  { resourceId: 2, resourceTitle: "Training room" },
-  { resourceId: 3, resourceTitle: "Meeting room 1" },
-  { resourceId: 4, resourceTitle: "Meeting room 2" },
+  { resourceId: 1, resourceTitle: "Hasan Doğan" },
+  { resourceId: 2, resourceTitle: "Yüksel Yurtay" },
+  { resourceId: 3, resourceTitle: "Metin özkan" },
+  { resourceId: 4, resourceTitle: "Mahmut js" },
 ];
 
 export const ResourceCalendar = ({}) => {
@@ -77,6 +92,7 @@ export const ResourceCalendar = ({}) => {
           setOpenModal(true);
           setSelectedEvent(event);
         }}
+        eventPropGetter={eventStyleGetter}
       />
     </>
   );
