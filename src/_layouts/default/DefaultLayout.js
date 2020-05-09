@@ -3,24 +3,28 @@ import { useLocation, useRouteMatch } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Drawer from "@material-ui/core/Drawer";
-import Box from "@material-ui/core/Box";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Link from "@material-ui/core/Link";
+import {
+  Drawer,
+  Box,
+  AppBar,
+  Toolbar,
+  List,
+  Typography,
+  Divider,
+  IconButton,
+  Badge,
+  Container,
+  Grid,
+  Paper,
+  Link,
+  Menu,
+  MenuItem,
+} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems, secondaryListItems } from "./listItems";
 import { LayoutStepper } from "../../Components/LayoutStepper";
+import { MdNotifications, MdSettings } from "react-icons/md";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -121,14 +125,21 @@ const DefaultLayout = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const { path } = useRouteMatch();
-  console.log(path);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
@@ -160,11 +171,20 @@ const DefaultLayout = (props) => {
           >
             E-berber
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
+          <IconButton color="inherit" onClick={handleClick}>
+            <MdSettings />
           </IconButton>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClose}>Dükkan profili</MenuItem>
+            <MenuItem onClick={handleClose}>Üyelik işlemleri</MenuItem>
+            <MenuItem onClick={handleClose}>Çıkış yap</MenuItem>
+          </Menu>
         </Toolbar>
       </AppBar>
       <Drawer
