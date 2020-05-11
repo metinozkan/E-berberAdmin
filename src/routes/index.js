@@ -14,9 +14,31 @@ import Membership from "../Pages/Membership";
 import Calendar from "../Pages/Calendar";
 import { BasicCalendar } from "../Pages/Calendar/BasicCalendar";
 import { ResourceCalendar } from "../Pages/Calendar/ResourceCalendar";
-
+import Agent from "../Utils/Agent";
+import request from "superagent";
 const Home = () => {
-  return <Redirect to="/general-information" />;
+  // return <Redirect to="/general-information" />;
+
+  return (
+    <div
+      onClick={() => {
+        // Agent.Barbers.getBarbers()
+        //   .withCredentials()
+        //   .then((res) => {
+        //     if (res.ok) {
+        //     }
+        //   });
+        request
+          .get("https://spring-boot-jpa-hibernate-pgsq.herokuapp.com/barbers")
+          .then((res) => {
+            if (res.ok) {
+            }
+          });
+      }}
+    >
+      tikla berber gelsin
+    </div>
+  );
 };
 
 const Customers = () => {

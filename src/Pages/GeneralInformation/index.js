@@ -1,8 +1,8 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-
+import request from "superagent";
 import styled from "styled-components";
-import { Grid } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 
 import { GeneralSettings } from "./components/GeneralSettings/GeneralSettings";
 import { WorkingHours } from "./components/WorkingHours/WorkingHours";
@@ -21,6 +21,20 @@ const GeneralInformation = ({ signed }) => {
       <Grid item xs={6}>
         <div style={{ width: "100%", height: "100%" }}>
           <GeneralSettings />
+          <Button
+            onClick={() => {
+              request
+                .get(
+                  "https://spring-boot-jpa-hibernate-pgsq.herokuapp.com/barbers"
+                )
+                .then((res) => {
+                  if (res.ok) {
+                  }
+                });
+            }}
+          >
+            tıkla
+          </Button>
         </div>
       </Grid>
       <Grid item xs={6}>
