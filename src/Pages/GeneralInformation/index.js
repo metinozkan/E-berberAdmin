@@ -6,6 +6,7 @@ import { Grid, Button } from "@material-ui/core";
 
 import { GeneralSettings } from "./components/GeneralSettings/GeneralSettings";
 import { WorkingHours } from "./components/WorkingHours/WorkingHours";
+import Agent from "../../Utils/Agent";
 
 const GeneralInformation = ({ signed }) => {
   return !signed ? (
@@ -23,14 +24,13 @@ const GeneralInformation = ({ signed }) => {
           <GeneralSettings />
           <Button
             onClick={() => {
-              request
-                .get(
-                  "https://spring-boot-jpa-hibernate-pgsq.herokuapp.com/barbers"
-                )
-                .then((res) => {
-                  if (res.ok) {
-                  }
-                });
+              Agent.Barbers.getBarbers().then((res) => {
+                console.log("hadiii");
+                if (res.ok) {
+                  console.log("hadiii", res.body);
+                  console.log("hadiii");
+                }
+              });
             }}
           >
             tıkla

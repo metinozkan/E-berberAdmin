@@ -16,6 +16,24 @@ const requests = {
 };
 const Barbers = {
   getBarbers: () => requests.get("/barbers"),
+  addBarbers: () => requests.post("/barbers/add"),
+};
+
+const Appointments = {
+  getAppointments: () => requests.get("/Appointments"),
+  addAppointments: () => requests.post("/Appointments/add"),
+  montlyStaffAppointments: () => requests.post("Appointments/monthly/staff"),
+  montlyCustomerAppointments: () =>
+    requests.post("Appointments/monthly/customer"),
+  montlyBarberAppointments: () => requests.post("Appointments/monthly/barber"),
+  dateBeforeAppointments: () =>
+    requests.post("Appointments/monthly/dateBefore/staff"),
+};
+
+const WorkHours = {
+  getWorkHours: () => requests.get("/WorkHours"),
+  updateWorkHours: () => requests.get("/WorkHours/put"),
+  addWorkHours: () => requests.get("/WorkHours/add"),
 };
 
 export default {
