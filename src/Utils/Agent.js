@@ -22,18 +22,44 @@ const Barbers = {
 const Appointments = {
   getAppointments: () => requests.get("/Appointments"),
   addAppointments: () => requests.post("/Appointments/add"),
+  deleteAppointments: (appointmentId) =>
+    requests.delete(`/Appointments/delete/${appointmentId}`),
+
   montlyStaffAppointments: () => requests.post("Appointments/monthly/staff"),
   montlyCustomerAppointments: () =>
     requests.post("Appointments/monthly/customer"),
   montlyBarberAppointments: () => requests.post("Appointments/monthly/barber"),
   dateBeforeAppointments: () =>
     requests.post("Appointments/monthly/dateBefore/staff"),
+
+  barberFilter: () => requests.post("/Appointments/barberFilter"),
+  withDate: () => requests.post("/Appointments/withDate"),
+  customerFilter: () => requests.post("/Appointments/customerFilter"),
+
+  getStaff: (staffId) => requests.get(`/Appointments/staff/${staffId}`),
+  getBarber: (barberId) => requests.get(`/Appointments/barber/${barberId}`),
+  getCustomer: (customerId) =>
+    requests.get(`/Appointments/customer/${customerId}`),
 };
 
 const WorkHours = {
   getWorkHours: () => requests.get("/WorkHours"),
+  addWorkHours: () => requests.post("/WorkHours/add"),
   updateWorkHours: () => requests.get("/WorkHours/put"),
   addWorkHours: () => requests.get("/WorkHours/add"),
+
+  dayStaff: () => requests.post("/WorkHours/staff/day"),
+  getStaffWorkHours: (staffId) => requests.get(`/WorkHours/staff/${staffId}`),
+};
+
+const Staffs = {
+  getStaffs: () => requests.get("/Staffs"),
+  addStaffs: () => requests.post("/Staffs/add"),
+
+  staffBarber: () => requests.get(`/Staffs/barber/${id}`),
+
+  deleteStaffAppointment: (id) =>
+    requests.delete(`/Staffs/Appointments/delete/${id}`),
 };
 
 export default {
