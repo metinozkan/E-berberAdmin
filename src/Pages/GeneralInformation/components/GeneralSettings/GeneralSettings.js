@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { districts } from "../../../../Utils/importFiles";
 import {
   TextField,
   ExpansionPanel,
@@ -147,11 +148,7 @@ export const GeneralSettings = () => {
             <Autocomplete
               freeSolo
               id="combo-box-demo"
-              options={[
-                { title: "Serdivan" },
-                { title: "Geyve" },
-                { title: "Adapazarı" },
-              ]}
+              options={districts}
               getOptionLabel={(option) => option.title}
               style={{ width: "100%" }}
               onChange={(e, values) => {
@@ -176,6 +173,16 @@ export const GeneralSettings = () => {
               color="primary"
               disableElevation
               fullWidth
+              onClick={() => {
+                const barberObject = {
+                  barberName: barberName,
+                  address: address,
+                  email: email,
+                  telephoneNumber: telephoneNumber,
+                  district: district,
+                };
+                console.log("barber obej", barberObject);
+              }}
             >
               Kaydet
             </Button>

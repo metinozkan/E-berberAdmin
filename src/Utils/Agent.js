@@ -57,7 +57,7 @@ const Staffs = {
   getStaffs: () => requests.get("/Staffs"),
   addStaffs: () => requests.post("/Staffs/add"),
 
-  staffBarber: () => requests.get(`/Staffs/barber/${id}`),
+  staffBarber: (id) => requests.get(`/Staffs/barber/${id}`),
 
   deleteStaffAppointment: (id) =>
     requests.delete(`/Staffs/Appointments/delete/${id}`),
