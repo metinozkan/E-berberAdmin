@@ -16,3 +16,13 @@ export const districts = [
   { title: "Karapürçek" },
   { title: "Taraklı" },
 ];
+
+export const hours = [
+  "08:00",
+  "08:30",
+  "09:00",
+  "09:30",
+  "10:00",
+  "10:30",
+  "20:00",
+];

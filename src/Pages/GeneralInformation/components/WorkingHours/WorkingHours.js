@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { hours } from "../../../../Utils/importFiles";
 import {
   TextField,
   ExpansionPanel,
@@ -49,13 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Hours = ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "20:00"];
-
 const WorkingHoursRow = ({ title, value, setValue }) => {
-  const [isOpen, setIsOpen] = useState(true);
-  const [openHour, setOpenHour] = useState("08:00");
-  const [closeHour, setCloseHour] = useState("20:00");
-
   return (
     <ContainerRow>
       <span style={{ flex: 1 }}>{title}</span>
@@ -94,7 +89,7 @@ const WorkingHoursRow = ({ title, value, setValue }) => {
         }}
         variant="outlined"
       >
-        {Hours.map((hour, index) => (
+        {hours.map((hour, index) => (
           <MenuItem key={index} value={hour}>
             {hour}
           </MenuItem>
@@ -116,12 +111,27 @@ const WorkingHoursRow = ({ title, value, setValue }) => {
         }}
         variant="outlined"
       >
-        {Hours.map((hour, index) => (
+        {hours.map((hour, index) => (
           <MenuItem key={index} value={hour}>
             {hour}
           </MenuItem>
         ))}
       </TextField>
+      <Button
+        color="primary"
+        variant="contained"
+        onClick={() => {
+          console.log(
+            "bugün ne imişş",
+            title,
+            value.isOpen,
+            value.openHour,
+            value.closeHour
+          );
+        }}
+      >
+        Kaydet
+      </Button>
     </ContainerRow>
   );
 };
@@ -238,14 +248,14 @@ export const WorkingHours = () => {
         <ExpansionPanelDetails>
           <div style={{ width: "100%", height: "100%" }}>
             <WorkingHoursComp></WorkingHoursComp>
-            <Button
+            {/* <Button
               variant="contained"
               color="primary"
               disableElevation
               fullWidth
             >
               Kaydet
-            </Button>
+            </Button> */}
           </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
