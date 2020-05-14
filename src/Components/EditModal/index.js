@@ -4,17 +4,18 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
+  DialogContentText,
   DialogTitle,
   Slide,
 } from "@material-ui/core";
-import { PricesEditTable } from "./PricesEditTable";
+//import { DurationEditTable } from "./DurationEditTable";
 import EditIcon from "@material-ui/icons/Edit";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export const PricesEditModal = ({ selectedService }) => {
+export const EditModal = ({ component, buttonTitle, dialogTitle }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -34,7 +35,7 @@ export const PricesEditModal = ({ selectedService }) => {
         onClick={handleClickOpen}
         style={{ margin: ".5em" }}
       >
-        Edit
+        {buttonTitle}
       </Button>
       <Dialog
         open={open}
@@ -44,11 +45,10 @@ export const PricesEditModal = ({ selectedService }) => {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title">
-          Süreleri Düzenle
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-slide-title">{dialogTitle}</DialogTitle>
         <DialogContent>
-          <PricesEditTable selectedService={selectedService} />
+          {/* //<DurationEditTable selectedService={selectedService} /> */}
+          {component}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

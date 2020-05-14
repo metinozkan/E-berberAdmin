@@ -309,6 +309,7 @@ export const ServicesTable = () => {
                       tabIndex={-1}
                       key={row.name}
                       selected={isItemSelected}
+                      style={{ margin: ".5em" }}
                     >
                       <TableCell padding="checkbox">
                         <Checkbox

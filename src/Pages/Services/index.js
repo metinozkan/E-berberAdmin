@@ -4,6 +4,9 @@ import styled from "styled-components";
 import { Grid, Button, Typography, Paper } from "@material-ui/core";
 import { ServicesTable } from "./components/ServicesTable";
 import { AddServiceMatchPersonelModal } from "./components/AddServiceMatchPersonnelModal";
+import { EditModal } from "../../Components/EditModal";
+import { ServiceAddTable } from "./components/ServiceAddTable";
+
 const TopServices = styled.div`
   width: 100%;
   paddign: 1em;
@@ -27,7 +30,12 @@ const Services = ({ signed }) => {
         <Typography variant="h4" gutterBottom>
           Services
         </Typography>
-        <AddServiceMatchPersonelModal />
+        {/* <AddServiceMatchPersonelModal /> */}
+        <EditModal
+          buttonTitle="Hizmet Ekle"
+          dialogTitle="Hizmet Ekle"
+          component={<ServiceAddTable />}
+        />
       </TopServices>
       <div
         style={{
