@@ -1,43 +1,39 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  TableSortLabel,
+  Toolbar,
+  Typography,
+  Paper,
+  Checkbox,
+  IconButton,
+  TextField,
+  Tooltip,
+  Switch,
+  FormControlLabel,
+  Button,
+} from "@material-ui/core";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
-import TableSortLabel from "@material-ui/core/TableSortLabel";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import Checkbox from "@material-ui/core/Checkbox";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import { Close } from "@material-ui/icons";
 
-function createData(name, personnel) {
-  return { name, personnel };
+function createData(name, duration, price, personnel) {
+  return { name, duration, price, personnel };
 }
 
 const rows = [
-  createData("Saç", ["Ahmet asdas", "Hasan Dogan"]),
-  createData("sakal", ["Ahmet asdas", "Hasan Dogan"]),
-  createData("Saç yıkama", ["Ahmet asdas", "Hasan Dogan"]),
-  createData("Ense", ["Ahmet asdas", "Hasan Dogan"]),
-  createData("Damat tıraş", ["Ahmet asdas", "Hasan Dogan"]),
+  createData("Saç", 15, 25, ["Ahmet asdas", "Hasan Dogan"]),
+  createData("sakal", 10, 25, ["Ahmet asdas", "Hasan Dogan"]),
+  createData("Saç yıkama", 5, 10, ["Ahmet asdas", "Hasan Dogan"]),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -75,6 +71,18 @@ const headCells = [
   },
   {
     id: "name",
+    numeric: true,
+    disablePadding: true,
+    label: "Süre",
+  },
+  {
+    id: "name",
+    numeric: true,
+    disablePadding: true,
+    label: "Fiyat",
+  },
+  {
+    id: "name",
     numeric: false,
     disablePadding: true,
     label: "Sunan Çalışanlar",
@@ -109,7 +117,8 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? "right" : "left"}
+            //align={headCell.numeric ? "right" : "left"}
+            align={"left"}
             padding={headCell.disablePadding ? "none" : "default"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -325,6 +334,7 @@ export const ServicesTable = () => {
                         style={{
                           borderRight: "1px solid #e2e2e2",
                           width: "20%",
+                          padding: ".5em",
                         }}
                       >
                         {row.name}
@@ -334,7 +344,37 @@ export const ServicesTable = () => {
                         id={labelId}
                         scope="row"
                         padding="none"
-                        style={{ marginLeft: ".5em", paddingLeft: ".5em" }}
+                        style={{
+                          borderRight: "1px solid #e2e2e2",
+                          paddingLeft: ".5em",
+                          width: "20%",
+                        }}
+                      >
+                        {row.duration}
+                      </TableCell>
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
+                        style={{
+                          borderRight: "1px solid #e2e2e2",
+                          paddingLeft: ".5em",
+                          width: "20%",
+                        }}
+                      >
+                        {row.price}
+                      </TableCell>
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
+                        style={{
+                          marginLeft: ".5em",
+                          paddingLeft: ".5em",
+                          width: "40%",
+                        }}
                       >
                         {row.personnel}
                       </TableCell>
