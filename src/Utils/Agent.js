@@ -14,6 +14,7 @@ const requests = {
   post: (url, body) => request.post(`${protocol}//${API_ROOT}${url}`, body),
   delete: (url, body) => request.delete(`${protocol}//${API_ROOT}${url}`, body),
 };
+
 const Barbers = {
   getBarbers: () => requests.get("/barbers"),
   addBarbers: () => requests.post("/barbers/add"),
@@ -60,6 +61,11 @@ const Staffs = {
 
   deleteStaffAppointment: (id) =>
     requests.delete(`/Staffs/Appointments/delete/${id}`),
+};
+
+const ServiceBarber = {
+  getServiceBarber: () => requests.get("/ServiceBarber"),
+  addServiceBarber: () => requests.post("/ServiceBarber/add"),
 };
 
 export default {
