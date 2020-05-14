@@ -47,7 +47,19 @@ export const GeneralSettings = () => {
   const [email, setEmail] = useState("");
   const [telephoneNumber, setTelephoneNumber] = useState();
   const [district, setDistrict] = useState("");
+  const [taxObject, setTaxObjet] = useState();
 
+  //InvoiceContaienr
+  const [taxName, setTaxName] = useState("");
+  const [taxNo, setTaxNo] = useState("");
+  const [taxOffice, setTaxOffice] = useState("");
+  const [taxAddress, setTaxAddress] = useState("");
+  const TaxObject = {
+    taxName: taxName,
+    taxNo: taxNo,
+    taxOffice: taxOffice,
+    taxAddress: taxAddress,
+  };
   // console.log("distric", district);
   return (
     <ContainerGeneral style={{}}>
@@ -166,7 +178,18 @@ export const GeneralSettings = () => {
                 />
               )}
             ></Autocomplete>
-            <InvoiceContainer></InvoiceContainer>
+            <InvoiceContainer
+              setTaxObjet={setTaxObjet}
+              taxObject={taxObject}
+              taxName={taxName}
+              setTaxName={setTaxName}
+              taxNo={taxNo}
+              setTaxNo={setTaxNo}
+              taxOffice={taxOffice}
+              setTaxOffice={setTaxOffice}
+              taxAddress={taxAddress}
+              setTaxAddress={setTaxAddress}
+            ></InvoiceContainer>
 
             <Button
               variant="contained"
@@ -182,6 +205,7 @@ export const GeneralSettings = () => {
                   district: district,
                 };
                 console.log("barber obej", barberObject);
+                console.log("Tax obej", TaxObject);
               }}
             >
               Kaydet

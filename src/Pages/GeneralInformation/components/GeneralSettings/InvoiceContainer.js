@@ -61,13 +61,20 @@ const ConteinerInvoiceRow = ({ title, value, setValue }) => {
     </InvoiceRow>
   );
 };
-export const InvoiceContainer = () => {
+export const InvoiceContainer = ({
+  setTaxObjet,
+  taxObject,
+  taxName,
+  setTaxName,
+  taxNo,
+  setTaxNo,
+  taxOffice,
+  setTaxOffice,
+  taxAddress,
+  setTaxAddress,
+}) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const [taxName, setTaxName] = useState("");
-  const [taxNo, setTaxNo] = useState("");
-  const [taxOffice, setTaxOffice] = useState("");
-  const [taxAddress, setTaxAddress] = useState("");
 
   return (
     <ExpansionPanel
