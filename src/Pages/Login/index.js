@@ -1,5 +1,6 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Agent } from "../../Utils/importFiles";
+import { Redirect, useHistory } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -52,7 +53,9 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = ({ signed }) => {
   const classes = useStyles();
-
+  const [eMail, seteMail] = useState("");
+  const [password, setPassword] = useState("");
+  const history = useHistory();
   return signed ? (
     <Redirect to="/home"></Redirect>
   ) : (
@@ -68,6 +71,10 @@ const Login = ({ signed }) => {
         <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
+            value={eMail}
+            onChange={(e) => {
+              seteMail(e.target.value);
+            }}
             margin="normal"
             required
             fullWidth
@@ -79,6 +86,10 @@ const Login = ({ signed }) => {
           />
           <TextField
             variant="outlined"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
             margin="normal"
             required
             fullWidth
@@ -93,11 +104,24 @@ const Login = ({ signed }) => {
             label="Remember me"
           />
           <Button
-            type="submit"
+            // type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={() => {
+              Agent.Login.loginBarber()
+                .send({
+                  eMail: eMail,
+                  password: password,
+                })
+                .then((res) => {
+                  if (res.ok) {
+                    console.log("login", res.body);
+                    history.push("/");
+                  }
+                });
+            }}
           >
             Sign In
           </Button>
