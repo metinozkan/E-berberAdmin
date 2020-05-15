@@ -11,7 +11,7 @@ export default function RouteWrapper({
   ...rest
 }) {
   // const signed = true;
-  const [signed, setSigned] = useState(false);
+  const [signed, setSigned] = useState(true);
   /**
    * Redirect user to SignIn page if he tries to access a private route
    * without authentication.

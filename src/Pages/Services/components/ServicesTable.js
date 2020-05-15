@@ -5,19 +5,13 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TablePagination,
   TableRow,
-  TableSortLabel,
   Toolbar,
   Typography,
   Paper,
   Checkbox,
   IconButton,
-  TextField,
   Tooltip,
-  Switch,
-  FormControlLabel,
-  Button,
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 import clsx from "clsx";

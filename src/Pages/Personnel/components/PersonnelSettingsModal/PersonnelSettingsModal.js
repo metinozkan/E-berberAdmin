@@ -6,15 +6,9 @@ import {
   DialogContent,
   DialogTitle,
   Grid,
-  TextField,
-  MenuItem,
-  ExpansionPanel,
-  ExpansionPanelSummary,
-  ExpansionPanelDetails,
 } from "@material-ui/core";
 import { MdKeyboardArrowLeft } from "react-icons/md";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { makeStyles } from "@material-ui/core/styles";
+
 import { Close } from "@material-ui/icons";
 import { PersonnelServices } from "./PersonnelServices";
 import { PersonnelEdit } from "./PersonnelEdit";
@@ -102,7 +96,7 @@ export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
             padding: "1em",
           }}
         >
-          {!selectedPage == 0 && (
+          {!selectedPage === 0 && (
             <MdKeyboardArrowLeft
               size={30}
               style={{ cursor: "pointer" }}
@@ -113,9 +107,9 @@ export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
           )}
 
           <DialogTitle id="alert-dialog-title" style={{ fontSize: "35px" }}>
-            {selectedPage == 0
+            {selectedPage === 0
               ? "Ayar Seçin"
-              : selectedPage == 1
+              : selectedPage === 1
               ? "Çalışan Düzenle"
               : "Verdiği Hizmetler"}
           </DialogTitle>
@@ -131,9 +125,9 @@ export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
         </div>
 
         <DialogContent>
-          {selectedPage == 0 ? (
+          {selectedPage === 0 ? (
             <SelectPageComp setSelectedPage={setSelectedPage}></SelectPageComp>
-          ) : selectedPage == 1 ? (
+          ) : selectedPage === 1 ? (
             <PersonnelEdit
               selectedPersonnel={selectedPersonnel}
             ></PersonnelEdit>
@@ -144,7 +138,7 @@ export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
           )}
         </DialogContent>
         <DialogActions>
-          {!selectedPage == 0 && (
+          {!selectedPage === 0 && (
             <Button
               onClick={handleClose}
               color="primary"

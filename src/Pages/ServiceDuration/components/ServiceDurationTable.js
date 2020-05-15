@@ -10,9 +10,7 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TablePagination,
   TableRow,
-  TableSortLabel,
   Toolbar,
   Typography,
   Paper,
@@ -20,7 +18,6 @@ import {
   IconButton,
   TextField,
   Tooltip,
-  Switch,
   FormControlLabel,
   Button,
 } from "@material-ui/core";
@@ -30,7 +27,6 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import { Close } from "@material-ui/icons";
 import { ServiceDurationEditModal } from "./ServiceDurationEditModal/ServiceDurationEditModal";
 
 const Services = [
