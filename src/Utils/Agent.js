@@ -20,6 +20,10 @@ const Barbers = {
   addBarbers: () => requests.post("/barbers/add"),
 };
 
+const Login = {
+  loginBarber: () => requests.post("/barbers/login"),
+};
+
 const Appointments = {
   getAppointments: () => requests.get("/Appointments"),
   addAppointments: () => requests.post("/Appointments/add"),
@@ -70,6 +74,11 @@ const ServiceBarber = {
 
 export default {
   Barbers,
+  ServiceBarber,
+  Staffs,
+  Login,
+  Appointments,
+  WorkHours,
   //   setToken: (_token) => {
   //     token = _token;
   //   },

@@ -1,5 +1,6 @@
-import React from "react";
-import { Redirect } from "react-router-dom";
+import React, { useState } from "react";
+import { Redirect, useHistory } from "react-router-dom";
+import { Agent, Storage } from "../../Utils/importFiles";
 import {
   Avatar,
   Button,
@@ -49,9 +50,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignUp = ({ signed }) => {
+const SignUp = ({ signed, setSigned }) => {
   const classes = useStyles();
-
+  const [barberName, setBarberName] = useState("");
+  const [eMail, seteMail] = useState("");
+  const [password, setPassword] = useState("");
+  const history = useHistory();
   return signed ? (
     <Redirect to="/home" />
   ) : (
@@ -66,32 +70,29 @@ const SignUp = ({ signed }) => {
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
-                autoComplete="fname"
-                name="firstName"
+                value={barberName}
+                onChange={(e) => {
+                  setBarberName(e.target.value);
+                }}
+                name="barberName"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
+                id="barberName"
+                label="Barber Name"
                 autoFocus
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid>
+
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
+                value={eMail}
+                onChange={(e) => {
+                  seteMail(e.target.value);
+                }}
                 required
                 fullWidth
                 id="email"
@@ -103,6 +104,10 @@ const SignUp = ({ signed }) => {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
                 required
                 fullWidth
                 name="password"
@@ -120,11 +125,31 @@ const SignUp = ({ signed }) => {
             </Grid>
           </Grid>
           <Button
-            type="submit"
+            // type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={() => {
+              // Agent.Barbers.addBarbers()
+              //   .send({
+              //     barberName: barberName,
+              //     eMail: eMail,
+              //     password: password,
+              //   })
+              //   .then((res) => {
+              //     if (res.ok) {
+              //       console.log("signUp succesfuly");
+              //       Storage.SetItem("barber", res.body);
+              //       history.push("/");
+              //     }
+              //   });
+              Storage.SetItem("barberName", barberName);
+              Storage.SetItem("eMail", eMail);
+              Storage.SetItem("barberId", 1);
+              setSigned(true);
+              history.push("/");
+            }}
           >
             Sign Up
           </Button>

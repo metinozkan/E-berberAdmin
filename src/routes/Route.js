@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Route, Redirect } from "react-router-dom";
 
@@ -10,8 +10,8 @@ export default function RouteWrapper({
   isPrivate,
   ...rest
 }) {
-  const signed = true;
-
+  // const signed = true;
+  const [signed, setSigned] = useState(false);
   /**
    * Redirect user to SignIn page if he tries to access a private route
    * without authentication.
@@ -38,7 +38,7 @@ export default function RouteWrapper({
       {...rest}
       render={(props) => (
         <Layout>
-          <Component {...props} signed={signed} />
+          <Component {...props} signed={signed} setSigned={setSigned} />
         </Layout>
       )}
     />
