@@ -95,7 +95,7 @@ const rows = Personnels.map((personnel) =>
   )
 );
 
-export const PersonnelTable = () => {
+export const PersonnelTable = ({ personnels }) => {
   const classes = useStyles();
 
   return (

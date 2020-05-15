@@ -60,10 +60,10 @@ const WorkHours = {
 };
 
 const Staffs = {
-  getStaffs: () => requests.get("/Staffs"),
+  //getStaffs: () => requests.get("/Staffs"),
   addStaffs: () => requests.post("/Staffs/add"),
 
-  staffBarber: (id) => requests.get(`/Staffs/barber/${id}`),
+  getStaffBarber: (barberId) => requests.get(`/Staffs/barber/${barberId}`),
 
   deleteStaffAppointment: (id) =>
     requests.delete(`/Staffs/Appointments/delete/${id}`),
