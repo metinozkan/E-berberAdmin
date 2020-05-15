@@ -20,8 +20,8 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(name, phoneNumber, workerType, genderType, button) {
-  return { name, phoneNumber, workerType, genderType, button };
+function createData(name, phoneNumber, workerType, workerColor, button) {
+  return { name, phoneNumber, workerType, workerColor, button };
 }
 
 const Personnels = [
@@ -85,18 +85,28 @@ const PersonnelMatchService = [
     services: ["çocuk traş", "maske", "el ayak :)"],
   },
 ];
-const rows = Personnels.map((personnel) =>
-  createData(
-    personnel.name,
-    personnel.phoneNumber,
-    personnel.workerType,
-    personnel.genderType,
-    <PersonnelSettingsModal selectedPersonnel={personnel} />
-  )
-);
+// const rows = Personnels.map((personnel) =>
+//   createData(
+//     personnel.name,
+//     personnel.phoneNumber,
+//     personnel.workerType,
+//     personnel.workerColor,
+//     <PersonnelSettingsModal selectedPersonnel={personnel} />
+//   )
+// );
 
-export const PersonnelTable = ({ personnels }) => {
+export const PersonnelTable = ({ personnels, _updatePersonnel }) => {
   const classes = useStyles();
+  console.log("person", personnels);
+  const rows = personnels.map((personnel) =>
+    createData(
+      personnel.staffName,
+      " personnel.phoneNumber",
+      "personnel.workerType",
+      " personnel.workerColor",
+      <PersonnelSettingsModal selectedPersonnel={personnel} />
+    )
+  );
 
   return (
     <TableContainer component={Paper} elevation={0}>
@@ -111,10 +121,10 @@ export const PersonnelTable = ({ personnels }) => {
               Çalışan Tipi
             </TableCell>
             <TableCell align="center" className={classes.tableCol}>
-              Müşteri Cinsiyeti
+              Çalışan Rengi
             </TableCell>
             <TableCell align="center" className={classes.tableCol}>
-              Buton gelecek
+              Düzenle
             </TableCell>
           </TableRow>
         </TableHead>
@@ -135,7 +145,7 @@ export const PersonnelTable = ({ personnels }) => {
                 {row.workerType}
               </TableCell>
               <TableCell align="center" className={classes.tableRowBorder}>
-                {row.genderType}
+                {row.workerColor}
               </TableCell>
               <TableCell align="center" className={""}>
                 {row.button}

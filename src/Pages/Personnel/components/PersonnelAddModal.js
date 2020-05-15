@@ -39,10 +39,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ModalContent = () => {
-  const [personnelType, setPersonnelType] = useState("Yönetici");
-  const [color, setColor] = useState();
-  const [openWorkingHours, setOpenWorkingHours] = useState(false);
+const PersonnelAdd = ({
+  _addPersonnel,
+  setPersonnelType,
+  setColor,
+  setName,
+  setEmail,
+  setPhoneNo,
+  setOpenWorkingHours,
+  personnelType,
+  color,
+  name,
+  email,
+  phoneNo,
+  openWorkingHours,
+}) => {
   const classes = useStyles();
   return (
     <Grid container direction="column" justify="flex-start">
@@ -50,6 +61,10 @@ const ModalContent = () => {
         <form className={classes.root} noValidate autoComplete="off" style={{}}>
           <TextField
             id="outlined-full-width"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
             label="Çalışan adı"
             style={{}}
             //  placeholder="Placeholder"
@@ -63,6 +78,10 @@ const ModalContent = () => {
           />
           <TextField
             id="outlined-full-width"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
             label="E posta adresi"
             style={{}}
             placeholder="Placeholder"
@@ -83,6 +102,10 @@ const ModalContent = () => {
             <span style={{ width: "10%" }}>+90</span>{" "}
             <TextField
               id="outlined-full-width"
+              value={phoneNo}
+              onChange={(e) => {
+                setPhoneNo(e.target.value);
+              }}
               label="Telefon numarası"
               style={{}}
               placeholder="Placeholder"
@@ -99,6 +122,10 @@ const ModalContent = () => {
           </div>
           <TextField
             id="outlined-full-width"
+            value={personnelType}
+            onChange={(e) => {
+              setPersonnelType(e.target.value);
+            }}
             //label="Açık"
             style={{ flex: 2, marginRight: ".5em" }}
             placeholder="Çalışan türü"
@@ -108,10 +135,6 @@ const ModalContent = () => {
             }}
             variant="outlined"
             select
-            value={personnelType}
-            onChange={(e) => {
-              setPersonnelType(e.target.value);
-            }}
           >
             <MenuItem value={"Yönetici"}>Yönetici</MenuItem>
             <MenuItem value={"Çalışan"}>Çalışan</MenuItem>
@@ -128,19 +151,19 @@ const ModalContent = () => {
             <span style={{ width: "20%" }}>Renk</span>
             <TextField
               id="outlined-full-width"
+              value={color}
+              onChange={(e) => {
+                setColor(e.target.value);
+              }}
               //label="Açık"
               style={{ flex: 2, marginRight: ".5em" }}
-              placeholder="Çalışan türü"
+              placeholder="Çalışan rengi"
               margin="dense"
               InputLabelProps={{
                 shrink: true,
               }}
               variant="outlined"
               select
-              value={color}
-              onChange={(e) => {
-                setColor(e.target.value);
-              }}
             >
               <MenuItem value={"red"}>
                 <div
@@ -184,9 +207,23 @@ const ModalContent = () => {
   );
 };
 
-export const PersonnelAddModal = () => {
+export const PersonnelAddModal = ({ _addPersonnel }) => {
   const [open, setOpen] = useState(false);
   const [selectedPage, setSelectedPage] = useState(0);
+  const [personnelType, setPersonnelType] = useState("Yönetici");
+  const [color, setColor] = useState();
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [phoneNo, setPhoneNo] = useState();
+  const [openWorkingHours, setOpenWorkingHours] = useState(false);
+
+  const PersonnelObject = {
+    personnelType: personnelType,
+    color: color,
+    name: name,
+    email: email,
+    phoneNo: phoneNo,
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -229,7 +266,21 @@ export const PersonnelAddModal = () => {
           </div>
 
           <DialogContent>
-            <ModalContent></ModalContent>
+            <PersonnelAdd
+              _addPersonnel={_addPersonnel}
+              personnelType={personnelType}
+              color={color}
+              name={name}
+              email={email}
+              phoneNo={phoneNo}
+              openWorkingHours={openWorkingHours}
+              setPersonnelType={setPersonnelType}
+              setColor={setColor}
+              setName={setName}
+              setEmail={setEmail}
+              setPhoneNo={setPhoneNo}
+              setOpenWorkingHours={setOpenWorkingHours}
+            ></PersonnelAdd>
           </DialogContent>
           <DialogActions>
             <Button
@@ -237,6 +288,9 @@ export const PersonnelAddModal = () => {
               color="primary"
               style={{ width: "100%" }}
               variant="outlined"
+              onClick={() => {
+                console.log("personelobj", PersonnelObject);
+              }}
             >
               Kaydet
             </Button>

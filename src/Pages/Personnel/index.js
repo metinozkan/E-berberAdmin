@@ -26,6 +26,26 @@ const Personnel = ({ signed }) => {
     });
   };
 
+  const _updatePersonnel = (personnelId) => {
+    Agent.Staffs.updateStaff("id")
+      .send({})
+      .then((res) => {
+        if (res.ok) {
+          console.log("update", res.body);
+        }
+      });
+  };
+
+  const _addPersonnel = (personnelObject) => {
+    Agent.Staffs.addStaffs()
+      .send(personnelObject)
+      .then((res) => {
+        if (res.ok) {
+          console.log("add,", res.body);
+        }
+      });
+  };
+
   useEffect(() => {
     console.log("kac kere");
 
@@ -49,7 +69,9 @@ const Personnel = ({ signed }) => {
             <Typography variant="h4" gutterBottom>
               Çalışanlar
             </Typography>
-            <PersonnelAddModal></PersonnelAddModal>
+            <PersonnelAddModal
+              _addPersonnel={_addPersonnel}
+            ></PersonnelAddModal>
           </TopPersonnel>
           <div
             style={{
@@ -61,7 +83,10 @@ const Personnel = ({ signed }) => {
               alignItems: "center",
             }}
           >
-            <PersonnelTable personnels={personnels}></PersonnelTable>
+            <PersonnelTable
+              personnels={personnels}
+              _updatePersonnel={_updatePersonnel}
+            ></PersonnelTable>
           </div>
         </>
       )}
