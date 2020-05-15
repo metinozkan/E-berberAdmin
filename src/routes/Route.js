@@ -4,6 +4,7 @@ import { Route, Redirect } from "react-router-dom";
 
 import DefaultLayout from "../_layouts/default/DefaultLayout";
 import AuthLayout from "../_layouts/auth/AuthLayout";
+import { Storage } from "../Utils/importFiles";
 
 export default function RouteWrapper({
   component: Component,
@@ -11,7 +12,10 @@ export default function RouteWrapper({
   ...rest
 }) {
   // const signed = true;
-  const [signed, setSigned] = useState(true);
+  const barber = Storage.GetItem("barber");
+
+  const [signed, setSigned] = useState(barber ? true : false);
+
   /**
    * Redirect user to SignIn page if he tries to access a private route
    * without authentication.
@@ -37,7 +41,7 @@ export default function RouteWrapper({
     <Route
       {...rest}
       render={(props) => (
-        <Layout>
+        <Layout setSigned={setSigned}>
           <Component {...props} signed={signed} setSigned={setSigned} />
         </Layout>
       )}

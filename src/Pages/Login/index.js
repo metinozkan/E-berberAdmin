@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Agent } from "../../Utils/importFiles";
+import { Agent, Storage } from "../../Utils/importFiles";
 import { Redirect, useHistory } from "react-router-dom";
 import {
   Avatar,
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = ({ signed }) => {
+const Login = ({ signed, setSigned }) => {
   const classes = useStyles();
   const [eMail, seteMail] = useState("");
   const [password, setPassword] = useState("");
@@ -110,17 +110,19 @@ const Login = ({ signed }) => {
             color="primary"
             className={classes.submit}
             onClick={() => {
-              Agent.Login.loginBarber()
-                .send({
-                  eMail: eMail,
-                  password: password,
-                })
-                .then((res) => {
-                  if (res.ok) {
-                    console.log("login", res.body);
-                    history.push("/");
-                  }
-                });
+              // Agent.Login.loginBarber()
+              //   .send({
+              //     eMail: eMail,
+              //     password: password,
+              //   })
+              //   .then((res) => {
+              //     if (res.ok) {
+              //       console.log("login", res.body);
+              //       history.push("/");
+              //     }
+              //   });
+              Storage.SetItem("barber", { id: 1, falan: "falan" });
+              setSigned(true);
             }}
           >
             Sign In

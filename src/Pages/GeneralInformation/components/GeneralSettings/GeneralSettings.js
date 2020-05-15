@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { districts } from "../../../../Utils/importFiles";
+import { districts, Agent } from "../../../../Utils/importFiles";
 import {
   TextField,
   ExpansionPanel,
@@ -40,13 +40,13 @@ export const ContainerGeneral = styled.div`
   border-radius: 5px;
 `;
 
-export const GeneralSettings = () => {
+export const GeneralSettings = ({ _updateGeneralSettings, barber }) => {
   const classes = useStyles();
-  const [barberName, setBarberName] = useState("");
-  const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
-  const [telephoneNumber, setTelephoneNumber] = useState();
-  const [district, setDistrict] = useState("");
+  const [barberName, setBarberName] = useState(barber.barberName);
+  const [address, setAddress] = useState(barber.adress);
+  const [email, setEmail] = useState(barber.eMail);
+  const [telephoneNumber, setTelephoneNumber] = useState(barber.phoneNo);
+  const [district, setDistrict] = useState(barber.district);
   const [taxObject, setTaxObjet] = useState();
 
   //InvoiceContaienr
@@ -61,6 +61,16 @@ export const GeneralSettings = () => {
     taxAddress: taxAddress,
   };
   // console.log("distric", district);
+
+  const barberObject = {
+    barberName: barberName,
+    phoneNo: telephoneNumber,
+    eMail: email,
+    adress: address,
+    district: district,
+    city: "Sakarya",
+  };
+
   return (
     <ContainerGeneral style={{}}>
       <ExpansionPanel
@@ -163,6 +173,7 @@ export const GeneralSettings = () => {
               options={districts}
               getOptionLabel={(option) => option.title}
               style={{ width: "100%" }}
+              inputValue={district}
               onChange={(e, values) => {
                 setDistrict(values.title);
               }}
@@ -197,15 +208,9 @@ export const GeneralSettings = () => {
               disableElevation
               fullWidth
               onClick={() => {
-                const barberObject = {
-                  barberName: barberName,
-                  address: address,
-                  email: email,
-                  telephoneNumber: telephoneNumber,
-                  district: district,
-                };
-                console.log("barber obej", barberObject);
-                console.log("Tax obej", TaxObject);
+                _updateGeneralSettings(barberObject);
+
+                console.log("gidenobje", barberObject);
               }}
             >
               Kaydet

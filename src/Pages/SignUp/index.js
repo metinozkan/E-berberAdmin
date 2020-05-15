@@ -131,24 +131,20 @@ const SignUp = ({ signed, setSigned }) => {
             color="primary"
             className={classes.submit}
             onClick={() => {
-              // Agent.Barbers.addBarbers()
-              //   .send({
-              //     barberName: barberName,
-              //     eMail: eMail,
-              //     password: password,
-              //   })
-              //   .then((res) => {
-              //     if (res.ok) {
-              //       console.log("signUp succesfuly");
-              //       Storage.SetItem("barber", res.body);
-              //       history.push("/");
-              //     }
-              //   });
-              Storage.SetItem("barberName", barberName);
-              Storage.SetItem("eMail", eMail);
-              Storage.SetItem("barberId", 1);
-              setSigned(true);
-              history.push("/");
+              Agent.Barbers.addBarbers()
+                .send({
+                  barberName: barberName,
+                  eMail: eMail,
+                  password: password,
+                })
+                .then((res) => {
+                  if (res.ok) {
+                    console.log("signUp succesfuly", res.body);
+                    Storage.SetItem("barber", res.body);
+                    history.push("/");
+                    setSigned(true);
+                  }
+                });
             }}
           >
             Sign Up

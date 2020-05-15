@@ -19,10 +19,11 @@ import purple from "@material-ui/core/colors/purple";
 import green from "@material-ui/core/colors/green";
 import blue from "@material-ui/core/colors/blue";
 import blueGrey from "@material-ui/core/colors/blueGrey";
+import red from "@material-ui/core/colors/red";
 
 const newTheme = createMuiTheme({
   palette: {
-    primary: purple,
+    primary: blueGrey,
     secondary: green,
   },
 });

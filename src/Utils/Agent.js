@@ -18,6 +18,8 @@ const requests = {
 const Barbers = {
   getBarbers: () => requests.get("/barbers"),
   addBarbers: () => requests.post("/barbers/add"),
+  updateBarbers: (barberId) => requests.put(`/barbers/edit/${barberId}`),
+  getBarber: (barberId) => requests.get(`/barbers/${barberId}`),
 };
 
 const Login = {

@@ -1,5 +1,6 @@
 import React from "react";
-import { useLocation, useRouteMatch } from "react-router-dom";
+import { Storage } from "../../Utils/Storage";
+import { useLocation, useRouteMatch, useHistory } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -125,7 +126,7 @@ const DefaultLayout = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const { path } = useRouteMatch();
-
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -183,7 +184,16 @@ const DefaultLayout = (props) => {
           >
             <MenuItem onClick={handleClose}>Dükkan profili</MenuItem>
             <MenuItem onClick={handleClose}>Üyelik işlemleri</MenuItem>
-            <MenuItem onClick={handleClose}>Çıkış yap</MenuItem>
+            <MenuItem
+              onClick={() => {
+                Storage.RemoveItem("barber");
+                history.push("/login");
+                props.setSigned(false);
+                handleClose();
+              }}
+            >
+              Çıkış yap
+            </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>

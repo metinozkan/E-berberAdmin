@@ -77,7 +77,7 @@ const Personnels = [
 
 const PersonnelMatchService = [
   {
-    name: "Yüksel Yurtay",
+    name: "Mahmut Gün",
     services: ["saç", "sakal", "ense", "damat traş"],
   },
   {
