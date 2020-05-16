@@ -15,7 +15,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export const EditModal = ({ component, buttonTitle, dialogTitle }) => {
+export const EditModal = (props) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -35,7 +35,7 @@ export const EditModal = ({ component, buttonTitle, dialogTitle }) => {
         onClick={handleClickOpen}
         style={{ margin: ".5em" }}
       >
-        {buttonTitle}
+        {props.buttonTitle}
       </Button>
       <Dialog
         open={open}
@@ -45,16 +45,26 @@ export const EditModal = ({ component, buttonTitle, dialogTitle }) => {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title">{dialogTitle}</DialogTitle>
+        <DialogTitle id="alert-dialog-slide-title">
+          {props.dialogTitle}
+        </DialogTitle>
         <DialogContent>
           {/* //<DurationEditTable selectedService={selectedService} /> */}
-          {component}
+          {props.children}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Disagree
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button
+            onClick={() => {
+              if (props.onConfirm) {
+                props.onConfirm();
+              }
+              handleClose();
+            }}
+            color="primary"
+          >
             Agree
           </Button>
         </DialogActions>

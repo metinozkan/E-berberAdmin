@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
@@ -32,7 +32,8 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import { Close } from "@material-ui/icons";
 import { PricesEditModal } from "../../ServicePrices/components/ServicePricesEditModal/PricesEditModal";
 import { EditModal } from "../../../Components/EditModal";
-import { ServiceAddTable } from "./ServiceAddTable";
+import { ServiceEdit } from "./ServiceEdit";
+import { ServiceAdd } from "./ServiceAdd";
 
 const Services = [
   { name: "Saç yıkama", price: "12", duration: "15" },
@@ -272,22 +273,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const ServicesTable = () => {
+export const ServicesTable = ({ services, _updateService }) => {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("name");
   const [selected, setSelected] = React.useState([]);
-
-  const rows = Services.map((service) =>
+  const [selectedService, setSelectedService] = useState(null);
+  // const rows = Services.map((service) =>
+  const rows = services.map((service) =>
     createData(
       service.name,
       service.price,
-      service.duration,
-      <EditModal
-        buttonTitle="Düzenle"
-        dialogTitle="Hizmet Düzenle"
-        component={<ServiceAddTable selectedService={service} />}
-      />
+      service.time,
+      <ServiceEdit selectedService={service} _updateService={_updateService} />
     )
   );
 
