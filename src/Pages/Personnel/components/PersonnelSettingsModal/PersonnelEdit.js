@@ -32,15 +32,21 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
-export const PersonnelEdit = ({ selectedPersonnel }) => {
+export const PersonnelEdit = ({
+  setPersonnelType,
+  setColor,
+  setName,
+  setEmail,
+  setPhoneNo,
+  setOpenWorkingHours,
+  personnelType,
+  color,
+  name,
+  email,
+  phoneNo,
+  openWorkingHours,
+}) => {
   const classes = useStyles();
-  const [personnelType, setPersonnelType] = useState("Yönetici");
-  const [color, setColor] = useState();
-  const [openWorkingHours, setOpenWorkingHours] = useState(false);
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [tel, setTel] = useState();
-  const [workerType, setWorkerType] = useState();
 
   //calısma saatlerini nasıl yapacaksın artık Allah bilir
 
@@ -51,7 +57,7 @@ export const PersonnelEdit = ({ selectedPersonnel }) => {
           <TextField
             id="outlined-full-width"
             label="Çalışan adı"
-            value={selectedPersonnel.name}
+            value={name}
             style={{}}
             //  placeholder="Placeholder"
             // helperText="Full width!"
@@ -85,7 +91,7 @@ export const PersonnelEdit = ({ selectedPersonnel }) => {
             <TextField
               id="outlined-full-width"
               label="Telefon numarası"
-              value={selectedPersonnel.phoneNumber}
+              value={phoneNo}
               style={{}}
               placeholder="Placeholder"
               // helperText="Full width!"
@@ -102,7 +108,6 @@ export const PersonnelEdit = ({ selectedPersonnel }) => {
           <TextField
             id="outlined-full-width"
             //label="Açık"
-            value={selectedPersonnel.workerType}
             style={{ flex: 2, marginRight: ".5em" }}
             placeholder="Çalışan türü"
             margin="dense"

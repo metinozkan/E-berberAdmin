@@ -12,7 +12,7 @@ import { MdKeyboardArrowLeft } from "react-icons/md";
 import { Close } from "@material-ui/icons";
 import { PersonnelServices } from "./PersonnelServices";
 import { PersonnelEdit } from "./PersonnelEdit";
-
+import { PersonnelAddAndEdit } from "../PersonnelAddModal";
 const SelectPageComp = ({ setSelectedPage }) => {
   return (
     <Grid
@@ -59,6 +59,20 @@ const SelectPageComp = ({ setSelectedPage }) => {
 export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
   const [open, setOpen] = useState(false);
   const [selectedPage, setSelectedPage] = useState(0);
+  const [personnelType, setPersonnelType] = useState("Yönetici");
+  const [color, setColor] = useState("red");
+  const [name, setName] = useState(selectedPersonnel.name);
+  const [email, setEmail] = useState();
+  const [phoneNo, setPhoneNo] = useState(selectedPersonnel.phoneNo);
+  const [openWorkingHours, setOpenWorkingHours] = useState(false);
+
+  const PersonnelObject = {
+    personnelType: personnelType,
+    color: color,
+    name: name,
+    email: email,
+    phoneNo: phoneNo,
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -128,9 +142,21 @@ export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
           {selectedPage === 0 ? (
             <SelectPageComp setSelectedPage={setSelectedPage}></SelectPageComp>
           ) : selectedPage === 1 ? (
-            <PersonnelEdit
+            <PersonnelAddAndEdit
               selectedPersonnel={selectedPersonnel}
-            ></PersonnelEdit>
+              personnelType={personnelType}
+              color={color}
+              name={name}
+              email={email}
+              phoneNo={phoneNo}
+              openWorkingHours={openWorkingHours}
+              setPersonnelType={setPersonnelType}
+              setColor={setColor}
+              setName={setName}
+              setEmail={setEmail}
+              setPhoneNo={setPhoneNo}
+              setOpenWorkingHours={setOpenWorkingHours}
+            ></PersonnelAddAndEdit>
           ) : (
             <PersonnelServices
               selectedPersonnel={selectedPersonnel}
@@ -138,16 +164,21 @@ export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
           )}
         </DialogContent>
         <DialogActions>
-          {!selectedPage === 0 && (
+          {selectedPage !== 0 ? (
             <Button
               onClick={handleClose}
               color="primary"
               style={{ width: "100%" }}
               variant="outlined"
+              onClick={() => {
+                if (selectedPage == 1) {
+                  console.log("düzenlenmiş hali", PersonnelObject);
+                }
+              }}
             >
               Kaydet
             </Button>
-          )}
+          ) : null}
         </DialogActions>
       </Dialog>
     </div>

@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PersonnelAdd = ({
+export const PersonnelAddAndEdit = ({
   _addPersonnel,
   setPersonnelType,
   setColor,
@@ -211,7 +211,7 @@ export const PersonnelAddModal = ({ _addPersonnel }) => {
   const [open, setOpen] = useState(false);
   const [selectedPage, setSelectedPage] = useState(0);
   const [personnelType, setPersonnelType] = useState("Yönetici");
-  const [color, setColor] = useState();
+  const [color, setColor] = useState("blue");
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [phoneNo, setPhoneNo] = useState();
@@ -266,7 +266,7 @@ export const PersonnelAddModal = ({ _addPersonnel }) => {
           </div>
 
           <DialogContent>
-            <PersonnelAdd
+            <PersonnelAddAndEdit
               _addPersonnel={_addPersonnel}
               personnelType={personnelType}
               color={color}
@@ -280,7 +280,7 @@ export const PersonnelAddModal = ({ _addPersonnel }) => {
               setEmail={setEmail}
               setPhoneNo={setPhoneNo}
               setOpenWorkingHours={setOpenWorkingHours}
-            ></PersonnelAdd>
+            ></PersonnelAddAndEdit>
           </DialogContent>
           <DialogActions>
             <Button

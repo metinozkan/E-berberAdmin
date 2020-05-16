@@ -86,7 +86,7 @@ export const PersonnelServices = ({ selectedPersonnel }) => {
       </div>
       <TableContainer component={Paper} elevation={0}>
         <Table
-          classserviceName={classes.table}
+          className={classes.table}
           size="medium"
           aria-label="a dense table"
         >

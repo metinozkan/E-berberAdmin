@@ -85,26 +85,33 @@ const PersonnelMatchService = [
     services: ["çocuk traş", "maske", "el ayak :)"],
   },
 ];
-// const rows = Personnels.map((personnel) =>
-//   createData(
-//     personnel.name,
-//     personnel.phoneNumber,
-//     personnel.workerType,
-//     personnel.workerColor,
-//     <PersonnelSettingsModal selectedPersonnel={personnel} />
-//   )
-// );
 
 export const PersonnelTable = ({ personnels, _updatePersonnel }) => {
   const classes = useStyles();
   console.log("person", personnels);
-  const rows = personnels.map((personnel) =>
+  // const rows = personnels.map((personnel) =>
+  //   createData(
+  //     personnel.staffName,
+  //     " personnel.phoneNumber",
+  //     "personnel.workerType",
+  //     " personnel.workerColor",
+  //     <PersonnelSettingsModal
+  //       selectedPersonnel={personnel}
+  //       _updatePersonnel={_updatePersonnel}
+  //     />
+  //   )
+  // );
+
+  const rows = Personnels.map((personnel) =>
     createData(
-      personnel.staffName,
-      " personnel.phoneNumber",
-      "personnel.workerType",
-      " personnel.workerColor",
-      <PersonnelSettingsModal selectedPersonnel={personnel} />
+      personnel.name,
+      personnel.phoneNumber,
+      personnel.workerType,
+      personnel.workerColor,
+      <PersonnelSettingsModal
+        selectedPersonnel={personnel}
+        _updatePersonnel={_updatePersonnel}
+      />
     )
   );
 
