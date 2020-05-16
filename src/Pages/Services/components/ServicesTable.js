@@ -1,34 +1,48 @@
 import React from "react";
+import styled from "styled-components";
+import Button from "@material-ui/core/Button";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { lighten, makeStyles } from "@material-ui/core/styles";
 import {
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
+  TablePagination,
   TableRow,
+  TableSortLabel,
   Toolbar,
   Typography,
   Paper,
   Checkbox,
   IconButton,
+  TextField,
   Tooltip,
+  Switch,
+  FormControlLabel,
 } from "@material-ui/core";
-import PropTypes from "prop-types";
-import clsx from "clsx";
-import { lighten, makeStyles } from "@material-ui/core/styles";
+import EditIcon from "@material-ui/icons/Edit";
+
+import Autocomplete from "@material-ui/lab/Autocomplete";
+
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import { Close } from "@material-ui/icons";
+import { PricesEditModal } from "../../ServicePrices/components/ServicePricesEditModal/PricesEditModal";
+import { EditModal } from "../../../Components/EditModal";
+import { ServiceAddTable } from "./ServiceAddTable";
 
-function createData(name, duration, price, personnel) {
-  return { name, duration, price, personnel };
-}
-
-const rows = [
-  createData("Saç", 15, 25, ["Ahmet asdas", "Hasan Dogan"]),
-  createData("sakal", 10, 25, ["Ahmet asdas", "Hasan Dogan"]),
-  createData("Saç yıkama", 5, 10, ["Ahmet asdas", "Hasan Dogan"]),
+const Services = [
+  { name: "Saç yıkama", price: "12", duration: "15" },
+  { name: "Saç kesim", price: "30", duration: "35" },
+  { name: "Sakal kesim", price: "8", duration: "15" },
 ];
+
+function createData(name, price, duration, button) {
+  return { name, price, button, duration };
+}
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -65,13 +79,13 @@ const headCells = [
   },
   {
     id: "name",
-    numeric: true,
+    numeric: false,
     disablePadding: true,
     label: "Süre",
   },
   {
     id: "name",
-    numeric: true,
+    numeric: false,
     disablePadding: true,
     label: "Fiyat",
   },
@@ -79,7 +93,7 @@ const headCells = [
     id: "name",
     numeric: false,
     disablePadding: true,
-    label: "Sunan Çalışanlar",
+    label: "edit",
   },
 ];
 
@@ -111,10 +125,10 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            //align={headCell.numeric ? "right" : "left"}
-            align={"left"}
+            align={headCell.numeric ? "right" : "left"}
             padding={headCell.disablePadding ? "none" : "default"}
             sortDirection={orderBy === headCell.id ? order : false}
+            style={{ paddingLeft: "0.5em" }}
           >
             {/* <TableSortLabel
               active={orderBy === headCell.id}
@@ -169,6 +183,14 @@ const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
 
+  const ToolBarTop = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    alinn-items: center;
+    width: 100%;
+  `;
+
   return (
     <Toolbar
       className={clsx(classes.root, {
@@ -185,14 +207,30 @@ const EnhancedTableToolbar = (props) => {
           {numSelected} selected
         </Typography>
       ) : (
-        <Typography
-          className={classes.title}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          Hizmet Ekle
-        </Typography>
+        <ToolBarTop>
+          <Autocomplete
+            freeSolo
+            style={{ width: "50%" }}
+            id="free-solo-2-demo"
+            disableClearable
+            options={["saç yıkama", "saç kesim", "sakal", "ense"]}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                placeholder="Ara"
+                margin="dense"
+                variant="outlined"
+                InputProps={{ ...params.InputProps, type: "search" }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            )}
+          />
+          <Button variant="outlined" color="primary">
+            Seçilen fiyatları düzenle
+          </Button>
+        </ToolBarTop>
       )}
 
       {numSelected > 0 && (
@@ -239,6 +277,19 @@ export const ServicesTable = () => {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("name");
   const [selected, setSelected] = React.useState([]);
+
+  const rows = Services.map((service) =>
+    createData(
+      service.name,
+      service.price,
+      service.duration,
+      <EditModal
+        buttonTitle="Düzenle"
+        dialogTitle="Hizmet Düzenle"
+        component={<ServiceAddTable selectedService={service} />}
+      />
+    )
+  );
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -306,18 +357,18 @@ export const ServicesTable = () => {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      //  onClick={(event) => handleClick(event, row.name)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={row.name}
                       selected={isItemSelected}
-                      style={{ margin: ".5em" }}
                     >
                       <TableCell padding="checkbox">
                         <Checkbox
                           checked={isItemSelected}
                           inputProps={{ "aria-labelledby": labelId }}
+                          onChange={(event) => handleClick(event, row.name)}
                         />
                       </TableCell>
                       <TableCell
@@ -327,8 +378,7 @@ export const ServicesTable = () => {
                         padding="none"
                         style={{
                           borderRight: "1px solid #e2e2e2",
-                          width: "20%",
-                          padding: ".5em",
+                          width: "30%",
                         }}
                       >
                         {row.name}
@@ -341,7 +391,7 @@ export const ServicesTable = () => {
                         style={{
                           borderRight: "1px solid #e2e2e2",
                           paddingLeft: ".5em",
-                          width: "20%",
+                          width: "30%",
                         }}
                       >
                         {row.duration}
@@ -354,7 +404,7 @@ export const ServicesTable = () => {
                         style={{
                           borderRight: "1px solid #e2e2e2",
                           paddingLeft: ".5em",
-                          width: "20%",
+                          width: "30%",
                         }}
                       >
                         {row.price}
@@ -364,13 +414,9 @@ export const ServicesTable = () => {
                         id={labelId}
                         scope="row"
                         padding="none"
-                        style={{
-                          marginLeft: ".5em",
-                          paddingLeft: ".5em",
-                          width: "40%",
-                        }}
+                        style={{ paddingLeft: ".5em", width: "10%" }}
                       >
-                        {row.personnel}
+                        {row.button}
                       </TableCell>
                     </TableRow>
                   );
