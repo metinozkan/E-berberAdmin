@@ -30,8 +30,8 @@ function getSteps() {
     "Genel Ayarlar",
     "Çalışanlar",
     "Hizmetler",
-    "Hizmet Süreleri",
-    "Hizmet Fiyatları",
+    // "Hizmet Süreleri",
+    // "Hizmet Fiyatları",
   ];
 }
 
@@ -131,12 +131,12 @@ export const LayoutStepper = () => {
       case 2:
         history.push("/services");
         break;
-      case 3:
-        history.push("/durations");
-        break;
-      case 4:
-        history.push("/prices");
-        break;
+      // case 3:
+      //   history.push("/durations");
+      //   break;
+      // case 4:
+      //   history.push("/prices");
+      //   break;
       default:
         console.log("home a gider");
     }

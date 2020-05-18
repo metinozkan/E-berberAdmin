@@ -121,7 +121,7 @@ const Login = ({ signed, setSigned }) => {
               //       history.push("/");
               //     }
               //   });
-              Storage.SetItem("barber", { id: 1, falan: "falan" });
+              Storage.SetItem("barber", { id: 13, falan: "falan" });
               setSigned(true);
             }}
           >

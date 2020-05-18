@@ -15,14 +15,14 @@ const localizer = momentLocalizer(moment);
 const events = [
   {
     id: 0,
-    title: "saç ",
+    title: "Ahmet Kutay - saç kesim",
     start: new Date(2018, 0, 29, 9, 0, 0),
     end: new Date(2018, 0, 29, 13, 0, 0),
     resourceId: 1,
   },
   {
     id: 1,
-    title: "Doğan",
+    title: "Ali Çakır - sakal kesim",
     allDay: true,
     start: new Date(2018, 0, 29, 14, 0, 0),
     end: new Date(2018, 0, 29, 16, 30, 0),
@@ -30,7 +30,7 @@ const events = [
   },
   {
     id: 2,
-    title: "Metin ",
+    title: "Metin",
     start: new Date(2018, 0, 29, 8, 30, 0),
     end: new Date(2018, 0, 29, 12, 30, 0),
     resourceId: 3,

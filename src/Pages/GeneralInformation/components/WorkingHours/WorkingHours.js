@@ -117,7 +117,7 @@ const WorkingHoursRow = ({ title, value, setValue }) => {
           </MenuItem>
         ))}
       </TextField>
-      <Button
+      {/* <Button
         color="primary"
         variant="contained"
         onClick={() => {
@@ -131,7 +131,7 @@ const WorkingHoursRow = ({ title, value, setValue }) => {
         }}
       >
         Kaydet
-      </Button>
+      </Button> */}
     </ContainerRow>
   );
 };
@@ -248,14 +248,14 @@ export const WorkingHours = () => {
         <ExpansionPanelDetails>
           <div style={{ width: "100%", height: "100%" }}>
             <WorkingHoursComp></WorkingHoursComp>
-            {/* <Button
+            <Button
               variant="contained"
               color="primary"
               disableElevation
               fullWidth
             >
               Kaydet
-            </Button> */}
+            </Button>
           </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>

@@ -54,19 +54,6 @@ const GeneralInformation = ({ signed }) => {
                 _updateGeneralSettings={_updateGeneralSettings}
                 barber={barber}
               />
-              <Button
-                onClick={() => {
-                  Agent.Barbers.getBarbers().then((res) => {
-                    console.log("hadiii");
-                    if (res.ok) {
-                      console.log("hadiii", res.body);
-                      console.log("hadiii");
-                    }
-                  });
-                }}
-              >
-                tıkla
-              </Button>
             </div>
           </Grid>
           <Grid item xs={6}>
