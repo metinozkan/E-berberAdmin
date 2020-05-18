@@ -217,7 +217,16 @@ const DefaultLayout = (props) => {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="xl" className={classes.container}>
-          <div style={{ height: "100%", width: "100%" }}>
+          <div
+            style={{
+              height: "100%",
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
             {!path.includes("calendar") && <LayoutStepper></LayoutStepper>}
             {props.children}
           </div>

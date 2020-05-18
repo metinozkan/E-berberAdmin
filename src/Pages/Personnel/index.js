@@ -4,6 +4,8 @@ import { Agent, Storage } from "../../Utils/importFiles";
 import { Grid, Button, Typography, Paper } from "@material-ui/core";
 import { PersonnelTable } from "./components/PersonnelTable";
 import { PersonnelAddModal } from "./components/PersonnelAddModal";
+import { Loading } from "../../Components/Loading";
+
 import { Route, Redirect } from "react-router-dom";
 
 const TopPersonnel = styled.div`
@@ -63,7 +65,7 @@ const Personnel = ({ signed }) => {
       alignItems="flex-start"
       style={{}}
     >
-      {personnels.length > 0 && (
+      {personnels.length > 0 ? (
         <>
           <TopPersonnel>
             <Typography variant="h4" gutterBottom>
@@ -89,6 +91,8 @@ const Personnel = ({ signed }) => {
             ></PersonnelTable>
           </div>
         </>
+      ) : (
+        <Loading />
       )}
     </Grid>
   );

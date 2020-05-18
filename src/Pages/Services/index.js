@@ -8,7 +8,7 @@ import { AddServiceMatchPersonelModal } from "./components/AddServiceMatchPerson
 import { EditModal } from "../../Components/EditModal";
 import { ServiceEdit } from "./components/ServiceEdit";
 import { ServiceAdd } from "./components/ServiceAdd";
-
+import { Loading } from "../../Components/Loading";
 const TopServices = styled.div`
   width: 100%;
   paddign: 1em;
@@ -98,7 +98,7 @@ const Services = ({ signed }) => {
           </div>
         </>
       ) : (
-        <div>loading</div>
+        <Loading />
       )}
     </Grid>
   );

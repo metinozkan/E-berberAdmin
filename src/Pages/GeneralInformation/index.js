@@ -6,6 +6,7 @@ import { Grid, Button } from "@material-ui/core";
 
 import { GeneralSettings } from "./components/GeneralSettings/GeneralSettings";
 import { WorkingHours } from "./components/WorkingHours/WorkingHours";
+import { Loading } from "../../Components/Loading";
 import { Agent, Storage } from "../../Utils/importFiles";
 
 const GeneralInformation = ({ signed }) => {
@@ -46,7 +47,7 @@ const GeneralInformation = ({ signed }) => {
       alignItems="flex-start"
       style={{}}
     >
-      {barber && (
+      {barber ? (
         <>
           <Grid item xs={6}>
             <div style={{ width: "100%", height: "100%" }}>
@@ -62,6 +63,8 @@ const GeneralInformation = ({ signed }) => {
             </div>
           </Grid>
         </>
+      ) : (
+        <Loading></Loading>
       )}
     </Grid>
   );
