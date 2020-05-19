@@ -50,8 +50,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const WorkingHoursRow = ({ title, value, setValue }) => {
+const WorkingHoursRow = ({ title, day }) => {
+  console.log("day", day);
   const [editing, setEditing] = useState(false);
+  const [value, setValue] = useState({
+    isOpen: true,
+    openHour: day.startHour,
+    closeHour: day.endHour,
+  });
   return (
     <ContainerRow>
       {!editing ? (
@@ -70,9 +76,11 @@ const WorkingHoursRow = ({ title, value, setValue }) => {
           >
             {title}
           </span>
-          <div style={{ flex: 1.5 }}>Açık</div>
-          <div style={{ flex: 1 }}>08:00</div>
-          <div style={{ flex: 1 }}> 23:00</div>
+          <div style={{ flex: 1.5, paddingLeft: "14px" }}>
+            {value.isOpen ? "Açık" : "Kapalı"}
+          </div>
+          <div style={{ flex: 1, paddingLeft: "14px" }}>{value.openHour}</div>
+          <div style={{ flex: 1, paddingLeft: "14px" }}> {value.closeHour}</div>
         </div>
       ) : (
         <>
@@ -105,7 +113,7 @@ const WorkingHoursRow = ({ title, value, setValue }) => {
             //label="Açık"
             disabled={value && !value.isOpen}
             select
-            value={value && value.openHour}
+            value={value.openHour}
             onChange={(e) => {
               setValue({ ...value, openHour: e.target.value });
             }}
@@ -127,7 +135,7 @@ const WorkingHoursRow = ({ title, value, setValue }) => {
             //label="Açık"
             disabled={value && !value.isOpen}
             select
-            value={value && value.closeHour}
+            value={value.closeHour}
             onChange={(e) => {
               setValue({ ...value, closeHour: e.target.value });
             }}
@@ -206,7 +214,6 @@ export const WorkingHoursComp = () => {
     openHour: "08:00",
     closeHour: "20:00",
   });
-  const handleChange = ({}) => {};
   return (
     <div
       style={{
@@ -256,7 +263,7 @@ export const WorkingHoursComp = () => {
   );
 };
 
-export const WorkingHours = () => {
+export const WorkingHours = ({ workingHours }) => {
   const classes = useStyles();
 
   return (
@@ -281,7 +288,16 @@ export const WorkingHours = () => {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <div style={{ width: "100%", height: "100%" }}>
-            <WorkingHoursComp></WorkingHoursComp>
+            {/* <WorkingHoursComp></WorkingHoursComp> */}
+
+            {workingHours.map((day) => (
+              <WorkingHoursRow
+                title={day.day}
+                day={day}
+                // value={sunday}
+                // setValue={setSunday}
+              ></WorkingHoursRow>
+            ))}
             {/* <Button
               variant="contained"
               color="primary"
