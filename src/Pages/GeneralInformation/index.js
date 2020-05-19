@@ -15,19 +15,16 @@ const GeneralInformation = ({ signed }) => {
   const _getBarber = (barberId) => {
     Agent.Barbers.getBarber(barberId).then((res) => {
       if (res.ok) {
-        console.log(res.body);
         setBarber(res.body);
       }
     });
   };
 
   const _updateGeneralSettings = (barberObject) => {
-    console.log("allaa", barberObject);
     Agent.Barbers.updateBarbers(barber.id)
       .send(barberObject)
       .then((res) => {
         if (res.ok) {
-          console.log("basarıli güncelleme");
           console.log("update", res.body);
         }
       });

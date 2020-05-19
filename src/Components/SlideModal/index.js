@@ -30,7 +30,7 @@ export const SlideModal = ({
   const _getCustomers = (customerId) => {
     Agent.Customers.getCustomer(customerId).then((res) => {
       if (res.ok) {
-        console.log(res.body);
+        // console.log(res.body);
       }
     });
   };
@@ -44,8 +44,6 @@ export const SlideModal = ({
       handleClose();
     }
   }, [openModal]);
-
-  console.log("selectedEvent", selectedEvent);
 
   return (
     <div>

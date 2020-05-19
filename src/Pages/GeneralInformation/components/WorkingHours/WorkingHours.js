@@ -51,7 +51,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const WorkingHoursRow = ({ title, day }) => {
-  console.log("day", day);
   const [editing, setEditing] = useState(false);
   const [value, setValue] = useState({
     isOpen: true,
@@ -163,13 +162,6 @@ const WorkingHoursRow = ({ title, day }) => {
           } else {
             setEditing(true);
           }
-          console.log(
-            "bugün ne imişş",
-            title,
-            value.isOpen,
-            value.openHour,
-            value.closeHour
-          );
         }}
       >
         {editing ? "Kaydet" : "Düzenle"}

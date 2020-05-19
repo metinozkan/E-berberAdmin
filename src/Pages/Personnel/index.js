@@ -22,7 +22,6 @@ const Personnel = ({ signed }) => {
   const _getPersonnel = (barberId) => {
     Agent.Staffs.getStaffBarber(barberId).then((res) => {
       if (res.ok) {
-        console.log("gelen berberler", res.body);
         setPersonnels(res.body);
       }
     });
@@ -49,8 +48,6 @@ const Personnel = ({ signed }) => {
   };
 
   useEffect(() => {
-    console.log("kac kere");
-
     const barber = Storage.GetItem("barber");
     _getPersonnel(barber.id);
   }, []);

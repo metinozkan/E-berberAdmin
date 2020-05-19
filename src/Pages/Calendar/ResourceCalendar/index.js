@@ -113,7 +113,6 @@ export const ResourceCalendar = ({}) => {
   };
   const _getServices = (barberAppointments, newPersonnels) => {
     if (barberAppointments && newPersonnels) {
-      console.log("barberAoppoo", barberAppointments);
       Agent.ServiceBarber.getServices(13).then((res) => {
         if (res.ok) {
           setServices(res.body);

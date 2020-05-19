@@ -110,7 +110,7 @@ export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
             padding: "1em",
           }}
         >
-          {!selectedPage === 0 && (
+          {/* {!selectedPage === 0 && (
             <MdKeyboardArrowLeft
               size={30}
               style={{ cursor: "pointer" }}
@@ -118,14 +118,14 @@ export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
                 setSelectedPage(selectedPage - 1);
               }}
             />
-          )}
+          )} */}
 
           <DialogTitle id="alert-dialog-title" style={{ fontSize: "35px" }}>
-            {selectedPage === 0
+            {/* {selectedPage === 0
               ? "Ayar Seçin"
-              : selectedPage === 1
-              ? "Çalışan Düzenle"
-              : "Verdiği Hizmetler"}
+              : selectedPage === 1 */}
+            "Çalışan Düzenle"
+            {/* : "Verdiği Hizmetler"} */}
           </DialogTitle>
           <Close
             size={30}
@@ -139,46 +139,42 @@ export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
         </div>
 
         <DialogContent>
-          {selectedPage === 0 ? (
+          {/* {selectedPage === 0 ? (
             <SelectPageComp setSelectedPage={setSelectedPage}></SelectPageComp>
-          ) : selectedPage === 1 ? (
-            <PersonnelAddAndEdit
-              selectedPersonnel={selectedPersonnel}
-              personnelType={personnelType}
-              color={color}
-              name={name}
-              email={email}
-              phoneNo={phoneNo}
-              openWorkingHours={openWorkingHours}
-              setPersonnelType={setPersonnelType}
-              setColor={setColor}
-              setName={setName}
-              setEmail={setEmail}
-              setPhoneNo={setPhoneNo}
-              setOpenWorkingHours={setOpenWorkingHours}
-            ></PersonnelAddAndEdit>
-          ) : (
-            <PersonnelServices
-              selectedPersonnel={selectedPersonnel}
-            ></PersonnelServices>
-          )}
+          ) : selectedPage === 1 ? ( */}
+          <PersonnelAddAndEdit
+            selectedPersonnel={selectedPersonnel}
+            personnelType={personnelType}
+            color={color}
+            name={name}
+            email={email}
+            phoneNo={phoneNo}
+            openWorkingHours={openWorkingHours}
+            setPersonnelType={setPersonnelType}
+            setColor={setColor}
+            setName={setName}
+            setEmail={setEmail}
+            setPhoneNo={setPhoneNo}
+            setOpenWorkingHours={setOpenWorkingHours}
+          ></PersonnelAddAndEdit>
+          {/* // ) : (
+          //   <PersonnelServices
+          //     selectedPersonnel={selectedPersonnel}
+          //   ></PersonnelServices>
+          // )} */}
         </DialogContent>
         <DialogActions>
-          {selectedPage !== 0 ? (
-            <Button
-              onClick={handleClose}
-              color="primary"
-              style={{ width: "100%" }}
-              variant="outlined"
-              onClick={() => {
-                if (selectedPage == 1) {
-                  console.log("düzenlenmiş hali", PersonnelObject);
-                }
-              }}
-            >
-              Kaydet
-            </Button>
-          ) : null}
+          {/* {selectedPage !== 0 ? ( */}
+          <Button
+            onClick={handleClose}
+            color="primary"
+            style={{ width: "100%" }}
+            variant="outlined"
+            onClick={() => {}}
+          >
+            Kaydet
+          </Button>
+          {/* ) : null} */}
         </DialogActions>
       </Dialog>
     </div>

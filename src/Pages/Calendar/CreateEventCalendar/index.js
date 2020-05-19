@@ -18,8 +18,6 @@ export const CreateEventCalendar = ({}) => {
   const handleSelect = ({ start, end }) => {
     const title = window.prompt("New Event name");
     if (title) {
-      console.log("gelen tarih vs ", start, end, title);
-
       let newEvents = events;
       newEvents.push({
         start,
@@ -29,7 +27,6 @@ export const CreateEventCalendar = ({}) => {
       setEvents(newEvents);
     }
   };
-  console.log("events", events);
   return (
     <>
       <Calendar

@@ -59,9 +59,7 @@ const Services = ({ signed }) => {
     _getServices(barber.id);
   }, []);
 
-  useEffect(() => {
-    console.log("yenile", services);
-  }, [services]);
+  useEffect(() => {}, [services]);
   return !signed ? (
     <Redirect to="/login" />
   ) : (
