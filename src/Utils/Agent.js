@@ -32,12 +32,13 @@ const Appointments = {
   deleteAppointments: (appointmentId) =>
     requests.delete(`/Appointments/delete/${appointmentId}`),
 
-  montlyStaffAppointments: () => requests.post("Appointments/monthly/staff"),
+  montlyStaffAppointments: () => requests.post("/Appointments/monthly/staff"),
   montlyCustomerAppointments: () =>
-    requests.post("Appointments/monthly/customer"),
-  montlyBarberAppointments: () => requests.post("Appointments/monthly/barber"),
+    requests.post("/Appointments/monthly/customer"),
+  getMontlyBarberAppointments: () =>
+    requests.post("/Appointments/monthly/barber"),
   dateBeforeAppointments: () =>
-    requests.post("Appointments/monthly/dateBefore/staff"),
+    requests.post("/Appointments/monthly/dateBefore/staff"),
 
   barberFilter: () => requests.post("/Appointments/barberFilter"),
   withDate: () => requests.post("/Appointments/withDate"),
@@ -75,6 +76,14 @@ const ServiceBarber = {
   updateService: (barberId) => requests.put(`/ServiceBarber/put/${barberId}`),
 };
 
+const Customers = {
+  getCustomers: (barberId) => requests.get(`/SCustomer/Barber/${barberId}`),
+  addCustomer: () => requests.post("/Customers/add"),
+  updateCustomer: (customerId) => requests.put(`/Customers/edit/${customerId}`),
+  getCustomer: (customerId) =>
+    requests.get(`/Customers/getCustomer/${customerId}`),
+};
+
 export default {
   Barbers,
   ServiceBarber,
@@ -82,6 +91,7 @@ export default {
   Login,
   Appointments,
   WorkHours,
+  Customers,
   //   setToken: (_token) => {
   //     token = _token;
   //   },

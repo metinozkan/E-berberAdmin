@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import Agent from "../../Utils/Agent";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -11,7 +12,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export const SlideModal = ({ openModal, setOpenModal, selectedEvent }) => {
+export const SlideModal = ({
+  openModal,
+  setOpenModal,
+  selectedEvent,
+  fromResourceCalendar,
+}) => {
+  const [customer, setCustomer] = useState();
   const handleClickOpen = () => {
     setOpenModal(true);
   };
@@ -19,13 +26,26 @@ export const SlideModal = ({ openModal, setOpenModal, selectedEvent }) => {
   const handleClose = () => {
     setOpenModal(false);
   };
+
+  const _getCustomers = (customerId) => {
+    Agent.Customers.getCustomer(customerId).then((res) => {
+      if (res.ok) {
+        console.log(res.body);
+      }
+    });
+  };
   useEffect(() => {
+    if (fromResourceCalendar && selectedEvent) {
+      // _getCustomers(selectedEvent.customerId);
+    }
     if (openModal) {
       handleClickOpen();
     } else {
       handleClose();
     }
   }, [openModal]);
+
+  console.log("selectedEvent", selectedEvent);
 
   return (
     <div>
