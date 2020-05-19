@@ -58,69 +58,39 @@ export const ServiceEdit = ({ selectedService, _updateService }) => {
   function createData(serviceName, serviceDuration, servicePrice) {
     return { serviceName, serviceDuration, servicePrice };
   }
-
-  const TableContent = () => {
-    return (
-      <Table classservice={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Hizmet</TableCell>
-            <TableCell align="center">Hizmet Süresi</TableCell>
-            <TableCell align="center">Hizmet Fiyatı</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow>
-            <TableCell
-              component="th"
-              scope="row"
-              style={{ width: "40%", borderRight: "1px solid #e2e2e2" }}
-            >
-              <TextField
-                value={serviceName}
-                onChange={(e) => {
-                  setServiceName(e.target.value);
-                }}
-                variant="outlined"
-                margin="dense"
-                placeholder="Hizmet"
-              ></TextField>
-            </TableCell>
-            <TableCell align="center" style={{ width: "25%" }}>
-              <TextField
-                value={serviceDuration}
-                onChange={(e) => {
-                  setServiceDuration(e.target.value);
-                }}
-                variant="outlined"
-                margin="dense"
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">dk</InputAdornment>
-                  ),
-                }}
-              ></TextField>
-            </TableCell>
-            <TableCell align="center" style={{ width: "25%" }}>
-              <TextField
-                value={servicePrice}
-                onChange={(e) => {
-                  setServicePrice(e.target.value);
-                }}
-                variant="outlined"
-                margin="dense"
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">Tl</InputAdornment>
-                  ),
-                }}
-              ></TextField>
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    );
-  };
+  const row = createData(
+    <TextField
+      value={serviceName}
+      onChange={(e) => {
+        setServiceName(e.target.value);
+      }}
+      variant="outlined"
+      margin="dense"
+      placeholder="Hizmet"
+    ></TextField>,
+    <TextField
+      value={serviceDuration}
+      onChange={(e) => {
+        setServiceDuration(e.target.value);
+      }}
+      variant="outlined"
+      margin="dense"
+      InputProps={{
+        endAdornment: <InputAdornment position="end">dk</InputAdornment>,
+      }}
+    ></TextField>,
+    <TextField
+      value={servicePrice}
+      onChange={(e) => {
+        setServicePrice(e.target.value);
+      }}
+      variant="outlined"
+      margin="dense"
+      InputProps={{
+        endAdornment: <InputAdornment position="end">Tl</InputAdornment>,
+      }}
+    ></TextField>
+  );
 
   return (
     <EditModal
@@ -142,7 +112,32 @@ export const ServiceEdit = ({ selectedService, _updateService }) => {
         elevation={0}
         style={{ border: "1px solid #e2e2e2" }}
       >
-        {selectedService ? <TableContent /> : <div>loading</div>}
+        <Table classservice={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Hizmet</TableCell>
+              <TableCell align="center">Hizmet Süresi</TableCell>
+              <TableCell align="center">Hizmet Fiyatı</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ width: "40%", borderRight: "1px solid #e2e2e2" }}
+              >
+                {row.serviceName}
+              </TableCell>
+              <TableCell align="center" style={{ width: "25%" }}>
+                {row.serviceDuration}
+              </TableCell>
+              <TableCell align="center" style={{ width: "25%" }}>
+                {row.servicePrice}
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </TableContainer>
     </EditModal>
   );

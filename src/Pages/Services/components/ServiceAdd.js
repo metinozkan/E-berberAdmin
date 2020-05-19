@@ -86,37 +86,6 @@ export const ServiceAdd = ({ selectedService, _addService }) => {
     ></TextField>
   );
 
-  const TableContent = () => {
-    return (
-      <Table classservice={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Hizmet</TableCell>
-            <TableCell align="center">Hizmet Süresi</TableCell>
-            <TableCell align="center">Hizmet Fiyatı</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow>
-            <TableCell
-              component="th"
-              scope="row"
-              style={{ width: "40%", borderRight: "1px solid #e2e2e2" }}
-            >
-              {row.serviceName}
-            </TableCell>
-            <TableCell align="center" style={{ width: "25%" }}>
-              {row.serviceDuration}
-            </TableCell>
-            <TableCell align="center" style={{ width: "25%" }}>
-              {row.servicePrice}
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    );
-  };
-
   return (
     <EditModal
       buttonTitle={"Hizmet Ekle"}
@@ -134,7 +103,32 @@ export const ServiceAdd = ({ selectedService, _addService }) => {
         elevation={0}
         style={{ border: "1px solid #e2e2e2" }}
       >
-        <TableContent />
+        <Table classservice={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Hizmet</TableCell>
+              <TableCell align="center">Hizmet Süresi</TableCell>
+              <TableCell align="center">Hizmet Fiyatı</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ width: "40%", borderRight: "1px solid #e2e2e2" }}
+              >
+                {row.serviceName}
+              </TableCell>
+              <TableCell align="center" style={{ width: "25%" }}>
+                {row.serviceDuration}
+              </TableCell>
+              <TableCell align="center" style={{ width: "25%" }}>
+                {row.servicePrice}
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </TableContainer>
     </EditModal>
   );

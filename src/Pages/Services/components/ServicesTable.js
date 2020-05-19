@@ -280,6 +280,7 @@ export const ServicesTable = ({ services, _updateService }) => {
   const [selected, setSelected] = React.useState([]);
   const [selectedService, setSelectedService] = useState(null);
   // const rows = Services.map((service) =>
+
   const rows = services.map((service) =>
     createData(
       service.name,
