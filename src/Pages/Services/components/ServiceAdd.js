@@ -92,7 +92,7 @@ export const ServiceAdd = ({ selectedService, _addService }) => {
       dialogTitle={"Hizmet Ekle"}
       onConfirm={() =>
         _addService({
-          name: serviceName,
+          typeName: serviceName,
           time: serviceDuration,
           price: servicePrice,
         })

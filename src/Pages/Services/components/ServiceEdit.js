@@ -99,7 +99,7 @@ export const ServiceEdit = ({ selectedService, _updateService }) => {
       onConfirm={() => {
         _updateService(
           {
-            name: serviceName,
+            typeName: serviceName,
             time: JSON.stringify(serviceDuration),
             price: JSON.stringify(servicePrice),
           },
