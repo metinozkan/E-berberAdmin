@@ -51,76 +51,110 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const WorkingHoursRow = ({ title, value, setValue }) => {
+  const [editing, setEditing] = useState(false);
   return (
     <ContainerRow>
-      <span style={{ flex: 1 }}>{title}</span>
-      <TextField
-        id="outlined-full-width"
-        //label="Açık"
+      {!editing ? (
+        <div
+          style={{
+            height: "51px",
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <span
+            style={{ flex: 1, fontWeight: "bold", textTransform: "uppercase" }}
+          >
+            {title}
+          </span>
+          <div style={{ flex: 1.5 }}>Açık</div>
+          <div style={{ flex: 1 }}>08:00</div>
+          <div style={{ flex: 1 }}> 23:00</div>
+        </div>
+      ) : (
+        <>
+          <span
+            style={{ flex: 1, fontWeight: "bold", textTransform: "uppercase" }}
+          >
+            {title}
+          </span>
+          <TextField
+            id="outlined-full-width"
+            //label="Açık"
 
-        style={{ flex: 2, marginRight: ".5em" }}
-        margin="dense"
-        InputLabelProps={{
-          shrink: true,
-        }}
-        variant="outlined"
-        select
-        value={value && value.isOpen}
-        onChange={(e) => {
-          setValue({ ...value, isOpen: e.target.value });
-        }}
-      >
-        <MenuItem value={true}>Açık</MenuItem>
-        <MenuItem value={false}>Kapalı</MenuItem>
-      </TextField>
-      <TextField
-        id="outlined-full-width"
-        //label="Açık"
-        disabled={value && !value.isOpen}
-        select
-        value={value && value.openHour}
-        onChange={(e) => {
-          setValue({ ...value, openHour: e.target.value });
-        }}
-        style={{ flex: 1, marginRight: ".5em" }}
-        margin="dense"
-        InputLabelProps={{
-          shrink: true,
-        }}
-        variant="outlined"
-      >
-        {hours.map((hour, index) => (
-          <MenuItem key={index} value={hour}>
-            {hour}
-          </MenuItem>
-        ))}
-      </TextField>
-      <TextField
-        id="outlined-full-width"
-        //label="Açık"
-        disabled={value && !value.isOpen}
-        select
-        value={value && value.closeHour}
-        onChange={(e) => {
-          setValue({ ...value, closeHour: e.target.value });
-        }}
-        style={{ flex: 1, marginRight: ".5em" }}
-        margin="dense"
-        InputLabelProps={{
-          shrink: true,
-        }}
-        variant="outlined"
-      >
-        {hours.map((hour, index) => (
-          <MenuItem key={index} value={hour}>
-            {hour}
-          </MenuItem>
-        ))}
-      </TextField>
-      {/* <Button
+            style={{ flex: 1.5, marginRight: ".5em" }}
+            margin="dense"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="outlined"
+            select
+            value={value && value.isOpen}
+            onChange={(e) => {
+              setValue({ ...value, isOpen: e.target.value });
+            }}
+          >
+            <MenuItem value={true}>Açık</MenuItem>
+            <MenuItem value={false}>Kapalı</MenuItem>
+          </TextField>
+          <TextField
+            id="outlined-full-width"
+            //label="Açık"
+            disabled={value && !value.isOpen}
+            select
+            value={value && value.openHour}
+            onChange={(e) => {
+              setValue({ ...value, openHour: e.target.value });
+            }}
+            style={{ flex: 1, marginRight: ".5em" }}
+            margin="dense"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="outlined"
+          >
+            {hours.map((hour, index) => (
+              <MenuItem key={index} value={hour}>
+                {hour}
+              </MenuItem>
+            ))}
+          </TextField>
+          <TextField
+            id="outlined-full-width"
+            //label="Açık"
+            disabled={value && !value.isOpen}
+            select
+            value={value && value.closeHour}
+            onChange={(e) => {
+              setValue({ ...value, closeHour: e.target.value });
+            }}
+            style={{ flex: 1, marginRight: ".5em" }}
+            margin="dense"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="outlined"
+          >
+            {hours.map((hour, index) => (
+              <MenuItem key={index} value={hour}>
+                {hour}
+              </MenuItem>
+            ))}
+          </TextField>
+        </>
+      )}
+      <Button
         color="primary"
         variant="contained"
         onClick={() => {
+          if (editing) {
+            setEditing(false);
+          } else {
+            setEditing(true);
+          }
           console.log(
             "bugün ne imişş",
             title,
@@ -130,8 +164,8 @@ const WorkingHoursRow = ({ title, value, setValue }) => {
           );
         }}
       >
-        Kaydet
-      </Button> */}
+        {editing ? "Kaydet" : "Düzenle"}
+      </Button>
     </ContainerRow>
   );
 };
@@ -248,14 +282,14 @@ export const WorkingHours = () => {
         <ExpansionPanelDetails>
           <div style={{ width: "100%", height: "100%" }}>
             <WorkingHoursComp></WorkingHoursComp>
-            <Button
+            {/* <Button
               variant="contained"
               color="primary"
               disableElevation
               fullWidth
             >
               Kaydet
-            </Button>
+            </Button> */}
           </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
