@@ -13,10 +13,11 @@ import {
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
+  useMediaQuery,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Close } from "@material-ui/icons";
 import { WorkingHours } from "../../GeneralInformation/components/WorkingHours/WorkingHours";
 import { PersonnelServices } from "./PersonnelSettingsModal/PersonnelServices";
@@ -288,6 +289,8 @@ export const PersonnelAddModal = ({ _addPersonnel }) => {
   const [phoneNo, setPhoneNo] = useState();
   const [openWorkingHours, setOpenWorkingHours] = useState(false);
 
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const PersonnelObject = {
     personnelType: personnelType,
     color: color,
@@ -311,6 +314,9 @@ export const PersonnelAddModal = ({ _addPersonnel }) => {
       </Button>
       <Dialog
         open={open}
+        fullScreen={fullScreen}
+        fullWidth={true}
+        maxWidth={"md"}
         //  onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"

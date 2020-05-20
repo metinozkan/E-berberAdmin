@@ -6,8 +6,10 @@ import {
   DialogContent,
   DialogTitle,
   Grid,
+  useMediaQuery,
 } from "@material-ui/core";
 import { MdKeyboardArrowLeft } from "react-icons/md";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 import { Close } from "@material-ui/icons";
 import { PersonnelServices } from "./PersonnelServices";
@@ -66,6 +68,8 @@ export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
   const [phoneNo, setPhoneNo] = useState(selectedPersonnel.phoneNo);
   const [openWorkingHours, setOpenWorkingHours] = useState(false);
 
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const PersonnelObject = {
     personnelType: personnelType,
     color: color,
@@ -96,6 +100,9 @@ export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
       </Button>
       <Dialog
         open={open}
+        fullScreen={fullScreen}
+        fullWidth={true}
+        maxWidth={"md"}
         //  onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"

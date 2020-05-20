@@ -72,7 +72,9 @@ const Personnel = ({ signed }) => {
               _addPersonnel={_addPersonnel}
             ></PersonnelAddModal>
           </TopPersonnel>
-          <div
+          <Grid
+            item
+            xs={12}
             style={{
               background: "white",
               width: "100%",
@@ -86,7 +88,7 @@ const Personnel = ({ signed }) => {
               personnels={personnels}
               _updatePersonnel={_updatePersonnel}
             ></PersonnelTable>
-          </div>
+          </Grid>
         </>
       ) : (
         <Loading />

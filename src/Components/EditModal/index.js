@@ -7,16 +7,19 @@ import {
   DialogContentText,
   DialogTitle,
   Slide,
+  useMediaQuery,
 } from "@material-ui/core";
 //import { DurationEditTable } from "./DurationEditTable";
 import EditIcon from "@material-ui/icons/Edit";
-
+import { useTheme } from "@material-ui/core/styles";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export const EditModal = (props) => {
   const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -39,6 +42,9 @@ export const EditModal = (props) => {
       </Button>
       <Dialog
         open={open}
+        fullScreen={fullScreen}
+        fullWidth={true}
+        maxWidth={"md"}
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}

@@ -21,11 +21,12 @@ import {
   IconButton,
   Tooltip,
   FormControlLabel,
+  useMediaQuery,
 } from "@material-ui/core";
 
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import { lighten, makeStyles } from "@material-ui/core/styles";
+import { lighten, makeStyles, useTheme } from "@material-ui/core/styles";
 
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -337,6 +338,8 @@ export const AddServiceModal = ({ setServices }) => {
   const [open, setOpen] = React.useState(false);
   const [selected, setSelected] = React.useState([]);
 
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -356,6 +359,9 @@ export const AddServiceModal = ({ setServices }) => {
       </Button>
       <Dialog
         open={open}
+        fullScreen={fullScreen}
+        fullWidth={true}
+        maxWidth={"md"}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"

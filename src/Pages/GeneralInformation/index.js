@@ -111,7 +111,7 @@ const GeneralInformation = ({ signed }) => {
     >
       {barber ? (
         <>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <div style={{ width: "100%", height: "100%" }}>
               <GeneralSettings
                 _updateGeneralSettings={_updateGeneralSettings}
@@ -119,10 +119,13 @@ const GeneralInformation = ({ signed }) => {
               />
             </div>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <div style={{ width: "100%", height: "100%" }}>
               {workingHours && (
-                <WorkingHours workingHours={workingHours}></WorkingHours>
+                <WorkingHours
+                  workingHours={workingHours}
+                  fromGeneralInformation={true}
+                ></WorkingHours>
               )}
             </div>
           </Grid>

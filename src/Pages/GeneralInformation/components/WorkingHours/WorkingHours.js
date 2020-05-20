@@ -255,7 +255,7 @@ export const WorkingHoursComp = () => {
   );
 };
 
-export const WorkingHours = ({ workingHours }) => {
+export const WorkingHours = ({ workingHours, fromGeneralInformation }) => {
   const classes = useStyles();
 
   return (
@@ -269,6 +269,7 @@ export const WorkingHours = ({ workingHours }) => {
           flexDirection: "column",
           justifyContent: "center",
         }}
+        elevation={fromGeneralInformation ? 1 : 0}
       >
         <ExpansionPanelSummary
           //expandIcon={<ExpandMoreIcon />}
