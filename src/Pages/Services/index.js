@@ -46,12 +46,17 @@ const Services = ({ signed }) => {
   };
 
   const _updateService = (serviceObject, serviceId) => {
-    console.log("güncellem icin", { ...serviceObject, barberId: barberId });
     Agent.ServiceBarber.updateService(serviceId)
       .send({ ...serviceObject, barberId: barberId })
       .then((res) => {
         if (res.ok) {
-          console.log("add", res.body);
+          const newServices = [];
+          services.map((service) =>
+            service.id != res.body.id
+              ? newServices.push(service)
+              : newServices.push(res.body)
+          );
+          setServices(newServices);
         }
       });
   };

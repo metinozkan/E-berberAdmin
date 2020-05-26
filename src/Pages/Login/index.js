@@ -110,23 +110,26 @@ const Login = ({ signed, setSigned }) => {
             color="primary"
             className={classes.submit}
             onClick={() => {
-              // Agent.Login.loginBarber()
-              //   .send({
-              //     eMail: eMail,
-              //     password: password,
-              //   })
-              //   .then((res) => {
-              //     if (res.ok) {
-              //       console.log("login", res.body);
-              //       history.push("/");
-              // Storage.SetItem("barber", {
-              //   ...res.body,
-              //   password: "****",
-              // });
-              //     }
-              //   });
-              Storage.SetItem("barber", { id: 1, falan: "falan" });
-              history.push("/");
+              Agent.Login.loginBarber()
+                .send({
+                  eMail: eMail,
+                  password: password,
+                })
+                .then((res) => {
+                  if (res.ok) {
+                    // console.log("login", res.body);
+                    Storage.SetItem("barber", {
+                      ...res.body,
+                      password: "****",
+                    });
+                  }
+                });
+              setTimeout(() => {
+                history.push("/general-information");
+              }, 300);
+
+              // Storage.SetItem("barber", { id: 1, falan: "falan" });
+              // history.push("/");
               setSigned(true);
             }}
           >

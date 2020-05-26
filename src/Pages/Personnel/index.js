@@ -63,6 +63,9 @@ const Personnel = ({ signed }) => {
 
   useEffect(() => {
     const barber = Storage.GetItem("barber");
+    if (!barber) {
+      return <Redirect to="/login" />;
+    }
     _getPersonnel(barber.id);
   }, []);
 

@@ -110,6 +110,9 @@ const GeneralInformation = ({ signed }) => {
 
   useEffect(() => {
     const barberStorage = Storage.GetItem("barber");
+    if (!barberStorage) {
+      return <Redirect to="/login" />;
+    }
     _getBarber(barberStorage.id);
     _getWorkingHours(barberStorage.id);
   }, []);
