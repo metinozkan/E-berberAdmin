@@ -19,12 +19,14 @@ const TopServices = styled.div`
 `;
 const Services = ({ signed }) => {
   const [services, setServices] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [barberId, setBarberId] = useState();
   const _getServices = (barberId) => {
     Agent.ServiceBarber.getServices(barberId).then((res) => {
       if (res.ok) {
-        console.log("res.", res.body);
+        console.log("hizmetler", res.body);
         setServices(res.body);
+        setIsLoading(false);
       }
     });
   };
@@ -36,7 +38,7 @@ const Services = ({ signed }) => {
         if (res.ok) {
           const newServices = services;
           newServices.push(res.body);
-          console.log("gelen", res.body);
+          console.log("service add gelen", res.body);
           console.log(newServices);
           setServices(newServices);
         }
@@ -44,7 +46,7 @@ const Services = ({ signed }) => {
   };
 
   const _updateService = (serviceObject, serviceId) => {
-    console.log("adadasdfas", { ...serviceObject, barberId: barberId });
+    console.log("güncellem icin", { ...serviceObject, barberId: barberId });
     Agent.ServiceBarber.updateService(serviceId)
       .send({ ...serviceObject, barberId: barberId })
       .then((res) => {
@@ -70,11 +72,11 @@ const Services = ({ signed }) => {
       alignItems="flex-start"
       style={{}}
     >
-      {services.length > 0 ? (
+      {!isLoading ? (
         <>
           <TopServices>
             <Typography variant="h4" gutterBottom>
-              Services
+              Hizmetler
             </Typography>
             {/* <AddServiceMatchPersonelModal /> */}
             <ServiceAdd _addService={_addService} />

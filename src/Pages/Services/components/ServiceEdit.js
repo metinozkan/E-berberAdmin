@@ -100,8 +100,8 @@ export const ServiceEdit = ({ selectedService, _updateService }) => {
         _updateService(
           {
             typeName: serviceName,
-            time: JSON.stringify(serviceDuration),
-            price: JSON.stringify(servicePrice),
+            time: Number(serviceDuration),
+            price: Number(servicePrice),
           },
           selectedService.id
         );

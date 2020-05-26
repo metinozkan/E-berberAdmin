@@ -94,7 +94,7 @@ const headCells = [
     id: "name",
     numeric: false,
     disablePadding: true,
-    label: "edit",
+    label: "Düzenle",
   },
 ];
 
@@ -116,12 +116,12 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          <Checkbox
+          {/* <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{ "aria-label": "select all desserts" }}
-          />
+          /> */}
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
@@ -228,9 +228,9 @@ const EnhancedTableToolbar = (props) => {
               />
             )}
           />
-          <Button variant="outlined" color="primary">
+          {/* <Button variant="outlined" color="primary">
             Seçilen fiyatları düzenle
-          </Button>
+          </Button> */}
         </ToolBarTop>
       )}
 
@@ -364,11 +364,11 @@ export const ServicesTable = ({ services, _updateService }) => {
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
-                        <Checkbox
+                        {/* <Checkbox
                           checked={isItemSelected}
                           inputProps={{ "aria-labelledby": labelId }}
                           onChange={(event) => handleClick(event, row.name)}
-                        />
+                        /> */}
                       </TableCell>
                       <TableCell
                         component="th"
@@ -378,6 +378,8 @@ export const ServicesTable = ({ services, _updateService }) => {
                         style={{
                           borderRight: "1px solid #e2e2e2",
                           width: "30%",
+                          marginLeft: ".5em",
+                          paddingLeft: ".5em",
                         }}
                       >
                         {row.name}
