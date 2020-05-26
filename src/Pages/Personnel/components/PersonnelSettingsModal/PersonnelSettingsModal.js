@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Storage } from "../../../../Utils/importFiles";
 import {
   Button,
   Dialog,
@@ -58,23 +59,28 @@ const SelectPageComp = ({ setSelectedPage }) => {
   );
 };
 
-export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
+export const PersonnelSettingsModal = ({
+  selectedPersonnel,
+  _updatePersonnel,
+}) => {
   const [open, setOpen] = useState(false);
   const [selectedPage, setSelectedPage] = useState(0);
-  const [personnelType, setPersonnelType] = useState("Yönetici");
-  const [color, setColor] = useState("red");
-  const [name, setName] = useState(selectedPersonnel.name);
-  const [email, setEmail] = useState();
-  const [phoneNo, setPhoneNo] = useState(selectedPersonnel.phoneNumber);
+  // const [personnelType, setPersonnelType] = useState("Yönetici");
+  const [color, setColor] = useState(selectedPersonnel.color);
+  const [name, setName] = useState(selectedPersonnel.staffName);
+  const [email, setEmail] = useState(selectedPersonnel.eMail);
+  const [phoneNo, setPhoneNo] = useState(selectedPersonnel.telNo);
   const [openWorkingHours, setOpenWorkingHours] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const PersonnelObject = {
-    personnelType: personnelType,
+    // personnelType: personnelType,
+    staffId: selectedPersonnel.id,
+    barberId: Storage.GetItem("barber").id,
     color: color,
-    name: name,
-    email: email,
-    phoneNo: phoneNo,
+    staffName: name,
+    eMail: email,
+    telNo: phoneNo,
   };
 
   const handleClickOpen = () => {
@@ -132,7 +138,7 @@ export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
             {/* {selectedPage === 0
               ? "Ayar Seçin"
               : selectedPage === 1 */}
-            "Çalışan Düzenle"
+            Çalışan Düzenle
             {/* : "Verdiği Hizmetler"} */}
           </DialogTitle>
           <Close
@@ -152,13 +158,13 @@ export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
           ) : selectedPage === 1 ? ( */}
           <PersonnelAddAndEdit
             selectedPersonnel={selectedPersonnel}
-            personnelType={personnelType}
+            // personnelType={personnelType}
             color={color}
             name={name}
             email={email}
             phoneNo={phoneNo}
             openWorkingHours={openWorkingHours}
-            setPersonnelType={setPersonnelType}
+            // setPersonnelType={setPersonnelType}
             setColor={setColor}
             setName={setName}
             setEmail={setEmail}
@@ -178,7 +184,10 @@ export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
             color="primary"
             style={{ width: "100%" }}
             variant="outlined"
-            onClick={() => {}}
+            onClick={() => {
+              _updatePersonnel(PersonnelObject);
+              handleClose();
+            }}
           >
             Kaydet
           </Button>

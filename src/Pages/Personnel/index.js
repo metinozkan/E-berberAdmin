@@ -28,12 +28,18 @@ const Personnel = ({ signed }) => {
     });
   };
 
-  const _updatePersonnel = (personnelId) => {
-    Agent.Staffs.updateStaff("id")
-      .send({})
+  const _updatePersonnel = (personnelObject) => {
+    Agent.Staffs.updateStaff(personnelObject.staffId)
+      .send(personnelObject)
       .then((res) => {
         if (res.ok) {
-          console.log("update", res.body);
+          const newPersonnels = [];
+          personnels.map((personnel) =>
+            personnel.id != res.body.id
+              ? newPersonnels.push(personnel)
+              : newPersonnels.push(res.body)
+          );
+          setPersonnels(newPersonnels);
         }
       });
   };
