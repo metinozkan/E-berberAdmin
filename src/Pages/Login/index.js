@@ -119,9 +119,14 @@ const Login = ({ signed, setSigned }) => {
               //     if (res.ok) {
               //       console.log("login", res.body);
               //       history.push("/");
+              // Storage.SetItem("barber", {
+              //   ...res.body,
+              //   password: "****",
+              // });
               //     }
               //   });
-              Storage.SetItem("barber", { id: 13, falan: "falan" });
+              Storage.SetItem("barber", { id: 1, falan: "falan" });
+              history.push("/");
               setSigned(true);
             }}
           >

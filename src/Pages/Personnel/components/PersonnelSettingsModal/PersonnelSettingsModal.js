@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Dialog,
@@ -65,9 +65,8 @@ export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
   const [color, setColor] = useState("red");
   const [name, setName] = useState(selectedPersonnel.name);
   const [email, setEmail] = useState();
-  const [phoneNo, setPhoneNo] = useState(selectedPersonnel.phoneNo);
+  const [phoneNo, setPhoneNo] = useState(selectedPersonnel.phoneNumber);
   const [openWorkingHours, setOpenWorkingHours] = useState(false);
-
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const PersonnelObject = {
@@ -85,6 +84,8 @@ export const PersonnelSettingsModal = ({ selectedPersonnel }) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {});
 
   return (
     <div>

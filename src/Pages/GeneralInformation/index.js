@@ -30,73 +30,88 @@ const GeneralInformation = ({ signed }) => {
       });
   };
 
-  const _getWorkingHours = () => {
-    // Agent.WorkHours.
-    const WorkHours = [
-      {
-        id: 8,
-        barberId: 13,
-        staffId: 5,
-        day: "Pazar",
-        startHour: "08:00",
-        endHour: "22:30",
-      },
-      {
-        id: 1,
-        barberId: 13,
-        staffId: 1,
-        day: "Pazartesi",
-        startHour: "08:30",
-        endHour: "22:30",
-      },
-      {
-        id: 2,
-        barberId: 13,
-        staffId: 1,
-        day: "Salı",
-        startHour: "08:30",
-        endHour: "22:30",
-      },
-      {
-        id: 3,
-        barberId: 13,
-        staffId: 1,
-        day: "Çarşamba",
-        startHour: "08:30",
-        endHour: "22:30",
-      },
-      {
-        id: 4,
-        barberId: 13,
-        staffId: 1,
-        day: "Perşembe",
-        startHour: "08:30",
-        endHour: "22:30",
-      },
-      {
-        id: 6,
-        barberId: 13,
-        staffId: 1,
-        day: "Cuma",
-        startHour: "08:30",
-        endHour: "22:30",
-      },
-      {
-        id: 7,
-        barberId: 13,
-        staffId: 1,
-        day: "Cumartesi",
-        startHour: "08:30",
-        endHour: "22:30",
-      },
-    ];
-    setWorkingHours(WorkHours);
+  const _getWorkingHours = (barberId) => {
+    Agent.WorkHours.getWorkHoursBarber(barberId).then((res) => {
+      if (res.ok) {
+        setWorkingHours(res.body);
+      }
+    });
+
+    // const WorkHours = [
+    //   {
+    //     id: 8,
+    //     barberId: 13,
+    //     staffId: 5,
+    //     day: "Pazar",
+    //     startHour: "08:00",
+    //     endHour: "22:30",
+    //   },
+    //   {
+    //     id: 1,
+    //     barberId: 13,
+    //     staffId: 1,
+    //     day: "Pazartesi",
+    //     startHour: "08:30",
+    //     endHour: "22:30",
+    //   },
+    //   {
+    //     id: 2,
+    //     barberId: 13,
+    //     staffId: 1,
+    //     day: "Salı",
+    //     startHour: "08:30",
+    //     endHour: "22:30",
+    //   },
+    //   {
+    //     id: 3,
+    //     barberId: 13,
+    //     staffId: 1,
+    //     day: "Çarşamba",
+    //     startHour: "08:30",
+    //     endHour: "22:30",
+    //   },
+    //   {
+    //     id: 4,
+    //     barberId: 13,
+    //     staffId: 1,
+    //     day: "Perşembe",
+    //     startHour: "08:30",
+    //     endHour: "22:30",
+    //   },
+    //   {
+    //     id: 6,
+    //     barberId: 13,
+    //     staffId: 1,
+    //     day: "Cuma",
+    //     startHour: "08:30",
+    //     endHour: "22:30",
+    //   },
+    //   {
+    //     id: 7,
+    //     barberId: 13,
+    //     staffId: 1,
+    //     day: "Cumartesi",
+    //     startHour: "08:30",
+    //     endHour: "22:30",
+    //   },
+    // ];
+    //setWorkingHours(WorkHours);
+  };
+  const _updateWorkHours = (workHoursObj) => {
+    console.log("work OBje", workHoursObj);
+    // Agent.WorkHours.updateWorkHours()
+    //   .send(workHoursObj)
+    //   .then((res) => {
+    //     if (res.ok) {
+    //       console.log("updateWorkhours", res.body);
+    //     }
+    //   });
   };
 
   useEffect(() => {
     const barberStorage = Storage.GetItem("barber");
     _getBarber(barberStorage.id);
-    _getWorkingHours();
+    _getWorkingHours(barberStorage.id);
   }, []);
 
   return !signed ? (
@@ -112,22 +127,19 @@ const GeneralInformation = ({ signed }) => {
       {barber ? (
         <>
           <Grid item xs={12} md={6}>
-            <div style={{ width: "100%", height: "100%" }}>
-              <GeneralSettings
-                _updateGeneralSettings={_updateGeneralSettings}
-                barber={barber}
-              />
-            </div>
+            <GeneralSettings
+              _updateGeneralSettings={_updateGeneralSettings}
+              barber={barber}
+            />
           </Grid>
           <Grid item xs={12} md={6}>
-            <div style={{ width: "100%", height: "100%" }}>
-              {workingHours && (
-                <WorkingHours
-                  workingHours={workingHours}
-                  fromGeneralInformation={true}
-                ></WorkingHours>
-              )}
-            </div>
+            {workingHours && (
+              <WorkingHours
+                workingHours={workingHours}
+                fromGeneralInformation={true}
+                _updateWorkHours={_updateWorkHours}
+              ></WorkingHours>
+            )}
           </Grid>
         </>
       ) : (

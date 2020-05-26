@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Storage } from "../../../Utils/importFiles";
 import {
   Button,
   Dialog,
@@ -188,7 +189,7 @@ export const PersonnelAddAndEdit = ({
               variant="outlined"
             />
           </div>
-          <TextField
+          {/* <TextField
             id="outlined-full-width"
             value={personnelType}
             onChange={(e) => {
@@ -206,7 +207,7 @@ export const PersonnelAddAndEdit = ({
           >
             <MenuItem value={"Yönetici"}>Yönetici</MenuItem>
             <MenuItem value={"Çalışan"}>Çalışan</MenuItem>
-          </TextField>
+          </TextField> */}
           <div
             style={{
               width: "100%",
@@ -241,6 +242,20 @@ export const PersonnelAddAndEdit = ({
               <MenuItem value={"blue"}>
                 <div
                   style={{ width: "100px", height: "20px", background: "blue" }}
+                ></div>
+              </MenuItem>
+              <MenuItem value={"pink"}>
+                <div
+                  style={{ width: "100px", height: "20px", background: "pink" }}
+                ></div>
+              </MenuItem>
+              <MenuItem value={"green"}>
+                <div
+                  style={{
+                    width: "100px",
+                    height: "20px",
+                    background: "green",
+                  }}
                 ></div>
               </MenuItem>
             </TextField>
@@ -282,21 +297,22 @@ export const PersonnelAddAndEdit = ({
 export const PersonnelAddModal = ({ _addPersonnel }) => {
   const [open, setOpen] = useState(false);
   const [selectedPage, setSelectedPage] = useState(0);
-  const [personnelType, setPersonnelType] = useState("Yönetici");
+  // const [personnelType, setPersonnelType] = useState("Yönetici");
   const [color, setColor] = useState("blue");
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [phoneNo, setPhoneNo] = useState();
   const [openWorkingHours, setOpenWorkingHours] = useState(false);
-
+  const barber = Storage.Get;
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const PersonnelObject = {
-    personnelType: personnelType,
+    // personnelType: personnelType,
+    barberId: Storage.GetItem("barber").id,
     color: color,
-    name: name,
-    email: email,
-    phoneNo: phoneNo,
+    staffName: name,
+    eMail: email,
+    telNo: phoneNo,
   };
 
   const handleClickOpen = () => {
@@ -345,13 +361,13 @@ export const PersonnelAddModal = ({ _addPersonnel }) => {
           <DialogContent>
             <PersonnelAddAndEdit
               _addPersonnel={_addPersonnel}
-              personnelType={personnelType}
+              // personnelType={personnelType}
               color={color}
               name={name}
               email={email}
               phoneNo={phoneNo}
               openWorkingHours={openWorkingHours}
-              setPersonnelType={setPersonnelType}
+              // setPersonnelType={setPersonnelType}
               setColor={setColor}
               setName={setName}
               setEmail={setEmail}
@@ -366,7 +382,8 @@ export const PersonnelAddModal = ({ _addPersonnel }) => {
               style={{ width: "100%" }}
               variant="outlined"
               onClick={() => {
-                console.log("personelobj", PersonnelObject);
+                _addPersonnel(PersonnelObject);
+                handleClose();
               }}
             >
               Kaydet

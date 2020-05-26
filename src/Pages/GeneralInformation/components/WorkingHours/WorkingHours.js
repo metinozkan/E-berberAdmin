@@ -50,11 +50,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const WorkingHoursRow = ({ title, day }) => {
+const WorkingHoursRow = ({ title, day, _updateWorkHours }) => {
   const [editing, setEditing] = useState(false);
   const [value, setValue] = useState({
     isOpen: true,
-    openHour: day.startHour,
+    startHour: day.startHour,
     closeHour: day.endHour,
   });
   return (
@@ -78,8 +78,8 @@ const WorkingHoursRow = ({ title, day }) => {
           <div style={{ flex: 1.5, paddingLeft: "14px" }}>
             {value.isOpen ? "Açık" : "Kapalı"}
           </div>
-          <div style={{ flex: 1, paddingLeft: "14px" }}>{value.openHour}</div>
-          <div style={{ flex: 1, paddingLeft: "14px" }}> {value.closeHour}</div>
+          <div style={{ flex: 1, paddingLeft: "14px" }}>{value.startHour}</div>
+          <div style={{ flex: 1, paddingLeft: "14px" }}> {value.endHour}</div>
         </div>
       ) : (
         <>
@@ -112,9 +112,9 @@ const WorkingHoursRow = ({ title, day }) => {
             //label="Açık"
             disabled={value && !value.isOpen}
             select
-            value={value.openHour}
+            value={value.startHour}
             onChange={(e) => {
-              setValue({ ...value, openHour: e.target.value });
+              setValue({ ...value, startHour: e.target.value });
             }}
             style={{ flex: 1, marginRight: ".5em" }}
             margin="dense"
@@ -134,9 +134,9 @@ const WorkingHoursRow = ({ title, day }) => {
             //label="Açık"
             disabled={value && !value.isOpen}
             select
-            value={value.closeHour}
+            value={value.endHour}
             onChange={(e) => {
-              setValue({ ...value, closeHour: e.target.value });
+              setValue({ ...value, endHour: e.target.value });
             }}
             style={{ flex: 1, marginRight: ".5em" }}
             margin="dense"
@@ -159,6 +159,9 @@ const WorkingHoursRow = ({ title, day }) => {
         onClick={() => {
           if (editing) {
             setEditing(false);
+            if (_updateWorkHours) {
+              _updateWorkHours({ ...day, ...value });
+            }
           } else {
             setEditing(true);
           }
@@ -255,7 +258,11 @@ export const WorkingHoursComp = () => {
   );
 };
 
-export const WorkingHours = ({ workingHours, fromGeneralInformation }) => {
+export const WorkingHours = ({
+  workingHours,
+  fromGeneralInformation,
+  _updateWorkHours,
+}) => {
   const classes = useStyles();
 
   return (
@@ -289,6 +296,7 @@ export const WorkingHours = ({ workingHours, fromGeneralInformation }) => {
                 day={day}
                 // value={sunday}
                 // setValue={setSunday}
+                _updateWorkHours={_updateWorkHours}
               ></WorkingHoursRow>
             ))}
             {/* <Button

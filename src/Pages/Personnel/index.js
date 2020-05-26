@@ -17,12 +17,13 @@ const TopPersonnel = styled.div`
   margin: 2em 0px;
 `;
 const Personnel = ({ signed }) => {
-  const [personnels, setPersonnels] = useState([]);
-
+  const [personnels, setPersonnels] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const _getPersonnel = (barberId) => {
     Agent.Staffs.getStaffBarber(barberId).then((res) => {
       if (res.ok) {
         setPersonnels(res.body);
+        setIsLoading(false);
       }
     });
   };
@@ -38,14 +39,21 @@ const Personnel = ({ signed }) => {
   };
 
   const _addPersonnel = (personnelObject) => {
+    //    console.log("personnel", personnelObject);
+
     Agent.Staffs.addStaffs()
       .send(personnelObject)
       .then((res) => {
         if (res.ok) {
+          const newPersonnels = personnels;
           console.log("add,", res.body);
+          newPersonnels.push(res.body);
+          setPersonnels(newPersonnels);
         }
       });
   };
+
+  useEffect(() => {});
 
   useEffect(() => {
     const barber = Storage.GetItem("barber");
@@ -62,7 +70,7 @@ const Personnel = ({ signed }) => {
       alignItems="flex-start"
       style={{}}
     >
-      {personnels.length > 0 ? (
+      {!isLoading ? (
         <>
           <TopPersonnel>
             <Typography variant="h4" gutterBottom>

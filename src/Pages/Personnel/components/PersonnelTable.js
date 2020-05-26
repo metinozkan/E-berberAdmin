@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -20,8 +20,8 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(name, phoneNumber, workerType, workerColor, button) {
-  return { name, phoneNumber, workerType, workerColor, button };
+function createData(name, phoneNumber, workerColor, button) {
+  return { name, phoneNumber, workerColor, button };
 }
 
 const Personnels = [
@@ -88,7 +88,6 @@ const PersonnelMatchService = [
 
 export const PersonnelTable = ({ personnels, _updatePersonnel }) => {
   const classes = useStyles();
-  console.log("person", personnels);
   // const rows = personnels.map((personnel) =>
   //   createData(
   //     personnel.staffName,
@@ -102,19 +101,22 @@ export const PersonnelTable = ({ personnels, _updatePersonnel }) => {
   //   )
   // );
 
-  const rows = Personnels.map((personnel) =>
+  const rows = personnels.map((personnel) =>
     createData(
-      personnel.name,
-      personnel.phoneNumber,
-      personnel.workerType,
-      personnel.workerColor,
+      personnel.staffName,
+      personnel.telNo,
+      // personnel.workerType,
+      personnel.color,
       <PersonnelSettingsModal
         selectedPersonnel={personnel}
         _updatePersonnel={_updatePersonnel}
       />
     )
   );
-
+  useEffect(() => {}, [personnels]);
+  useEffect(() => {
+    console.log("table", personnels);
+  });
   return (
     <TableContainer component={Paper} elevation={0}>
       <Table className={classes.table} aria-label="simple table">
@@ -124,9 +126,9 @@ export const PersonnelTable = ({ personnels, _updatePersonnel }) => {
             <TableCell align="center" className={classes.tableCol}>
               Telefon Numarası
             </TableCell>
-            <TableCell align="center" className={classes.tableCol}>
+            {/* <TableCell align="center" className={classes.tableCol}>
               Çalışan Tipi
-            </TableCell>
+            </TableCell> */}
             <TableCell align="center" className={classes.tableCol}>
               Çalışan Rengi
             </TableCell>
@@ -148,9 +150,9 @@ export const PersonnelTable = ({ personnels, _updatePersonnel }) => {
               <TableCell align="center" className={classes.tableRowBorder}>
                 {row.phoneNumber}
               </TableCell>
-              <TableCell align="center" className={classes.tableRowBorder}>
+              {/* <TableCell align="center" className={classes.tableRowBorder}>
                 {row.workerType}
-              </TableCell>
+              </TableCell> */}
               <TableCell align="center" className={classes.tableRowBorder}>
                 {row.workerColor}
               </TableCell>

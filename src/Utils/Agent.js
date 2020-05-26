@@ -6,7 +6,7 @@ const protocol = "https:";
 //   ? "167.71.69.250"
 //   : `${window.location.host}`;
 
-export const API_ROOT = "spring-boot-jpa-hibernate-pgsq.herokuapp.com";
+export const API_ROOT = "webservisdeneme.azurewebsites.net";
 const requests = {
   del: (url) => request.del(`${protocol}//${API_ROOT}${url}`),
   get: (url) => request.get(`${protocol}//${API_ROOT}${url}`),
@@ -52,6 +52,8 @@ const Appointments = {
 
 const WorkHours = {
   getWorkHours: () => requests.get("/WorkHours"),
+  getWorkHoursBarber: (barberId) =>
+    requests.get(`/WorkHours/barber/${barberId}`),
   addWorkHours: () => requests.post("/WorkHours/add"),
   updateWorkHours: () => requests.get("/WorkHours/put"),
   addWorkHours: () => requests.get("/WorkHours/add"),
