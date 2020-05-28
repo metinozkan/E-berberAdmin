@@ -116,21 +116,25 @@ const Login = ({ signed, setSigned }) => {
                   password: password,
                 })
                 .then((res) => {
+                  console.log("istek gitti ama", res);
+
                   if (res.ok) {
                     // console.log("login", res.body);
                     Storage.SetItem("barber", {
                       ...res.body,
                       password: "****",
                     });
+                    setSigned(true);
+                    setTimeout(() => {
+                      history.push("/general-information");
+                    }, 300);
+                  } else {
+                    console.log("hata");
                   }
                 });
-              setTimeout(() => {
-                history.push("/general-information");
-              }, 300);
 
               // Storage.SetItem("barber", { id: 1, falan: "falan" });
               // history.push("/");
-              setSigned(true);
             }}
           >
             Sign In
