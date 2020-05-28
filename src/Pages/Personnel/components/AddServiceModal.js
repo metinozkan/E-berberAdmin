@@ -394,13 +394,7 @@ export const AddServiceModal = ({ setServices }) => {
           <Button onClick={handleClose} color="primary">
             Disagree
           </Button>
-          <Button
-            onClick={() => {
-              console.log(selected);
-            }}
-            color="primary"
-            autoFocus
-          >
+          <Button onClick={() => {}} color="primary" autoFocus>
             Agree
           </Button>
         </DialogActions>

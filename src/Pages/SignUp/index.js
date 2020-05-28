@@ -143,7 +143,6 @@ const SignUp = ({ signed, setSigned }) => {
                 })
                 .then((res) => {
                   if (res.ok) {
-                    console.log("signUp succesfuly", res.body);
                     Storage.SetItem("barber", res.body);
                     history.push("/");
                     setIsLoading(false);

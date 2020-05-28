@@ -24,7 +24,6 @@ const Services = ({ signed }) => {
   const _getServices = (barberId) => {
     Agent.ServiceBarber.getServices(barberId).then((res) => {
       if (res.ok) {
-        console.log("hizmetler", res.body);
         setServices(res.body);
         setIsLoading(false);
       }
@@ -32,15 +31,15 @@ const Services = ({ signed }) => {
   };
 
   const _addService = (serviceObject) => {
+    setIsLoading(true);
     Agent.ServiceBarber.addService()
       .send({ ...serviceObject, barberId: barberId })
       .then((res) => {
         if (res.ok) {
           const newServices = services;
           newServices.push(res.body);
-          console.log("service add gelen", res.body);
-          console.log(newServices);
           setServices(newServices);
+          setIsLoading(false);
         }
       });
   };
@@ -66,7 +65,7 @@ const Services = ({ signed }) => {
     _getServices(barber.id);
   }, []);
 
-  useEffect(() => {}, [services]);
+  useEffect(() => {});
   return !signed ? (
     <Redirect to="/login" />
   ) : (
@@ -97,7 +96,7 @@ const Services = ({ signed }) => {
             }}
           >
             <ServicesTable
-              services={services}
+              servicesForTable={services}
               _updateService={_updateService}
             />
           </div>

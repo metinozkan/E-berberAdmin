@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
@@ -273,14 +273,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const ServicesTable = ({ services, _updateService }) => {
+export const ServicesTable = ({ servicesForTable, _updateService }) => {
   const classes = useStyles();
+  const [services, setServices] = useState([]);
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("name");
   const [selected, setSelected] = React.useState([]);
   const [selectedService, setSelectedService] = useState(null);
   // const rows = Services.map((service) =>
-
   const rows = services.map((service) =>
     createData(
       service.name,
@@ -327,6 +327,9 @@ export const ServicesTable = ({ services, _updateService }) => {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
+  useEffect(() => {
+    setServices(servicesForTable);
+  }, [servicesForTable]);
   return (
     <div className={classes.root}>
       <Paper className={classes.paper} elevation={0}>

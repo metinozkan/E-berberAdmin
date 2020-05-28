@@ -119,8 +119,6 @@ const Login = ({ signed, setSigned }) => {
                   password: password,
                 })
                 .then((res) => {
-                  console.log("istek gitti ama", res);
-
                   if (res.ok) {
                     // console.log("login", res.body);
                     Storage.SetItem("barber", {

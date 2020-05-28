@@ -98,7 +98,6 @@ const GeneralInformation = ({ signed }) => {
     //setWorkingHours(WorkHours);
   };
   const _updateWorkHours = (workHoursObj) => {
-    console.log("work OBje", workHoursObj);
     // Agent.WorkHours.updateWorkHours()
     //   .send(workHoursObj)
     //   .then((res) => {

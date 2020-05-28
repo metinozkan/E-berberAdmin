@@ -46,13 +46,13 @@ const Personnel = ({ signed }) => {
 
   const _addPersonnel = (personnelObject) => {
     //    console.log("personnel", personnelObject);
-
+    setIsLoading(true);
     Agent.Staffs.addStaffs()
       .send(personnelObject)
       .then((res) => {
         if (res.ok) {
+          setIsLoading(false);
           const newPersonnels = personnels;
-          console.log("add,", res.body);
           newPersonnels.push(res.body);
           setPersonnels(newPersonnels);
         }
@@ -102,7 +102,7 @@ const Personnel = ({ signed }) => {
             }}
           >
             <PersonnelTable
-              personnels={personnels}
+              personnelsForTable={personnels}
               _updatePersonnel={_updatePersonnel}
             ></PersonnelTable>
           </Grid>
