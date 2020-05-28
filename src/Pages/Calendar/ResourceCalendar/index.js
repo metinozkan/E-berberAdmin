@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Agent, Loading } from "../../../Utils/importFiles";
+import { useHistory } from "react-router-dom";
+import { Agent, Loading, Storage } from "../../../Utils/importFiles";
 import { Grid } from "@material-ui/core";
 // import events from "../CreateEventCalendar/events";
 import { SlideModal } from "../../../Components/SlideModal";
@@ -59,7 +60,8 @@ const resourceMap = [
   { resourceId: 4, resourceTitle: "Mahmut js" },
 ];
 
-export const ResourceCalendar = ({}) => {
+export const ResourceCalendar = (props) => {
+  const [barber, setBarber] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(false);
   const [barberMontlyAppointments, setBarberMontlyAppointments] = useState(
@@ -70,6 +72,7 @@ export const ResourceCalendar = ({}) => {
   const [personnels, setPersonnels] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  const history = useHistory();
   const eventStyleGetter = (event, start, end, isSelected) => {
     var backgroundColor = "#" + event.hexColor;
     var style = {
@@ -85,8 +88,9 @@ export const ResourceCalendar = ({}) => {
     };
   };
   const _getBarberMontlyAppointments = () => {
+    const barberStorage = Storage.GetItem("barber");
     Agent.Appointments.getMontlyBarberAppointments()
-      .send({ barberId: 13 })
+      .send({ barberId: barberStorage.id })
       .then((res) => {
         if (res.ok) {
           setBarberMontlyAppointments(res.body);
@@ -97,7 +101,9 @@ export const ResourceCalendar = ({}) => {
   };
 
   const _getPersonnels = (barberAppointments) => {
-    Agent.Staffs.getStaffBarber(13).then((res) => {
+    const barberStorage = Storage.GetItem("barber");
+
+    Agent.Staffs.getStaffBarber(barberStorage.id).then((res) => {
       if (res.ok) {
         const newPersonnels = [];
         res.body.map((personnel) =>
@@ -112,23 +118,29 @@ export const ResourceCalendar = ({}) => {
     });
   };
   const _getServices = (barberAppointments, newPersonnels) => {
+    const barberStorage = Storage.GetItem("barber");
+
     if (barberAppointments && newPersonnels) {
-      Agent.ServiceBarber.getServices(13).then((res) => {
+      Agent.ServiceBarber.getServices(barberStorage.id).then((res) => {
         if (res.ok) {
           setServices(res.body);
           const services = res.body;
           const newEvents = [];
+
           barberAppointments.map((appointment) =>
             newEvents.push({
-              ...appointment,
+              // ...appointment,
+              customerId: appointment.customerId,
               id: appointment.id,
-              title: appointment.customerId,
+              // title: appointment.customerId,
               start: modifyDate(appointment.appointmentDate),
               end: modifyDate(appointment.appointmentEndDate),
+              startForModal: modifyDateForModal(appointment.appointmentDate),
+              endForModal: modifyDateForModal(appointment.appointmentEndDate),
               resourceId: appointment.staffId,
               personnel: newPersonnels.find((p) => p.id == appointment.staffId),
-              service: services.find(
-                (service) => service.id == appointment.serviceId
+              services: appointment.serviceId.map((ser) =>
+                services.find((service) => service.id == ser)
               ),
             })
           );
@@ -155,6 +167,16 @@ export const ResourceCalendar = ({}) => {
     const numberHour = Number(stringTime[0]);
     const numberMinute = Number(stringTime[1]);
     const numberSecond = Number(stringTime[2]);
+    // const newAppointmentDate =
+    //   numberDay +
+    //   "/" +
+    //   stringYear[1] +
+    //   "/" +
+    //   numberYear +
+    //   " " +
+    //   stringTime[0] +
+    //   ":" +
+    //   stringTime[1];
     return new Date(
       numberYear,
       numberMonth,
@@ -164,15 +186,42 @@ export const ResourceCalendar = ({}) => {
       numberSecond
     );
   };
+  const modifyDateForModal = (date) => {
+    const stringDate = date.split("T");
+    const year = stringDate[0];
+    const time = stringDate[1];
+    const stringYear = year.split("-");
+    const stringTimes = time.split(".");
+    const stringTime = stringTimes[0].split(":");
 
+    const numberYear = Number(stringYear[0]);
+    const numberDay = Number(stringYear[2]);
+
+    const newAppointmentDate =
+      numberDay +
+      "/" +
+      stringYear[1] +
+      "/" +
+      numberYear +
+      " " +
+      stringTime[0] +
+      ":" +
+      stringTime[1];
+    return newAppointmentDate;
+  };
   useEffect(() => {
-    _getBarberMontlyAppointments();
-    _getPersonnels();
+    const barberStorage = Storage.GetItem("barber");
+    if (barberStorage) {
+      setBarber(barberStorage);
+      _getBarberMontlyAppointments();
+      _getPersonnels();
+    } else {
+      history.push("/login");
+    }
   }, []);
-
   return (
     <>
-      {events && personnels && (
+      {events && personnels && selectedEvent && (
         <SlideModal
           openModal={openModal}
           setOpenModal={setOpenModal}

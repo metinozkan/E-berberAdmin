@@ -12,8 +12,9 @@ export default function RouteWrapper({
   ...rest
 }) {
   // const signed = true;
-  const barber = Storage.GetItem("barber");
-
+  const [barber, setBarber] = useState(
+    Storage.GetItem("barber") ? Storage.GetItem("barber") : false
+  );
   const [signed, setSigned] = useState(barber ? true : false);
 
   /**
@@ -42,7 +43,12 @@ export default function RouteWrapper({
       {...rest}
       render={(props) => (
         <Layout setSigned={setSigned}>
-          <Component {...props} signed={signed} setSigned={setSigned} />
+          <Component
+            {...props}
+            signed={signed}
+            setSigned={setSigned}
+            barber={barber}
+          />
         </Layout>
       )}
     />
