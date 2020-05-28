@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
-import { Agent, Storage } from "../../Utils/importFiles";
+import { Agent, Storage, Loading } from "../../Utils/importFiles";
 import {
   Avatar,
   Button,
@@ -55,11 +55,14 @@ const SignUp = ({ signed, setSigned }) => {
   const [barberName, setBarberName] = useState("");
   const [eMail, seteMail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const history = useHistory();
   return signed ? (
     <Redirect to="/home" />
   ) : (
     <Container component="main" maxWidth="xs">
+      {isLoading && <Loading />}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -131,6 +134,7 @@ const SignUp = ({ signed, setSigned }) => {
             color="primary"
             className={classes.submit}
             onClick={() => {
+              setIsLoading(true);
               Agent.Barbers.addBarbers()
                 .send({
                   barberName: barberName,
@@ -142,6 +146,7 @@ const SignUp = ({ signed, setSigned }) => {
                     console.log("signUp succesfuly", res.body);
                     Storage.SetItem("barber", res.body);
                     history.push("/");
+                    setIsLoading(false);
                     setSigned(true);
                   }
                 });

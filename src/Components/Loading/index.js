@@ -15,6 +15,7 @@ export const Loading = ({ type, animateExit, fromSpeaker, emptyPage }) => {
         left: "50%",
         top: "50%",
         transform: "translate(-50%, -50%)",
+        zIndex: 15,
       }}
     >
       <div

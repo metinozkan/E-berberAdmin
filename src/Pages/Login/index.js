@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Agent, Storage } from "../../Utils/importFiles";
+import { Agent, Storage, Loading } from "../../Utils/importFiles";
 import { Redirect, useHistory } from "react-router-dom";
 import {
   Avatar,
@@ -55,11 +55,13 @@ const Login = ({ signed, setSigned }) => {
   const classes = useStyles();
   const [eMail, seteMail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
   return signed ? (
     <Redirect to="/home"></Redirect>
   ) : (
     <Container component="main" maxWidth="xs">
+      {isLoading && <Loading />}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -110,6 +112,7 @@ const Login = ({ signed, setSigned }) => {
             color="primary"
             className={classes.submit}
             onClick={() => {
+              setIsLoading(true);
               Agent.Login.loginBarber()
                 .send({
                   eMail: eMail,
@@ -128,6 +131,7 @@ const Login = ({ signed, setSigned }) => {
                     setTimeout(() => {
                       history.push("/general-information");
                     }, 300);
+                    setIsLoading(false);
                   } else {
                     console.log("hata");
                   }
