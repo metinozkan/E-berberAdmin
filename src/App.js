@@ -23,8 +23,12 @@ import red from "@material-ui/core/colors/red";
 
 const newTheme = createMuiTheme({
   palette: {
-    primary: blueGrey,
-    secondary: green,
+    primary: {
+      main: "#0277bd",
+    },
+    secondary: {
+      main: "#80d8ff",
+    },
   },
 });
 
