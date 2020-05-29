@@ -88,6 +88,8 @@ export const PersonnelAddAndEdit = ({
         }
       });
   };
+
+  const _deleteWorkHours = (workHoursId) => {};
   useEffect(() => {
     console.log("kac kere calısıyon");
     _getWorkingHours();

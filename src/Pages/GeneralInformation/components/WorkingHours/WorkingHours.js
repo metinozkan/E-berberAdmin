@@ -110,7 +110,7 @@ const WorkingHoursRow = ({ title, day, _updateWorkHours }) => {
           <TextField
             id="outlined-full-width"
             //label="Açık"
-            disabled={value && !value.isOpen}
+            disabled={value && value.isOpen == "false"}
             select
             value={value.startHour}
             onChange={(e) => {
@@ -132,7 +132,7 @@ const WorkingHoursRow = ({ title, day, _updateWorkHours }) => {
           <TextField
             id="outlined-full-width"
             //label="Açık"
-            disabled={value && !value.isOpen}
+            disabled={value && value.isOpen == "false"}
             select
             value={value.endHour}
             onChange={(e) => {

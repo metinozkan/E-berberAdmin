@@ -56,10 +56,9 @@ const Personnel = ({ signed }) => {
           newPersonnels.push(res.body);
           setPersonnels(newPersonnels);
           const staffId = res.body.id;
-          setIsLoading(false);
-          // barberWorkTimes.map((time, index) => {
-          //   addWorkHours(time, staffId);
-          // });
+          barberWorkTimes.map((time, index) => {
+            addWorkHours(time, staffId);
+          });
         }
       });
   };

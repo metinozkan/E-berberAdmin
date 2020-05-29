@@ -79,7 +79,7 @@ const Staffs = {
 const ServiceBarber = {
   getServices: (barberId) => requests.get(`/ServiceBarber/Barber/${barberId}`),
   addService: () => requests.post("/ServiceBarber/add"),
-  updateService: (barberId) => requests.put(`/ServiceBarber/put/${barberId}`),
+  updateService: (serviceId) => requests.put(`/ServiceBarber/put/${serviceId}`),
 };
 
 const Customers = {

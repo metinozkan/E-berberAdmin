@@ -8,6 +8,7 @@ import {
   ExpansionPanelDetails,
   Typography,
   Button,
+  MenuItem,
 } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { makeStyles } from "@material-ui/core/styles";
@@ -167,28 +168,24 @@ export const GeneralSettings = ({ _updateGeneralSettings, barber }) => {
               }
               variant="outlined"
             />
-            <Autocomplete
-              freeSolo
-              id="combo-box-demo"
-              options={districts}
-              getOptionLabel={(option) => option.title}
-              style={{ width: "100%" }}
-              inputValue={district}
-              onChange={(e, values) => {
-                setDistrict(values.title);
+            <TextField
+              id="standard-select-currency"
+              select
+              label="İlçe"
+              fullWidth
+              margin="dense"
+              variant="outlined"
+              value={district}
+              onChange={(e) => {
+                setDistrict(e.target.value);
               }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  id="outlined-full-width"
-                  label="İlçe seçin"
-                  placeholder="Placeholder"
-                  fullWidth
-                  margin="dense"
-                  variant="outlined"
-                />
-              )}
-            ></Autocomplete>
+            >
+              {districts.map((option) => (
+                <MenuItem key={option.title} value={option.title}>
+                  {option.title}
+                </MenuItem>
+              ))}
+            </TextField>
             <InvoiceContainer
               setTaxObjet={setTaxObjet}
               taxObject={taxObject}

@@ -113,6 +113,7 @@ const Login = ({ signed, setSigned }) => {
             className={classes.submit}
             onClick={() => {
               setIsLoading(true);
+
               Agent.Login.loginBarber()
                 .send({
                   eMail: eMail,

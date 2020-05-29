@@ -91,7 +91,6 @@ export const ServiceEdit = ({ selectedService, _updateService }) => {
       }}
     ></TextField>
   );
-
   return (
     <EditModal
       buttonTitle={"Düzenle"}

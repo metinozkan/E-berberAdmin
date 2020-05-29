@@ -12,19 +12,26 @@ import { Agent, Storage } from "../../Utils/importFiles";
 const GeneralInformation = ({ signed }) => {
   const [barber, setBarber] = useState(null);
   const [workTimes, setworkTimes] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingUpdate, setIsLoadingUpdate] = useState(false);
+
   const _getBarber = (barberId) => {
     Agent.Barbers.getBarber(barberId).then((res) => {
       if (res.ok) {
         setBarber(res.body);
+        setIsLoading(false);
       }
     });
   };
 
   const _updateGeneralSettings = (barberObject) => {
+    setIsLoadingUpdate(true);
     Agent.Barbers.updateBarbers(barber.id)
       .send(barberObject)
       .then((res) => {
         if (res.ok) {
+          setIsLoadingUpdate(false);
+
           console.log("update", res.body);
         }
       });
@@ -142,6 +149,7 @@ const GeneralInformation = ({ signed }) => {
       alignItems="flex-start"
       style={{}}
     >
+      {isLoadingUpdate && <Loading />}
       {barber ? (
         <>
           <Grid item xs={12} md={6}>

@@ -45,17 +45,27 @@ const Services = ({ signed }) => {
   };
 
   const _updateService = (serviceObject, serviceId) => {
+    console.log("update", {
+      ...serviceObject,
+      barberId: barberId,
+      id: serviceId,
+    });
     Agent.ServiceBarber.updateService(serviceId)
-      .send({ ...serviceObject, barberId: barberId })
+      .send({ ...serviceObject, barberId: barberId, id: serviceId })
       .then((res) => {
         if (res.ok) {
-          const newServices = [];
-          services.map((service) =>
-            service.id != res.body.id
-              ? newServices.push(service)
-              : newServices.push(res.body)
-          );
-          setServices(newServices);
+          if (!Error) {
+            console.log("update", res.body.data);
+            const newServices = [];
+            services.map((service) =>
+              service.id != res.body.data.id
+                ? newServices.push(service)
+                : newServices.push(res.body.data)
+            );
+            setServices(newServices);
+          } else {
+            console.log("bir sorun olustu");
+          }
         }
       });
   };

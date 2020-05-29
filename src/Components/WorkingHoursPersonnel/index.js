@@ -321,7 +321,7 @@ export const WorkingHoursPersonnel = ({ workingHours, _updateWorkHours }) => {
                 ></WorkingHoursRow>
               ))}
 
-            <WorkingHoursAddRow />
+            {/* <WorkingHoursAddRow /> */}
             {/* <Button
               variant="contained"
               color="primary"
