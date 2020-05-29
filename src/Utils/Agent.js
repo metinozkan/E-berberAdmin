@@ -61,7 +61,6 @@ const WorkHours = {
     requests.get(`/WorkHours/barber/${barberId}`),
   addWorkHours: () => requests.post("/WorkHours/add"),
   updateWorkHours: () => requests.get("/WorkHours/put"),
-  addWorkHours: () => requests.get("/WorkHours/add"),
 
   dayStaff: () => requests.post("/WorkHours/staff/day"),
   getStaffWorkHours: (staffId) => requests.get(`/WorkHours/staff/${staffId}`),

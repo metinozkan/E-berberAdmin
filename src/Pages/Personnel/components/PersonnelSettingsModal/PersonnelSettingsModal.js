@@ -62,6 +62,7 @@ const SelectPageComp = ({ setSelectedPage }) => {
 export const PersonnelSettingsModal = ({
   selectedPersonnel,
   _updatePersonnel,
+  forPersonnelSettings,
 }) => {
   const [open, setOpen] = useState(false);
   const [selectedPage, setSelectedPage] = useState(0);
@@ -170,6 +171,7 @@ export const PersonnelSettingsModal = ({
             setEmail={setEmail}
             setPhoneNo={setPhoneNo}
             setOpenWorkingHours={setOpenWorkingHours}
+            forPersonnelSettings={forPersonnelSettings}
           ></PersonnelAddAndEdit>
           {/* // ) : (
           //   <PersonnelServices

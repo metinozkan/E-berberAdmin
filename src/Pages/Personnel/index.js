@@ -19,6 +19,8 @@ const TopPersonnel = styled.div`
 const Personnel = ({ signed }) => {
   const [personnels, setPersonnels] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [barberWorkTimes, setBarberWorkTimes] = useState([]);
+  const [barberId, setBarberId] = useState();
   const _getPersonnel = (barberId) => {
     Agent.Staffs.getStaffBarber(barberId).then((res) => {
       if (res.ok) {
@@ -46,27 +48,71 @@ const Personnel = ({ signed }) => {
 
   const _addPersonnel = (personnelObject) => {
     //    console.log("personnel", personnelObject);
+    // {
+    //   "barberId": "1",
+    //   "staffId": "4",
+    //   "day": "Friday",
+    //   "startHour": "09:00",
+    //   "endHour": "21:30"
+    // }
+
     setIsLoading(true);
     Agent.Staffs.addStaffs()
       .send(personnelObject)
       .then((res) => {
         if (res.ok) {
-          setIsLoading(false);
           const newPersonnels = personnels;
           newPersonnels.push(res.body);
           setPersonnels(newPersonnels);
+          console.log("staffId", res.body);
+          const staffId = res.body.id;
+          barberWorkTimes.map((time, index) => {
+            addWorkHours(time, staffId);
+          });
         }
       });
+  };
+
+  const addWorkHours = (time, staffId) => {
+    console.log("geldi");
+
+    Agent.WorkHours.addWorkHours()
+      .send({
+        barberId: barberId,
+        staffId: staffId,
+        day: time.day,
+        startHour: time.startHour,
+        endHour: time.endHour,
+      })
+      .then((res) => {
+        if (res.ok) {
+          setIsLoading(false);
+          console.log("dönen saaat", res.body);
+        }
+      });
+  };
+  const _getBarberWorkTimes = (barberId) => {
+    Agent.Barbers.getBarberWorkTimes(barberId).then((res) => {
+      if (res.ok) {
+        console.log(res.body);
+        setBarberWorkTimes(res.body);
+        // _getStaffWorkHours();
+      }
+    });
   };
 
   useEffect(() => {});
 
   useEffect(() => {
     const barber = Storage.GetItem("barber");
+
     if (!barber) {
       return <Redirect to="/login" />;
+    } else {
+      setBarberId(barber.id);
+      _getPersonnel(barber.id);
+      _getBarberWorkTimes(barber.id);
     }
-    _getPersonnel(barber.id);
   }, []);
 
   return !signed ? (

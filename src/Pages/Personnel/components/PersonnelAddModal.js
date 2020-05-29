@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Storage } from "../../../Utils/importFiles";
+import { WorkingHoursPersonnel } from "../../../Components/WorkingHoursPersonnel";
 import {
   Button,
   Dialog,
@@ -55,6 +56,7 @@ export const PersonnelAddAndEdit = ({
   email,
   phoneNo,
   openWorkingHours,
+  forPersonnelSettings,
 }) => {
   const classes = useStyles();
   const [personnelWorkingHours, setPersonnelWorkingHours] = useState(false);
@@ -261,33 +263,35 @@ export const PersonnelAddAndEdit = ({
             </TextField>
           </div>
 
-          <ExpansionPanel
-            expanded={openWorkingHours}
-            onChange={() => setOpenWorkingHours(!openWorkingHours)}
-            style={{ width: "100%", margin: "2em 0px" }}
-          >
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1bh-content"
-              id="panel1bh-header"
+          {forPersonnelSettings && (
+            <ExpansionPanel
+              expanded={openWorkingHours}
+              onChange={() => setOpenWorkingHours(!openWorkingHours)}
+              style={{ width: "100%", margin: "2em 0px" }}
             >
-              <Typography className={classes.heading}>
-                + Çalışma Saatleri
-              </Typography>
-              <Typography className={classes.secondaryHeading}>
-                Tıklayın ve çalışma saatlerini düzenleyin
-              </Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <div style={{ width: "100%" }}>
-                {personnelWorkingHours && (
-                  <WorkingHours
-                    workingHours={personnelWorkingHours}
-                  ></WorkingHours>
-                )}
-              </div>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+              >
+                <Typography className={classes.heading}>
+                  + Çalışma Saatleri
+                </Typography>
+                <Typography className={classes.secondaryHeading}>
+                  Tıklayın ve çalışma saatlerini düzenleyin
+                </Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <div style={{ width: "100%" }}>
+                  {personnelWorkingHours && (
+                    <WorkingHoursPersonnel
+                      workingHours={personnelWorkingHours}
+                    ></WorkingHoursPersonnel>
+                  )}
+                </div>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+          )}
         </form>
       </Grid>
     </Grid>

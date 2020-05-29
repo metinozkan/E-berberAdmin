@@ -112,6 +112,7 @@ export const PersonnelTable = ({ personnelsForTable, _updatePersonnel }) => {
       <PersonnelSettingsModal
         selectedPersonnel={personnel}
         _updatePersonnel={_updatePersonnel}
+        forPersonnelSettings={true}
       />
     )
   );
