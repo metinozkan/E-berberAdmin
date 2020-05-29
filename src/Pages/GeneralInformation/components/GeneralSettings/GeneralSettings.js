@@ -10,7 +10,7 @@ import {
   Button,
   MenuItem,
 } from "@material-ui/core";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+import { FiUpload, FiImage } from "react-icons/fi";
 import { makeStyles } from "@material-ui/core/styles";
 import { InvoiceContainer } from "./InvoiceContainer";
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +40,14 @@ export const ContainerGeneral = styled.div`
   background: white;
   border-radius: 5px;
 `;
-
+const InputHidden = styled.input`
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+`;
 export const GeneralSettings = ({ _updateGeneralSettings, barber }) => {
   const classes = useStyles();
   const [barberName, setBarberName] = useState(barber.barberName);
@@ -55,6 +62,9 @@ export const GeneralSettings = ({ _updateGeneralSettings, barber }) => {
   const [taxNo, setTaxNo] = useState("");
   const [taxOffice, setTaxOffice] = useState("");
   const [taxAddress, setTaxAddress] = useState("");
+
+  const [image, setImage] = useState();
+  const [imagePreviewUrl, setImagePreviewUrl] = useState();
   const TaxObject = {
     taxName: taxName,
     taxNo: taxNo,
@@ -99,6 +109,94 @@ export const GeneralSettings = ({ _updateGeneralSettings, barber }) => {
             autoComplete="off"
             style={{}}
           >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                marginBottom: ".5em",
+                width: "100%",
+              }}
+            >
+              {imagePreviewUrl ? (
+                <img
+                  src={imagePreviewUrl}
+                  style={{
+                    width: "120px",
+                    height: "120px",
+                    marginRight: ".5em",
+                  }}
+                ></img>
+              ) : (
+                <div
+                  style={{
+                    border: "1px solid gray",
+                    borderRadius: "5px",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "120px",
+                    height: "120px",
+                    marginRight: ".5em",
+                  }}
+                >
+                  <FiImage size={25} />
+                </div>
+              )}
+              <label
+                htmlFor="file"
+                style={{
+                  border: "none",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  margin: ".2em",
+                  cursor: "pointer",
+                  width: "100%",
+                }}
+              >
+                <InputHidden
+                  style={{ width: "100%", heigth: "100%" }}
+                  type="file"
+                  name="file"
+                  id="file"
+                  accept="image/x-png,image/jpeg,image/jpg"
+                  onChange={(event) => {
+                    setImage(event.target.files[0]);
+                    let reader = new FileReader();
+                    reader.onloadend = () => {
+                      setImagePreviewUrl(reader.result);
+                    };
+                    reader.readAsDataURL(event.target.files[0]);
+                  }}
+                ></InputHidden>
+
+                <span
+                  style={{
+                    border: "1px solid rgb(196, 196, 196)",
+                    borderRadius: "5px",
+                    width: "100%",
+                    padding: ".5em 1em",
+                    fontSize: "16px",
+                    whiteSpace: "nowrap",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    aligItems: "center",
+                  }}
+                >
+                  Dükkan Resmi Yükle{" "}
+                  <FiUpload
+                    size={15}
+                    style={{ marginLeft: ".5em", color: "#0277bd" }}
+                  />
+                </span>
+              </label>
+            </div>
+
             <TextField
               id="outlined-full-width"
               label="İşletme adı"
@@ -186,6 +284,7 @@ export const GeneralSettings = ({ _updateGeneralSettings, barber }) => {
                 </MenuItem>
               ))}
             </TextField>
+
             <InvoiceContainer
               setTaxObjet={setTaxObjet}
               taxObject={taxObject}
