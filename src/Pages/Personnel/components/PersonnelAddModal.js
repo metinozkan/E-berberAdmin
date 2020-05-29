@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Storage } from "../../../Utils/importFiles";
+import { Storage, Agent } from "../../../Utils/importFiles";
 import { WorkingHoursPersonnel } from "../../../Components/WorkingHoursPersonnel";
 import {
   Button,
@@ -57,70 +57,34 @@ export const PersonnelAddAndEdit = ({
   phoneNo,
   openWorkingHours,
   forPersonnelSettings,
+  selectedPersonnel,
 }) => {
   const classes = useStyles();
   const [personnelWorkingHours, setPersonnelWorkingHours] = useState(false);
+
   const _getWorkingHours = () => {
-    // Agent.WorkHours.
-    const WorkHours = [
-      {
-        id: 8,
-        barberId: 13,
-        staffId: 5,
-        day: "Pazar",
-        startHour: "08:00",
-        endHour: "22:30",
-      },
-      {
-        id: 1,
-        barberId: 13,
-        staffId: 1,
-        day: "Pazartesi",
-        startHour: "08:30",
-        endHour: "22:30",
-      },
-      {
-        id: 2,
-        barberId: 13,
-        staffId: 1,
-        day: "Salı",
-        startHour: "08:30",
-        endHour: "22:30",
-      },
-      {
-        id: 3,
-        barberId: 13,
-        staffId: 1,
-        day: "Çarşamba",
-        startHour: "08:30",
-        endHour: "22:30",
-      },
-      {
-        id: 4,
-        barberId: 13,
-        staffId: 1,
-        day: "Perşembe",
-        startHour: "08:30",
-        endHour: "22:30",
-      },
-      {
-        id: 6,
-        barberId: 13,
-        staffId: 1,
-        day: "Cuma",
-        startHour: "08:30",
-        endHour: "22:30",
-      },
-      {
-        id: 7,
-        barberId: 13,
-        staffId: 1,
-        day: "Cumartesi",
-        startHour: "08:30",
-        endHour: "22:30",
-      },
-    ];
-    setPersonnelWorkingHours(WorkHours);
+    if (selectedPersonnel) {
+      Agent.WorkHours.getStaffWorkHours(selectedPersonnel.id).then((res) => {
+        if (res.ok) {
+          console.log("ekra", res.body);
+          setPersonnelWorkingHours(res.body);
+        }
+      });
+    }
+  };
+
+  const _updateWorkHours = (workingHoursObject) => {
+    console.log("aupdetawokrHOURS", {
+      ...workingHoursObject,
+      staffId: selectedPersonnel.id,
+    });
+    // Agent.WorkHours.updateWorkHours()
+    //   .send({ ...workingHoursObject, staffId: selectedPersonnel.id })
+    //   .then((res) => {
+    //     if (res.ok) {
+    //       console.log("geliyormu update WorksHours", res.body);
+    //     }
+    //   });
   };
   useEffect(() => {
     _getWorkingHours();
@@ -286,6 +250,7 @@ export const PersonnelAddAndEdit = ({
                   {personnelWorkingHours && (
                     <WorkingHoursPersonnel
                       workingHours={personnelWorkingHours}
+                      _updateWorkHours={_updateWorkHours}
                     ></WorkingHoursPersonnel>
                   )}
                 </div>

@@ -168,7 +168,6 @@ const WorkingHoursRow = ({ title, day, _updateWorkHours }) => {
                 endHour: value.endHour,
                 isOpen: value.isOpen,
               };
-              console.log("update giden", workTimesObj);
               _updateWorkHours(workTimesObj);
             }
           } else {

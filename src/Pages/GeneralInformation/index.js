@@ -99,8 +99,6 @@ const GeneralInformation = ({ signed }) => {
     //setworkTimes(WorkHours);
   };
   const _updateWorkTimes = (workHoursObj) => {
-    console.log("workTiems", workHoursObj);
-
     Agent.Barbers.updateBarberWorkTimes(workHoursObj.id)
       .send(workHoursObj)
       .then((res) => {

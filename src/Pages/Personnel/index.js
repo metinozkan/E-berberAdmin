@@ -47,15 +47,6 @@ const Personnel = ({ signed }) => {
   };
 
   const _addPersonnel = (personnelObject) => {
-    //    console.log("personnel", personnelObject);
-    // {
-    //   "barberId": "1",
-    //   "staffId": "4",
-    //   "day": "Friday",
-    //   "startHour": "09:00",
-    //   "endHour": "21:30"
-    // }
-
     setIsLoading(true);
     Agent.Staffs.addStaffs()
       .send(personnelObject)
@@ -64,18 +55,16 @@ const Personnel = ({ signed }) => {
           const newPersonnels = personnels;
           newPersonnels.push(res.body);
           setPersonnels(newPersonnels);
-          console.log("staffId", res.body);
           const staffId = res.body.id;
-          barberWorkTimes.map((time, index) => {
-            addWorkHours(time, staffId);
-          });
+          setIsLoading(false);
+          // barberWorkTimes.map((time, index) => {
+          //   addWorkHours(time, staffId);
+          // });
         }
       });
   };
 
   const addWorkHours = (time, staffId) => {
-    console.log("geldi");
-
     Agent.WorkHours.addWorkHours()
       .send({
         barberId: barberId,
@@ -87,14 +76,12 @@ const Personnel = ({ signed }) => {
       .then((res) => {
         if (res.ok) {
           setIsLoading(false);
-          console.log("dönen saaat", res.body);
         }
       });
   };
   const _getBarberWorkTimes = (barberId) => {
     Agent.Barbers.getBarberWorkTimes(barberId).then((res) => {
       if (res.ok) {
-        console.log(res.body);
         setBarberWorkTimes(res.body);
         // _getStaffWorkHours();
       }

@@ -93,7 +93,6 @@ export const PersonnelSettingsModal = ({
   };
 
   useEffect(() => {});
-
   return (
     <div>
       <Button

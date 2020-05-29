@@ -90,18 +90,6 @@ export const PersonnelTable = ({ personnelsForTable, _updatePersonnel }) => {
   const classes = useStyles();
 
   const [personnels, setPersonnels] = useState([]);
-  // const rows = personnels.map((personnel) =>
-  //   createData(
-  //     personnel.staffName,
-  //     " personnel.phoneNumber",
-  //     "personnel.workerType",
-  //     " personnel.workerColor",
-  //     <PersonnelSettingsModal
-  //       selectedPersonnel={personnel}
-  //       _updatePersonnel={_updatePersonnel}
-  //     />
-  //   )
-  // );
 
   const rows = personnels.map((personnel) =>
     createData(
