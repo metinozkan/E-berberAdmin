@@ -20,6 +20,11 @@ const Barbers = {
   addBarbers: () => requests.post("/barbers/add"),
   updateBarbers: (barberId) => requests.put(`/barbers/edit/${barberId}`),
   getBarber: (barberId) => requests.get(`/barbers/${barberId}`),
+
+  getBarberWorkTimes: (barberId) =>
+    requests.get(`/barbers/workTimes/${barberId}`),
+  updateBarberWorkTimes: (workTimeId) =>
+    requests.get(`/barbers/update/workTimes/${workTimeId}`),
 };
 
 const Login = {

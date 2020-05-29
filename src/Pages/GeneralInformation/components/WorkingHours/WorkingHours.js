@@ -53,9 +53,9 @@ const useStyles = makeStyles((theme) => ({
 const WorkingHoursRow = ({ title, day, _updateWorkHours }) => {
   const [editing, setEditing] = useState(false);
   const [value, setValue] = useState({
-    isOpen: true,
+    isOpen: day.isOpen,
     startHour: day.startHour,
-    closeHour: day.endHour,
+    endHour: day.endHour,
   });
   return (
     <ContainerRow>
@@ -76,7 +76,7 @@ const WorkingHoursRow = ({ title, day, _updateWorkHours }) => {
             {title}
           </span>
           <div style={{ flex: 1.5, paddingLeft: "14px" }}>
-            {value.isOpen ? "Açık" : "Kapalı"}
+            {value.isOpen == "true" ? "Açık" : "Kapalı"}
           </div>
           <div style={{ flex: 1, paddingLeft: "14px" }}>{value.startHour}</div>
           <div style={{ flex: 1, paddingLeft: "14px" }}> {value.endHour}</div>
@@ -104,8 +104,8 @@ const WorkingHoursRow = ({ title, day, _updateWorkHours }) => {
               setValue({ ...value, isOpen: e.target.value });
             }}
           >
-            <MenuItem value={true}>Açık</MenuItem>
-            <MenuItem value={false}>Kapalı</MenuItem>
+            <MenuItem value={"true"}>Açık</MenuItem>
+            <MenuItem value={"false"}>Kapalı</MenuItem>
           </TextField>
           <TextField
             id="outlined-full-width"
@@ -160,7 +160,16 @@ const WorkingHoursRow = ({ title, day, _updateWorkHours }) => {
           if (editing) {
             setEditing(false);
             if (_updateWorkHours) {
-              _updateWorkHours({ ...day, ...value });
+              const workTimesObj = {
+                id: day.id,
+                barberId: day.barberId,
+                day: day.day,
+                startHour: value.startHour,
+                endHour: value.endHour,
+                isOpen: value.isOpen,
+              };
+              console.log("update giden", workTimesObj);
+              _updateWorkHours(workTimesObj);
             }
           } else {
             setEditing(true);
@@ -290,15 +299,19 @@ export const WorkingHours = ({
           <div style={{ width: "100%", height: "100%" }}>
             {/* <WorkingHoursComp></WorkingHoursComp> */}
 
-            {workingHours.map((day) => (
-              <WorkingHoursRow
-                title={day.day}
-                day={day}
-                // value={sunday}
-                // setValue={setSunday}
-                _updateWorkHours={_updateWorkHours}
-              ></WorkingHoursRow>
-            ))}
+            {workingHours
+              .sort(function (a, b) {
+                return a.id - b.id;
+              })
+              .map((day) => (
+                <WorkingHoursRow
+                  title={day.day}
+                  day={day}
+                  // value={sunday}
+                  // setValue={setSunday}
+                  _updateWorkHours={_updateWorkHours}
+                ></WorkingHoursRow>
+              ))}
             {/* <Button
               variant="contained"
               color="primary"

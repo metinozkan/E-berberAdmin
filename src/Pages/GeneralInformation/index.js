@@ -11,7 +11,7 @@ import { Agent, Storage } from "../../Utils/importFiles";
 
 const GeneralInformation = ({ signed }) => {
   const [barber, setBarber] = useState(null);
-  const [workingHours, setWorkingHours] = useState(false);
+  const [workTimes, setworkTimes] = useState(false);
   const _getBarber = (barberId) => {
     Agent.Barbers.getBarber(barberId).then((res) => {
       if (res.ok) {
@@ -30,10 +30,11 @@ const GeneralInformation = ({ signed }) => {
       });
   };
 
-  const _getWorkingHours = (barberId) => {
-    Agent.WorkHours.getWorkHoursBarber(barberId).then((res) => {
+  const _getWorkTimes = (barberId) => {
+    Agent.Barbers.getBarberWorkTimes(barberId).then((res) => {
       if (res.ok) {
-        setWorkingHours(res.body);
+        //console.log("workTimes", res.body);
+        setworkTimes(res.body);
       }
     });
 
@@ -95,14 +96,31 @@ const GeneralInformation = ({ signed }) => {
     //     endHour: "22:30",
     //   },
     // ];
-    //setWorkingHours(WorkHours);
+    //setworkTimes(WorkHours);
   };
-  const _updateWorkHours = (workHoursObj) => {
-    // Agent.WorkHours.updateWorkHours()
+  const _updateWorkTimes = (workHoursObj) => {
+    console.log("workTiems", workHoursObj);
+
+    Agent.Barbers.updateBarberWorkTimes(workHoursObj.id)
+      .send(workHoursObj)
+      .then((res) => {
+        if (res.ok) {
+          console.log(res.body);
+        }
+      });
+    // Agent.Barbers.updateBarberWorkTimes(workHoursObj.id)
     //   .send(workHoursObj)
     //   .then((res) => {
     //     if (res.ok) {
-    //       console.log("updateWorkhours", res.body);
+    //       console.log("update", res.body);
+    //       const newWorkTimes = [];
+    //       workTimes.map((workT) =>
+    //         workT != res.body.id
+    //           ? newWorkTimes.push(workT)
+    //           : newWorkTimes.push(res.body)
+    //       );
+    //       console.log("new", newWorkTimes);
+    //       setworkTimes(newWorkTimes);
     //     }
     //   });
   };
@@ -113,7 +131,7 @@ const GeneralInformation = ({ signed }) => {
       return <Redirect to="/login" />;
     }
     _getBarber(barberStorage.id);
-    _getWorkingHours(barberStorage.id);
+    _getWorkTimes(barberStorage.id);
   }, []);
 
   return !signed ? (
@@ -135,11 +153,11 @@ const GeneralInformation = ({ signed }) => {
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            {workingHours && (
+            {workTimes && (
               <WorkingHours
-                workingHours={workingHours}
+                workingHours={workTimes}
                 fromGeneralInformation={true}
-                _updateWorkHours={_updateWorkHours}
+                _updateWorkHours={_updateWorkTimes}
               ></WorkingHours>
             )}
           </Grid>
