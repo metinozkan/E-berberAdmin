@@ -167,8 +167,7 @@ const WorkingHoursRow = ({ title, day, _updateWorkHours }) => {
               };
               _updateWorkHours(workTimesObj);
               console.log("woktteim", workTimesObj);
-
-              // setEditing(false);
+              setEditing(false);
             }}
           >
             <MdDone size={25} color="green">

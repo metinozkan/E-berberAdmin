@@ -11,6 +11,8 @@ export const Loading = ({ type, animateExit, fromSpeaker, emptyPage }) => {
   return (
     <div
       style={{
+        width: "100vw",
+        height: "100vh",
         position: "absolute",
         left: "50%",
         top: "50%",

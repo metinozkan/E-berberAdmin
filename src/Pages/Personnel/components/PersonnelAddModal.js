@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Storage, Agent } from "../../../Utils/importFiles";
+import { Storage, Agent, Loading } from "../../../Utils/importFiles";
 import { WorkingHoursPersonnel } from "../../../Components/WorkingHoursPersonnel";
 import {
   Button,
@@ -61,7 +61,7 @@ export const PersonnelAddAndEdit = ({
 }) => {
   const classes = useStyles();
   const [personnelWorkingHours, setPersonnelWorkingHours] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
   const _getWorkingHours = () => {
     if (selectedPersonnel) {
       Agent.WorkHours.getStaffWorkHours(selectedPersonnel.id).then((res) => {
@@ -78,20 +78,24 @@ export const PersonnelAddAndEdit = ({
       ...workingHoursObject,
       staffId: selectedPersonnel.id,
     });
-    // Agent.WorkHours.updateWorkHours()
-    //   .send({ ...workingHoursObject, staffId: selectedPersonnel.id })
-    //   .then((res) => {
-    //     if (res.ok) {
-    //       console.log("geliyormu update WorksHours", res.body);
-    //     }
-    //   });
+    setIsLoading(true);
+    Agent.WorkHours.updateWorkHours()
+      .send({ ...workingHoursObject, staffId: selectedPersonnel.id })
+      .then((res) => {
+        if (res.ok) {
+          setIsLoading(false);
+          console.log("geliyormu update WorksHours", res.body);
+        }
+      });
   };
   useEffect(() => {
+    console.log("kac kere calısıyon");
     _getWorkingHours();
   }, []);
 
   return (
     <Grid container direction="column" justify="flex-start">
+      {isLoading && <Loading />}
       <Grid item xs={12}>
         <form className={classes.root} noValidate autoComplete="off" style={{}}>
           <TextField
