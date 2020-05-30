@@ -32,7 +32,7 @@ const GeneralInformation = ({ signed }) => {
   const _updateGeneralSettings = (barberObject) => {
     setIsLoadingUpdate(true);
     Agent.Barbers.updateBarbers(barber.id)
-      .send(barberObject)
+      .send({ ...barberObject, password: barber.password })
       .then((res) => {
         if (res.ok) {
           if (!res.body.Error) {
@@ -61,6 +61,7 @@ const GeneralInformation = ({ signed }) => {
     });
   };
   const _updateWorkTimes = (workHoursObj) => {
+    console.log("giden workTime", workHoursObj);
     Agent.Barbers.updateBarberWorkTimes(workHoursObj.id)
       .send(workHoursObj)
       .then((res) => {
@@ -72,21 +73,6 @@ const GeneralInformation = ({ signed }) => {
           }
         }
       });
-    // Agent.Barbers.updateBarberWorkTimes(workHoursObj.id)
-    //   .send(workHoursObj)
-    //   .then((res) => {
-    //     if (res.ok) {
-    //       console.log("update", res.body);
-    //       const newWorkTimes = [];
-    //       workTimes.map((workT) =>
-    //         workT != res.body.id
-    //           ? newWorkTimes.push(workT)
-    //           : newWorkTimes.push(res.body)
-    //       );
-    //       console.log("new", newWorkTimes);
-    //       setworkTimes(newWorkTimes);
-    //     }
-    //   });
   };
 
   const _updateImage = (image) => {

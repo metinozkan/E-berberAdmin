@@ -31,6 +31,7 @@ const Personnel = ({ signed }) => {
   };
 
   const _updatePersonnel = (personnelObject) => {
+    console.log("giden obje", personnelObject);
     Agent.Staffs.updateStaff(personnelObject.staffId)
       .send(personnelObject)
       .then((res) => {

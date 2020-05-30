@@ -64,6 +64,7 @@ const Services = ({ signed }) => {
       .send({ ...serviceObject, barberId: barberId, id: serviceId })
       .then((res) => {
         if (res.ok) {
+          console.log("res", res.body);
           if (!res.body.Error) {
             setRequestLoading(false);
 
@@ -76,7 +77,7 @@ const Services = ({ signed }) => {
             );
             setServices(newServices);
           } else {
-            console.log("bir sorun olustu".res.body.Message);
+            console.log("bir sorun olustu");
           }
         }
       });
