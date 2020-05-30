@@ -48,7 +48,11 @@ const InputHidden = styled.input`
   position: absolute;
   z-index: -1;
 `;
-export const GeneralSettings = ({ _updateGeneralSettings, barber }) => {
+export const GeneralSettings = ({
+  _updateGeneralSettings,
+  barber,
+  _updateImage,
+}) => {
   const classes = useStyles();
   const [barberName, setBarberName] = useState(barber.barberName);
   const [address, setAddress] = useState(barber.adress);
@@ -305,6 +309,7 @@ export const GeneralSettings = ({ _updateGeneralSettings, barber }) => {
               fullWidth
               onClick={() => {
                 _updateGeneralSettings(barberObject);
+                _updateImage(image);
 
                 console.log("gidenobje", barberObject);
               }}

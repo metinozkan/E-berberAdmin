@@ -60,7 +60,7 @@ export const EditModal = (props) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Disagree
+            İptal
           </Button>
           <Button
             onClick={() => {
@@ -71,7 +71,7 @@ export const EditModal = (props) => {
             }}
             color="primary"
           >
-            Agree
+            Tamam
           </Button>
         </DialogActions>
       </Dialog>

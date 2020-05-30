@@ -10,7 +10,7 @@ import PeopleAlt from "@material-ui/icons/PeopleAlt";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-
+import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 import { Link } from "react-router-dom";
 
 const LinkContainer = ({ icon, path, title }) => {
@@ -58,7 +58,7 @@ export const mainListItems = (
       title="Hizmetler"
     />
 
-    <LinkContainer
+    {/* <LinkContainer
       icon={<QueryBuilderIcon color="primary" />}
       path="/durations"
       title="Hizmet Süreleri"
@@ -67,19 +67,18 @@ export const mainListItems = (
       icon={<AttachMoneyIcon color="primary" />}
       path="/prices"
       title="Hizmet Fiyatları"
-    />
+    /> */}
   </div>
 );
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Randevuler Muhabbeti</ListSubheader>
     <LinkContainer
-      icon={<AssignmentIcon color="primary" />}
+      icon={<EventAvailableIcon color="primary" />}
       path="/calendar"
       title="Takvim"
     />
-    <LinkContainer
+    {/* <LinkContainer
       icon={<AssignmentIcon color="primary" />}
       path="/basic-calendar"
       title="BasicTakvim"
@@ -106,6 +105,6 @@ export const secondaryListItems = (
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Year-end sale" />
-    </ListItem>
+    </ListItem> */}
   </div>
 );

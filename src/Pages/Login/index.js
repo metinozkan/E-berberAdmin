@@ -133,6 +133,7 @@ const Login = ({ signed, setSigned }) => {
                     setIsLoading(false);
                   } else {
                     console.log("hata");
+                    setIsLoading(false);
                   }
                 });
 

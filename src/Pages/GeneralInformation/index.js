@@ -44,66 +44,6 @@ const GeneralInformation = ({ signed }) => {
         setworkTimes(res.body);
       }
     });
-
-    // const WorkHours = [
-    //   {
-    //     id: 8,
-    //     barberId: 13,
-    //     staffId: 5,
-    //     day: "Pazar",
-    //     startHour: "08:00",
-    //     endHour: "22:30",
-    //   },
-    //   {
-    //     id: 1,
-    //     barberId: 13,
-    //     staffId: 1,
-    //     day: "Pazartesi",
-    //     startHour: "08:30",
-    //     endHour: "22:30",
-    //   },
-    //   {
-    //     id: 2,
-    //     barberId: 13,
-    //     staffId: 1,
-    //     day: "Salı",
-    //     startHour: "08:30",
-    //     endHour: "22:30",
-    //   },
-    //   {
-    //     id: 3,
-    //     barberId: 13,
-    //     staffId: 1,
-    //     day: "Çarşamba",
-    //     startHour: "08:30",
-    //     endHour: "22:30",
-    //   },
-    //   {
-    //     id: 4,
-    //     barberId: 13,
-    //     staffId: 1,
-    //     day: "Perşembe",
-    //     startHour: "08:30",
-    //     endHour: "22:30",
-    //   },
-    //   {
-    //     id: 6,
-    //     barberId: 13,
-    //     staffId: 1,
-    //     day: "Cuma",
-    //     startHour: "08:30",
-    //     endHour: "22:30",
-    //   },
-    //   {
-    //     id: 7,
-    //     barberId: 13,
-    //     staffId: 1,
-    //     day: "Cumartesi",
-    //     startHour: "08:30",
-    //     endHour: "22:30",
-    //   },
-    // ];
-    //setworkTimes(WorkHours);
   };
   const _updateWorkTimes = (workHoursObj) => {
     Agent.Barbers.updateBarberWorkTimes(workHoursObj.id)
@@ -128,6 +68,22 @@ const GeneralInformation = ({ signed }) => {
     //       setworkTimes(newWorkTimes);
     //     }
     //   });
+  };
+
+  const _updateImage = (image) => {
+    let formData = new FormData();
+    formData.append("file", image);
+    console.log(image);
+
+    if (image) {
+      Agent.Barbers.uploadImage(barber.id)
+        .send(formData)
+        .then((res) => {
+          if (res.ok) {
+            console.log(res.body);
+          }
+        });
+    }
   };
 
   useEffect(() => {
@@ -155,6 +111,7 @@ const GeneralInformation = ({ signed }) => {
           <Grid item xs={12} md={6}>
             <GeneralSettings
               _updateGeneralSettings={_updateGeneralSettings}
+              _updateImage={_updateImage}
               barber={barber}
             />
           </Grid>

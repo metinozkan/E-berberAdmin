@@ -25,6 +25,8 @@ const Barbers = {
     requests.get(`/barbers/workTimes/${barberId}`),
   updateBarberWorkTimes: (workTimeId) =>
     requests.get(`/barbers/update/workTimes/${workTimeId}`),
+
+  uploadImage: (barberId) => requests.post(`/storage/uploadFile/${barberId}`),
 };
 
 const Login = {

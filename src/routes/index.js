@@ -32,14 +32,14 @@ export default function Routes() {
       <Route path="/home" exact component={Home} />
       <Route path="/personnel" exact component={Personnel} />
       <Route path="/services" exact component={Services} />
-      <Route path="/durations" exact component={ServiceDuration} />
-      <Route path="/prices" exact component={ServicePrices} />
+      {/* <Route path="/durations" exact component={ServiceDuration} />
+      <Route path="/prices" exact component={ServicePrices} /> */}
       <Route path="/general-information" exact component={GeneralInformation} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={SignUp} />
       <Route path="/calendar" exact component={Calendar} />
-      <Route path="/basic-calendar" exact component={BasicCalendar} />
-      <Route path="/resource-calendar" exact component={ResourceCalendar} />
+      {/* <Route path="/basic-calendar" exact component={BasicCalendar} />
+      <Route path="/resource-calendar" exact component={ResourceCalendar} /> */}
 
       {/* redirect user to SignIn page if route does not exist and user is not authenticated */}
       <Route component={Login} />
