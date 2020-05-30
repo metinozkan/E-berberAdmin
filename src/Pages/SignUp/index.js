@@ -143,10 +143,15 @@ const SignUp = ({ signed, setSigned }) => {
                 })
                 .then((res) => {
                   if (res.ok) {
-                    Storage.SetItem("barber", res.body);
-                    history.push("/");
-                    setIsLoading(false);
-                    setSigned(true);
+                    if (!res.body.Error) {
+                      console.log("gelendaya", res.body.data);
+                      Storage.SetItem("barber", res.body.data);
+                      history.push("/");
+                      setIsLoading(false);
+                      setSigned(true);
+                    } else {
+                      console.log("Hata", res.body.Message);
+                    }
                   }
                 });
             }}

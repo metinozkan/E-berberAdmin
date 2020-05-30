@@ -18,8 +18,13 @@ const GeneralInformation = ({ signed }) => {
   const _getBarber = (barberId) => {
     Agent.Barbers.getBarber(barberId).then((res) => {
       if (res.ok) {
-        setBarber(res.body);
-        setIsLoading(false);
+        if (!res.body.Error) {
+          setBarber(res.body.data);
+          setIsLoading(false);
+          console.log("berber", res.body.data);
+        } else {
+          console.log("hata", res.body.Message);
+        }
       }
     });
   };
@@ -30,9 +35,13 @@ const GeneralInformation = ({ signed }) => {
       .send(barberObject)
       .then((res) => {
         if (res.ok) {
-          setIsLoadingUpdate(false);
+          if (!res.body.Error) {
+            setIsLoadingUpdate(false);
 
-          console.log("update", res.body);
+            console.log("update", res.body.data);
+          } else {
+            console.log(res.body.Message);
+          }
         }
       });
   };
@@ -40,8 +49,14 @@ const GeneralInformation = ({ signed }) => {
   const _getWorkTimes = (barberId) => {
     Agent.Barbers.getBarberWorkTimes(barberId).then((res) => {
       if (res.ok) {
+        if (!res.body.Error) {
+          setworkTimes(res.body.data);
+          console.log("barberWokrtime", res.body.data);
+        }
         //console.log("workTimes", res.body);
-        setworkTimes(res.body);
+        else {
+          console.log("hata", res.body.Message);
+        }
       }
     });
   };
@@ -50,7 +65,11 @@ const GeneralInformation = ({ signed }) => {
       .send(workHoursObj)
       .then((res) => {
         if (res.ok) {
-          console.log(res.body);
+          if (!res.body.Error) {
+            console.log(res.body.data);
+          } else {
+            console.log("hata", res.body.Message);
+          }
         }
       });
     // Agent.Barbers.updateBarberWorkTimes(workHoursObj.id)
@@ -80,7 +99,15 @@ const GeneralInformation = ({ signed }) => {
         .send(formData)
         .then((res) => {
           if (res.ok) {
-            console.log(res.body);
+            if (!res.body.Error) {
+              console.log(res.body.data);
+              const newBarber = { ...barber, photo: res.body.data };
+              setBarber(newBarber);
+              console.log(newBarber);
+              _updateGeneralSettings(newBarber);
+            } else {
+              console.log("hata", res.body.Message);
+            }
           }
         });
     }

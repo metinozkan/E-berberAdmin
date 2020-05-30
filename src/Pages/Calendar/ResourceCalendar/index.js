@@ -93,9 +93,13 @@ export const ResourceCalendar = (props) => {
       .send({ barberId: barberStorage.id })
       .then((res) => {
         if (res.ok) {
-          setBarberMontlyAppointments(res.body);
-          //_getServices(res.body);
-          _getPersonnels(res.body);
+          if (!res.body.Error) {
+            setBarberMontlyAppointments(res.body.data);
+            //_getServices(res.body);
+            _getPersonnels(res.body.data);
+          } else {
+            console.log("hata", res.body.Message);
+          }
         }
       });
   };
@@ -123,30 +127,36 @@ export const ResourceCalendar = (props) => {
     if (barberAppointments && newPersonnels) {
       Agent.ServiceBarber.getServices(barberStorage.id).then((res) => {
         if (res.ok) {
-          setServices(res.body);
-          const services = res.body;
-          const newEvents = [];
+          if (!res.body.Error) {
+            setServices(res.body.data);
+            const services = res.body.data;
+            const newEvents = [];
 
-          barberAppointments.map((appointment) =>
-            newEvents.push({
-              // ...appointment,
-              customerId: appointment.customerId,
-              id: appointment.id,
-              // title: appointment.customerId,
-              start: modifyDate(appointment.appointmentDate),
-              end: modifyDate(appointment.appointmentEndDate),
-              startForModal: modifyDateForModal(appointment.appointmentDate),
-              endForModal: modifyDateForModal(appointment.appointmentEndDate),
-              resourceId: appointment.staffId,
-              personnel: newPersonnels.find((p) => p.id == appointment.staffId),
-              services: appointment.serviceId.map((ser) =>
-                services.find((service) => service.id == ser)
-              ),
-            })
-          );
-          setEvents(newEvents);
+            barberAppointments.map((appointment) =>
+              newEvents.push({
+                // ...appointment,
+                customerId: appointment.customerId,
+                id: appointment.id,
+                // title: appointment.customerId,
+                start: modifyDate(appointment.appointmentDate),
+                end: modifyDate(appointment.appointmentEndDate),
+                startForModal: modifyDateForModal(appointment.appointmentDate),
+                endForModal: modifyDateForModal(appointment.appointmentEndDate),
+                resourceId: appointment.staffId,
+                personnel: newPersonnels.find(
+                  (p) => p.id == appointment.staffId
+                ),
+                services: appointment.serviceId.map((ser) =>
+                  services.find((service) => service.id == ser)
+                ),
+              })
+            );
+            setEvents(newEvents);
 
-          setIsLoading(false);
+            setIsLoading(false);
+          }
+        } else {
+          console.log("hata", res.body.Message);
         }
       });
     }

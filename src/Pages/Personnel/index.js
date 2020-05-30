@@ -74,14 +74,22 @@ const Personnel = ({ signed }) => {
       })
       .then((res) => {
         if (res.ok) {
-          setIsLoading(false);
+          if (!res.body.Error) {
+            setIsLoading(false);
+          } else {
+            console.log("hata", res.body.Message);
+          }
         }
       });
   };
   const _getBarberWorkTimes = (barberId) => {
     Agent.Barbers.getBarberWorkTimes(barberId).then((res) => {
       if (res.ok) {
-        setBarberWorkTimes(res.body);
+        if (!res.body.Error) {
+          setBarberWorkTimes(res.body.data);
+        } else {
+          console.log("hata", res.body.Message);
+        }
         // _getStaffWorkHours();
       }
     });

@@ -121,16 +121,20 @@ const Login = ({ signed, setSigned }) => {
                 })
                 .then((res) => {
                   if (res.ok) {
-                    // console.log("login", res.body);
-                    Storage.SetItem("barber", {
-                      ...res.body,
-                      password: "****",
-                    });
-                    setSigned(true);
-                    setTimeout(() => {
-                      history.push("/general-information");
-                    }, 300);
-                    setIsLoading(false);
+                    if (!res.body.Error) {
+                      // console.log("login", res.body);
+                      Storage.SetItem("barber", {
+                        ...res.body.data,
+                        password: "****",
+                      });
+                      setSigned(true);
+                      setTimeout(() => {
+                        history.push("/general-information");
+                      }, 300);
+                      setIsLoading(false);
+                    } else {
+                      console.log("hata", res.body.Message);
+                    }
                   } else {
                     console.log("hata");
                     setIsLoading(false);

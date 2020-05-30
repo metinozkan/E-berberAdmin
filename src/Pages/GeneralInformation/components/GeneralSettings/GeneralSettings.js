@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { districts, Agent } from "../../../../Utils/importFiles";
+import { districts, Agent, Loading } from "../../../../Utils/importFiles";
 import {
   TextField,
   ExpansionPanel,
@@ -48,17 +48,15 @@ const InputHidden = styled.input`
   position: absolute;
   z-index: -1;
 `;
-export const GeneralSettings = ({
-  _updateGeneralSettings,
-  barber,
-  _updateImage,
-}) => {
+export const GeneralSettings = ({ _updateGeneralSettings, barber }) => {
   const classes = useStyles();
   const [barberName, setBarberName] = useState(barber.barberName);
   const [address, setAddress] = useState(barber.adress);
   const [email, setEmail] = useState(barber.eMail);
   const [telephoneNumber, setTelephoneNumber] = useState(barber.phoneNo);
   const [district, setDistrict] = useState(barber.district);
+  const [photo, setPhoto] = useState(barber.photo);
+
   const [taxObject, setTaxObjet] = useState();
 
   //InvoiceContaienr
@@ -69,6 +67,8 @@ export const GeneralSettings = ({
 
   const [image, setImage] = useState();
   const [imagePreviewUrl, setImagePreviewUrl] = useState();
+  const [imageLink, setImageLink] = useState();
+  const [uploadImageLoading, setUploadImageLoading] = useState(false);
   const TaxObject = {
     taxName: taxName,
     taxNo: taxNo,
@@ -86,8 +86,31 @@ export const GeneralSettings = ({
     city: "Sakarya",
   };
 
+  const _updateImage = (image) => {
+    let formData = new FormData();
+    formData.append("file", image);
+    console.log(image);
+    setUploadImageLoading(true);
+    if (image) {
+      Agent.Barbers.uploadImage(barber.id)
+        .send(formData)
+        .then((res) => {
+          if (res.ok) {
+            setUploadImageLoading(false);
+
+            if (!res.body.Error) {
+              console.log(res.body.data);
+              setImageLink(res.body.data);
+            } else {
+              console.log("hata", res.body.Message);
+            }
+          }
+        });
+    }
+  };
   return (
     <ContainerGeneral style={{}}>
+      {uploadImageLoading && <Loading />}
       <ExpansionPanel
         expanded={true}
         // onChange={"handleChange("panel1")"}
@@ -126,6 +149,15 @@ export const GeneralSettings = ({
               {imagePreviewUrl ? (
                 <img
                   src={imagePreviewUrl}
+                  style={{
+                    width: "120px",
+                    height: "120px",
+                    marginRight: ".5em",
+                  }}
+                ></img>
+              ) : photo ? (
+                <img
+                  src={photo}
                   style={{
                     width: "120px",
                     height: "120px",
@@ -171,6 +203,7 @@ export const GeneralSettings = ({
                   onChange={(event) => {
                     setImage(event.target.files[0]);
                     let reader = new FileReader();
+                    _updateImage(event.target.files[0]);
                     reader.onloadend = () => {
                       setImagePreviewUrl(reader.result);
                     };
@@ -308,8 +341,7 @@ export const GeneralSettings = ({
               disableElevation
               fullWidth
               onClick={() => {
-                _updateGeneralSettings(barberObject);
-                _updateImage(image);
+                _updateGeneralSettings({ ...barberObject, photo: imageLink });
 
                 console.log("gidenobje", barberObject);
               }}

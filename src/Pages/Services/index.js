@@ -21,25 +21,34 @@ const Services = ({ signed }) => {
   const [services, setServices] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [barberId, setBarberId] = useState();
+  const [requestLoading, setRequestLoading] = useState(false);
   const _getServices = (barberId) => {
     Agent.ServiceBarber.getServices(barberId).then((res) => {
       if (res.ok) {
-        setServices(res.body);
-        setIsLoading(false);
+        if (!res.body.Error) {
+          setServices(res.body.data);
+          setIsLoading(false);
+        } else {
+          console.log("hata", res.body.Message);
+        }
       }
     });
   };
 
   const _addService = (serviceObject) => {
-    setIsLoading(true);
+    setRequestLoading(true);
     Agent.ServiceBarber.addService()
       .send({ ...serviceObject, barberId: barberId })
       .then((res) => {
         if (res.ok) {
-          const newServices = services;
-          newServices.push(res.body);
-          setServices(newServices);
-          setIsLoading(false);
+          if (!res.body.Error) {
+            const newServices = services;
+            newServices.push(res.body.data);
+            setServices(newServices);
+            setRequestLoading(false);
+          } else {
+            console.log("hata", res.body.Message);
+          }
         }
       });
   };
@@ -50,11 +59,14 @@ const Services = ({ signed }) => {
       barberId: barberId,
       id: serviceId,
     });
+    setRequestLoading(true);
     Agent.ServiceBarber.updateService(serviceId)
       .send({ ...serviceObject, barberId: barberId, id: serviceId })
       .then((res) => {
         if (res.ok) {
-          if (!Error) {
+          if (!res.body.Error) {
+            setRequestLoading(false);
+
             console.log("update", res.body.data);
             const newServices = [];
             services.map((service) =>
@@ -64,7 +76,7 @@ const Services = ({ signed }) => {
             );
             setServices(newServices);
           } else {
-            console.log("bir sorun olustu");
+            console.log("bir sorun olustu".res.body.Message);
           }
         }
       });
@@ -105,6 +117,7 @@ const Services = ({ signed }) => {
               alignItems: "center",
             }}
           >
+            {requestLoading && <Loading />}
             <ServicesTable
               servicesForTable={services}
               _updateService={_updateService}
