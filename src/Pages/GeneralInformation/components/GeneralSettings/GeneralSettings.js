@@ -342,8 +342,6 @@ export const GeneralSettings = ({ _updateGeneralSettings, barber }) => {
               fullWidth
               onClick={() => {
                 _updateGeneralSettings({ ...barberObject, photo: imageLink });
-
-                console.log("gidenobje", barberObject);
               }}
             >
               Kaydet

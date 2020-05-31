@@ -21,6 +21,7 @@ const Personnel = ({ signed }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [barberWorkTimes, setBarberWorkTimes] = useState([]);
   const [barberId, setBarberId] = useState();
+  const [updateLoading, setUpdateLoading] = useState(false);
   const _getPersonnel = (barberId) => {
     Agent.Staffs.getStaffBarber(barberId).then((res) => {
       if (res.ok) {
@@ -31,11 +32,14 @@ const Personnel = ({ signed }) => {
   };
 
   const _updatePersonnel = (personnelObject) => {
+    setUpdateLoading(true);
     console.log("giden obje", personnelObject);
     Agent.Staffs.updateStaff(personnelObject.staffId)
       .send(personnelObject)
       .then((res) => {
         if (res.ok) {
+          setUpdateLoading(false);
+
           const newPersonnels = [];
           personnels.map((personnel) =>
             personnel.id != res.body.id
@@ -130,6 +134,7 @@ const Personnel = ({ signed }) => {
               _addPersonnel={_addPersonnel}
             ></PersonnelAddModal>
           </TopPersonnel>
+          {updateLoading && <Loading />}
           <Grid
             item
             xs={12}

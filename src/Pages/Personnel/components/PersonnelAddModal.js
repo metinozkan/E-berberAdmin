@@ -62,12 +62,34 @@ export const PersonnelAddAndEdit = ({
   const classes = useStyles();
   const [personnelWorkingHours, setPersonnelWorkingHours] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const modifyWorkingHours = (workingHours) => {
+    const newWorkingHours = workingHours.map((day) =>
+      day.day === "Monday"
+        ? { ...day, order: 1 }
+        : day.day === "Tuesday"
+        ? { ...day, order: 2 }
+        : day.day == "Wednesday"
+        ? { ...day, order: 3 }
+        : day.day == "Thursday"
+        ? { ...day, order: 4 }
+        : day.day == "Friday"
+        ? { ...day, order: 5 }
+        : day.day == "Saturday"
+        ? { ...day, order: 6 }
+        : day.day == "Sunday"
+        ? { ...day, order: 7 }
+        : "none"
+    );
+    console.log("newWork", newWorkingHours);
+    return newWorkingHours;
+  };
   const _getWorkingHours = () => {
     if (selectedPersonnel) {
       Agent.WorkHours.getStaffWorkHours(selectedPersonnel.id).then((res) => {
         if (res.ok) {
           console.log("ekra", res.body);
-          setPersonnelWorkingHours(res.body);
+          setPersonnelWorkingHours(modifyWorkingHours(res.body));
         }
       });
     }

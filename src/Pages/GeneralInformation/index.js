@@ -37,7 +37,6 @@ const GeneralInformation = ({ signed }) => {
         if (res.ok) {
           if (!res.body.Error) {
             setIsLoadingUpdate(false);
-
             console.log("update", res.body.data);
           } else {
             console.log(res.body.Message);
@@ -75,29 +74,34 @@ const GeneralInformation = ({ signed }) => {
       });
   };
 
-  const _updateImage = (image) => {
-    let formData = new FormData();
-    formData.append("file", image);
-    console.log(image);
+  // const _updateImage = (image) => {
+  //   let formData = new FormData();
+  //   formData.append("file", image);
+  //   console.log(image);
+  //   console.log("upşloadimage basladı");
 
-    if (image) {
-      Agent.Barbers.uploadImage(barber.id)
-        .send(formData)
-        .then((res) => {
-          if (res.ok) {
-            if (!res.body.Error) {
-              console.log(res.body.data);
-              const newBarber = { ...barber, photo: res.body.data };
-              setBarber(newBarber);
-              console.log(newBarber);
-              _updateGeneralSettings(newBarber);
-            } else {
-              console.log("hata", res.body.Message);
-            }
-          }
-        });
-    }
-  };
+  //   if (image) {
+  //     Agent.Barbers.uploadImage(barber.id)
+  //       .send(formData)
+  //       .then((res) => {
+  //         console.log("upşloadimage bgeldi amaı");
+
+  //         if (res.ok) {
+  //           console.log("upşloadimage", res.body);
+  //           if (!res.body.Error) {
+  //             console.log(res.body.data);
+  //             const newBarber = { ...barber, photo: res.body.data };
+  //             console.log("yeni berber datası", newBarber);
+  //             setBarber(newBarber);
+  //             console.log(newBarber);
+  //             _updateGeneralSettings(newBarber);
+  //           } else {
+  //             console.log("hata", res.body.Message);
+  //           }
+  //         }
+  //       });
+  //   }
+  // };
 
   useEffect(() => {
     const barberStorage = Storage.GetItem("barber");
@@ -124,7 +128,6 @@ const GeneralInformation = ({ signed }) => {
           <Grid item xs={12} md={6}>
             <GeneralSettings
               _updateGeneralSettings={_updateGeneralSettings}
-              _updateImage={_updateImage}
               barber={barber}
             />
           </Grid>

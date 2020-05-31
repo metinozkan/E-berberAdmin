@@ -311,15 +311,17 @@ export const WorkingHoursPersonnel = ({ workingHours, _updateWorkHours }) => {
             {/* <WorkingHoursComp></WorkingHoursComp> */}
 
             {workingHours &&
-              workingHours.map((day) => (
-                <WorkingHoursRow
-                  title={day.day}
-                  day={day}
-                  // value={sunday}
-                  // setValue={setSunday}
-                  _updateWorkHours={_updateWorkHours}
-                ></WorkingHoursRow>
-              ))}
+              workingHours
+                .sort((a, b) => a.order - b.order)
+                .map((day) => (
+                  <WorkingHoursRow
+                    title={day.day}
+                    day={day}
+                    // value={sunday}
+                    // setValue={setSunday}
+                    _updateWorkHours={_updateWorkHours}
+                  ></WorkingHoursRow>
+                ))}
 
             {/* <WorkingHoursAddRow /> */}
             {/* <Button
