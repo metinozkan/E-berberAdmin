@@ -38,8 +38,12 @@ export const SlideModal = ({
   const _getCustomers = (customerId) => {
     Agent.Customers.getCustomer(customerId).then((res) => {
       if (res.ok) {
-        setIsLoading(false);
-        setCustomer(res.body);
+        if (!res.body.Error) {
+          setIsLoading(false);
+          setCustomer(res.body.data);
+        } else {
+          console.log("hata", res.body.Message);
+        }
       }
     });
   };
