@@ -165,7 +165,7 @@ const Login = ({ signed, setSigned }) => {
             </Grid>
             <Grid item>
               <Link href="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
+                {"Henüz hesabın yok mu? Üye ol"}
               </Link>
             </Grid>
           </Grid>
