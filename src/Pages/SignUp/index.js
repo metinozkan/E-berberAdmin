@@ -12,6 +12,7 @@ import {
   Box,
   Typography,
 } from "@material-ui/core";
+import ConfirmModal from "../../Components/ConfirmModal";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
@@ -56,13 +57,20 @@ const SignUp = ({ signed, setSigned }) => {
   const [eMail, seteMail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
+  const [modalContent, setModalContent] = useState("");
   const history = useHistory();
   return signed ? (
     <Redirect to="/home" />
   ) : (
     <Container component="main" maxWidth="xs">
       {isLoading && <Loading />}
+      <ConfirmModal
+        openConfirmModal={openConfirmModal}
+        setOpenConfirmModal={setOpenConfirmModal}
+        confirmMesage={"Tamam"}
+        modalContent={modalContent}
+      />
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -150,7 +158,10 @@ const SignUp = ({ signed, setSigned }) => {
                       setIsLoading(false);
                       setSigned(true);
                     } else {
-                      console.log("Hata", res.body.Message);
+                      setOpenConfirmModal(true);
+                      setIsLoading(false);
+                      setModalContent(res.body.Message);
+                      console.log("hata", res.body.Message);
                     }
                   }
                 });
