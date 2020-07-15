@@ -10,16 +10,16 @@ import { Loading } from "../../Components/Loading";
 import { Agent, Storage } from "../../Utils/importFiles";
 
 const GeneralInformation = ({ signed }) => {
-  const [barber, setBarber] = useState(null);
-  const [workTimes, setworkTimes] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [barber, setBarber] = useState(null);
+  //  const [workTimes, setworkTimes] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isLoadingUpdate, setIsLoadingUpdate] = useState(false);
 
   const _getBarber = (barberId) => {
     Agent.Barbers.getBarber(barberId).then((res) => {
       if (res.ok) {
         if (!res.body.Error) {
-          setBarber(res.body.data);
+          // setBarber(res.body.data);
           setIsLoading(false);
           console.log("berber", res.body.data);
         } else {
@@ -49,7 +49,7 @@ const GeneralInformation = ({ signed }) => {
     Agent.Barbers.getBarberWorkTimes(barberId).then((res) => {
       if (res.ok) {
         if (!res.body.Error) {
-          setworkTimes(res.body.data);
+          // setworkTimes(res.body.data);
           console.log("barberWokrtime", res.body.data);
         }
         //console.log("workTimes", res.body);
@@ -104,14 +104,75 @@ const GeneralInformation = ({ signed }) => {
   // };
 
   useEffect(() => {
-    const barberStorage = Storage.GetItem("barber");
-    if (!barberStorage) {
-      return <Redirect to="/login" />;
-    }
-    _getBarber(barberStorage.id);
-    _getWorkTimes(barberStorage.id);
+    // const barberStorage = Storage.GetItem("barber");
+    // if (!barberStorage) {
+    //   return <Redirect to="/login" />;
+    // }
+    // _getBarber(barberStorage.id);
+    // _getWorkTimes(barberStorage.id);
+    // setBarber(barber);
+    // setworkTimes(workHours);
   }, []);
+  const barber = {
+    barberName: "Serdivan Kufaör",
+    adress: "Serdivan istiklal mahallesi",
+    eMail: "serdiva@gmail.com",
+    phoneNo: "535053354",
+    district: "Serdivan",
+    photo: "null",
+  };
 
+  const workTimes = [
+    {
+      id: 1,
+      day: "Pazartesi",
+      isOpen: true,
+      startHour: "08:00",
+      endHour: "22:00",
+    },
+    {
+      id: 2,
+      day: "Salı",
+      isOpen: true,
+      startHour: "08:00",
+      endHour: "22:00",
+    },
+    {
+      id: 3,
+      day: "Çarşamba",
+      isOpen: true,
+      startHour: "08:00",
+      endHour: "22:00",
+    },
+    {
+      id: 4,
+      day: "Perşembe",
+      isOpen: true,
+      startHour: "08:00",
+      endHour: "22:00",
+    },
+    {
+      id: 5,
+      day: "Cuma",
+      isOpen: true,
+      startHour: "08:00",
+      endHour: "22:00",
+    },
+    {
+      id: 6,
+      day: "Cumartesi",
+      isOpen: true,
+      startHour: "08:00",
+      endHour: "22:00",
+    },
+    {
+      id: 7,
+      day: "Pazar",
+      isOpen: true,
+      startHour: "08:00",
+      endHour: "22:00",
+    },
+  ];
   return !signed ? (
     <Redirect to="/login" />
   ) : (

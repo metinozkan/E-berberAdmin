@@ -113,8 +113,7 @@ export const PersonnelAddAndEdit = ({
 
   const _deleteWorkHours = (workHoursId) => {};
   useEffect(() => {
-    console.log("kac kere calısıyon");
-    _getWorkingHours();
+    //_getWorkingHours();
   }, []);
 
   return (
@@ -305,7 +304,8 @@ export const PersonnelAddModal = ({ _addPersonnel }) => {
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const PersonnelObject = {
     // personnelType: personnelType,
-    barberId: Storage.GetItem("barber").id,
+    // barberId: Storage.GetItem("barber").id,
+    barberId: 1,
     color: color,
     staffName: name,
     eMail: email,

@@ -18,8 +18,8 @@ const TopServices = styled.div`
   margin: 2em 0px;
 `;
 const Services = ({ signed }) => {
-  const [services, setServices] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [servicess, setServices] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [barberId, setBarberId] = useState();
   const [requestLoading, setRequestLoading] = useState(false);
   const _getServices = (barberId) => {
@@ -84,10 +84,11 @@ const Services = ({ signed }) => {
   };
   useEffect(() => {
     const barber = Storage.GetItem("barber");
-    setBarberId(barber.id);
-    _getServices(barber.id);
+    //setBarberId(barber.id);
+    //  _getServices(barber.id);
   }, []);
 
+  const services = [{ id: 1, name: "Saç", price: "15", time: "25" }];
   useEffect(() => {});
   return !signed ? (
     <Redirect to="/login" />

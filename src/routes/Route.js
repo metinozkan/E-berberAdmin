@@ -15,7 +15,8 @@ export default function RouteWrapper({
   const [barber, setBarber] = useState(
     Storage.GetItem("barber") ? Storage.GetItem("barber") : false
   );
-  const [signed, setSigned] = useState(barber ? true : false);
+  // const [signed, setSigned] = useState(barber ? true : false);
+  const [signed, setSigned] = useState(true);
 
   /**
    * Redirect user to SignIn page if he tries to access a private route

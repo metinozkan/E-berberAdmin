@@ -77,7 +77,8 @@ export const PersonnelSettingsModal = ({
   const PersonnelObject = {
     // personnelType: personnelType,
     staffId: selectedPersonnel.id,
-    barberId: Storage.GetItem("barber").id,
+    // barberId: Storage.GetItem("barber").id,
+    barberId: 1,
     color: color,
     staffName: name,
     eMail: email,

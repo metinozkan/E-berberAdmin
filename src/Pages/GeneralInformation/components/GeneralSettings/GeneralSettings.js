@@ -341,7 +341,10 @@ export const GeneralSettings = ({ _updateGeneralSettings, barber }) => {
               disableElevation
               fullWidth
               onClick={() => {
-                _updateGeneralSettings({ ...barberObject, photo: imageLink });
+                _updateGeneralSettings({
+                  ...barberObject,
+                  photo: imageLink ? imageLink : barber.photo,
+                });
               }}
             >
               Kaydet

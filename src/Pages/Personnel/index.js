@@ -17,8 +17,8 @@ const TopPersonnel = styled.div`
   margin: 2em 0px;
 `;
 const Personnel = ({ signed }) => {
-  const [personnels, setPersonnels] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  const [personnelsss, setPersonnels] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const [barberWorkTimes, setBarberWorkTimes] = useState([]);
   const [barberId, setBarberId] = useState();
   const [updateLoading, setUpdateLoading] = useState(false);
@@ -105,14 +105,21 @@ const Personnel = ({ signed }) => {
   useEffect(() => {
     const barber = Storage.GetItem("barber");
 
-    if (!barber) {
-      return <Redirect to="/login" />;
-    } else {
-      setBarberId(barber.id);
-      _getPersonnel(barber.id);
-      _getBarberWorkTimes(barber.id);
-    }
+    // if (!barber) {
+    //   return <Redirect to="/login" />;
+    // } else {
+    //   setBarberId(barber.id);
+    //   _getPersonnel(barber.id);
+    //   _getBarberWorkTimes(barber.id);
+    // }
+
+    //setPersonnels(Personnels);
+    //setBarberWorkTimes();
   }, []);
+
+  const personnels = [
+    { id: 1, staffName: "Ahmet", telNo: "045654312", color: "red" },
+  ];
 
   return !signed ? (
     <Redirect to="/login" />
@@ -124,7 +131,7 @@ const Personnel = ({ signed }) => {
       alignItems="flex-start"
       style={{}}
     >
-      {!isLoading ? (
+      {personnels ? (
         <>
           <TopPersonnel>
             <Typography variant="h4" gutterBottom>

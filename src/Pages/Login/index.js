@@ -120,36 +120,36 @@ const Login = ({ signed, setSigned }) => {
             color="primary"
             className={classes.submit}
             onClick={() => {
-              setIsLoading(true);
-
-              Agent.Login.loginBarber()
-                .send({
-                  eMail: eMail,
-                  password: password,
-                })
-                .then((res) => {
-                  if (res.ok) {
-                    if (!res.body.Error) {
-                      // console.log("login", res.body);
-                      Storage.SetItem("barber", {
-                        ...res.body.data,
-                        password: "****",
-                      });
-                      setSigned(true);
-                      setTimeout(() => {
-                        history.push("/general-information");
-                      }, 300);
-                      setIsLoading(false);
-                    } else {
-                      setOpenConfirmModal(true);
-                      setIsLoading(false);
-                      setModalContent(res.body.Message);
-                      console.log("hata", res.body.Message);
-                    }
-                  } else {
-                    setIsLoading(false);
-                  }
-                });
+              //              setIsLoading(true);
+              history.push("/general-information");
+              // Agent.Login.loginBarber()
+              //   .send({
+              //     eMail: eMail,
+              //     password: password,
+              //   })
+              //   .then((res) => {
+              //     if (res.ok) {
+              //       if (!res.body.Error) {
+              //         // console.log("login", res.body);
+              //         Storage.SetItem("barber", {
+              //           ...res.body.data,
+              //           password: "****",
+              //         });
+              //         setSigned(true);
+              //         setTimeout(() => {
+              //           history.push("/general-information");
+              //         }, 300);
+              //         setIsLoading(false);
+              //       } else {
+              //         setOpenConfirmModal(true);
+              //         setIsLoading(false);
+              //         setModalContent(res.body.Message);
+              //         console.log("hata", res.body.Message);
+              //       }
+              //     } else {
+              //       setIsLoading(false);
+              //     }
+              //   });
 
               // Storage.SetItem("barber", { id: 1, falan: "falan" });
               // history.push("/");
